@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+//컨트롤러입니다
 @Controller
 @Slf4j
 public class MainController {
