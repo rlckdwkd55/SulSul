@@ -15,7 +15,10 @@
     </select>
 
     <select id="getLikeSearchList" parameterType="java.util.Map" resultType="com.sulsulmarket.sulsul.main.dto.Product">
-        SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUESTLIST_STRING}, '%') LIMIT 12;
+        SELECT * FROM PRODUCT
+        WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUESTLIST_STRING}, '%')
+        ORDER BY PRODUCT_NO ASC
+            LIMIT 10;
     </select>
 
     <select id="getLikeSearchListCount" parameterType="java.util.Map" resultType="String">

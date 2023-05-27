@@ -3,6 +3,7 @@ package com.sulsulmarket.sulsul.main.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.sulsulmarket.sulsul.Util.SulSulUil;
 import com.sulsulmarket.sulsul.main.dto.Product;
 import com.sulsulmarket.sulsul.main.service.MainService;
 import jdk.jshell.spi.ExecutionControlProvider;
@@ -19,6 +20,7 @@ import java.util.Map;
 
 //컨트롤러입니다
 @Controller
+@CrossOrigin(origins="*", allowedHeaders = "*")
 @Slf4j
 public class MainController {
 
@@ -56,7 +58,8 @@ public class MainController {
 
         String json = gson.toJson(resultMap);
 
-        return new ResponseEntity<>(json, HttpStatus.OK);
+        //String json = "result";
+        return new ResponseEntity<>(json.getBytes(), HttpStatus.OK);
 
 
     }
@@ -90,20 +93,19 @@ public class MainController {
 
     /**
      * 상품검색(비동기)에서 키워드 입력 후 검색을 누르면
-     * 해당 검색에 해당하는 제품을 보여주는 제품상세페이지를 띄워준다.
+     * 해당 검색에 해당하는 제품을 보여주는 제품목록페이지를 띄워준다.
      */
     @PostMapping("/product/productList")
-    public ResponseEntity<Object> productList(@RequestBody String requestString, String page) {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public ResponseEntity<Object> productList(@RequestBody Map<String, String> productListMap) {
+
         String json = null;
 
-        try {
-            String requestListString = objectMapper.writeValueAsString(requestString);
-            String pageNum = objectMapper.writeValueAsString(page);
+            String requestListString = productListMap.get("requestString").toString();
+            int pageNum = Integer.parseInt(productListMap.get("page"));
 
 
         log.info("요기 도달하는 리퀘스트 이름은 뭐니 : {}", requestListString);
-        if (requestListString != null && pageNum == null) {
+        if (requestListString != null && pageNum == 1) {
             log.info("요청하는 이름이 뭐니 :{}",requestListString);
             Map<String, String> parameter = new HashMap<>();
             parameter.put("REQUESTLIST_STRING", requestListString);
@@ -120,19 +122,26 @@ public class MainController {
                 Gson gson = new GsonBuilder().create();
                 json = gson.toJson(resultMap);
             }
-        } else {
+        } else if (pageNum > 1){
+            //TODO pageNum 이 0보다 큰 경우 ex) 1,2,3,4,5,6,7...의 경우 page 값을 쿼리문에 담아갈 필요가 있다.
+            Map<String, String> parameter = new HashMap<>();
+            parameter.put("REQUESTLIST_STRING", requestListString);
+            String totalCount = mainService.getLikeSearchListCount(parameter);
+            log.info("요청 하는 값을 찍어보자 : {}, : {}", pageNum, Integer.parseInt((totalCount)));
+            Map<String, Integer> page = SulSulUil.getPage(pageNum, Integer.parseInt((totalCount)));
+            int startPage = page.get("startNum");
+            int endPage = page.get("endNum");
+            parameter.put("START_PAGE", String.valueOf(startPage));
+            parameter.put("END_PAGE", String.valueOf(endPage));
+            log.info("시작 페이지 : {}, 조건 절에 들어갈 페이지 : {}", startPage, endPage);
+        }else {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
-        } catch (Exception e){
 
-        }
         return new ResponseEntity<>(json, HttpStatus.OK);
 
 
     }
-
-
-
 
 }

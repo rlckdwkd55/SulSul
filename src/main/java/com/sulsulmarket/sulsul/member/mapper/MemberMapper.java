@@ -15,4 +15,8 @@ public interface MemberMapper {
     MemberDTO memberLogin(String id, String password);
 
     int memberSign(MemberDTO memberDTO);
+
+    MemberDTO getMemberEmail(String email);
+
+    int memberPasswordUpdate(String newPassword, String id);
 }

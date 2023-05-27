@@ -12,16 +12,16 @@
 
     <insert id="memberSign">
         INSERT INTO MEMBER(
-               MEMBER_ID
-              ,MEMBER_PW
-              ,MEMBER_NAME
-              ,MEMBER_BIRTHDATE
-              ,MEMBER_GENDER
-              ,MEMBER_ADDRESS
-              ,MEMBER_PHONE
-              ,MEMBER_EMAIL
-              ,MEMBER_ENROLLDATE
-              ,MEMBER_STATUS
+                MEMBER_ID
+               ,MEMBER_PW
+               ,MEMBER_NAME
+               ,MEMBER_BIRTHDATE
+               ,MEMBER_GENDER
+               ,MEMBER_ADDRESS
+               ,MEMBER_PHONE
+               ,MEMBER_EMAIL
+               ,MEMBER_ENROLLDATE
+               ,MEMBER_STATUS
         )
         VALUES(
                #{MEMBER_ID}
@@ -32,8 +32,8 @@
               ,#{MEMBER_ADDRESS}
               ,#{MEMBER_PHONE}
               ,#{MEMBER_EMAIL}
-              ,CURRENT_TIMESTAMP
-              ,#{MEMBER_STATUS}
+              ,now()
+              ,'N'
               )
     </insert>
 
@@ -43,5 +43,17 @@
         WHERER MEMBER_ID = #{MEMBER_ID}
         AND MEMBER_PW = #{MEMBER_PW}
     </select>
+
+    <select id="getMemberByEmail">
+        SELECT *
+          FROM MEMBER
+        WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
+    </select>
+    
+    <update id="memberPasswordUpdate">
+        UPDATE MEMBER
+            SET MEMBER_PW = #{MEMBER_PW}
+        WHERE MEMBER_ID = #{MEMBER_ID}
+    </update>
 
 </mapper>

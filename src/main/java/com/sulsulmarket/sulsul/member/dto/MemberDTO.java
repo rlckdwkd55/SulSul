@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 public class MemberDTO {
 
     @JsonProperty("memberId")
-    @NotNull(message = "아이디는 필수 입력 값")
+//    @NotNull(message = "아이디는 필수 입력 값")
     private String MEMBER_ID;
 
     @JsonProperty("password")
-    @NotNull(message = "비밀번호는 필수 입력 값")
+//    @NotNull(message = "비밀번호는 필수 입력 값")
     private String MEMBER_PW;
 
     @JsonProperty("memberName")
@@ -28,18 +28,19 @@ public class MemberDTO {
     private String MEMBER_BIRTHDATE;
 
     @JsonProperty("memberGender")
-    @NotNull(message = "성별은 필수 입력 값")
+//    @NotNull(message = "성별은 필수 입력 값")
     private String MEMBER_GENDER;
 
     @JsonProperty("memberAddress")
-    @NotNull(message = "주소는 필수 입력 값")
+//    @NotNull(message = "주소는 필수 입력 값")
     private String MEMBER_ADDRESS;
 
     @JsonProperty("memberPhone")
-    @NotNull(message = "전화번호는 필수 입력 값")
+//    @NotNull(message = "전화번호는 필수 입력 값")
     private String MEMBER_PHONE;
 
     @JsonProperty("memberEmail")
+//    @NotNull(message = "이메일은 필수 입력 값")
     private String MEMBER_EMAIL;
 
     @JsonProperty("memberEnrollDate")
@@ -47,5 +48,4 @@ public class MemberDTO {
 
     @JsonProperty("memberStatus")
     private String MEMBER_STATUS;
-
 }

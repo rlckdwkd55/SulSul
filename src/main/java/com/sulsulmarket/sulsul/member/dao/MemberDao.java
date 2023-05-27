@@ -2,6 +2,7 @@ package com.sulsulmarket.sulsul.member.dao;
 
 import com.sulsulmarket.sulsul.member.dto.MemberDTO;
 import com.sulsulmarket.sulsul.member.mapper.MemberMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @Repository
 public class MemberDao implements MemberMapper {
 
+    @Autowired
     private MemberMapper memberMapper;
 
     @Override
@@ -34,5 +36,17 @@ public class MemberDao implements MemberMapper {
     public int memberSign(MemberDTO memberDTO) {
 
         return memberMapper.memberSign(memberDTO);
+    }
+
+    @Override
+    public MemberDTO getMemberEmail(String email) {
+
+        return memberMapper.getMemberEmail(email);
+    }
+
+    @Override
+    public int memberPasswordUpdate(String newPassword, String id) {
+
+        return memberMapper.memberPasswordUpdate(newPassword, id);
     }
 }
