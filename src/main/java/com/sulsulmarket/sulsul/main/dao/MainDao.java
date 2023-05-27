@@ -16,15 +16,27 @@ public class MainDao implements MainMapper {
 
     @Override
     public List<Product> getBestRankingProd() {
-
         return mainMapper.getBestRankingProd();
     }
 
     @Override
     public List<Product> getNewProduct(){
-
         return mainMapper.getNewProduct();
     }
 
+    @Override
+    public List<String> getLikeList(Map<String, String> parameter){
+        return mainMapper.getLikeList(parameter);
+    }
+
+    @Override
+    public List<Product> getLikeSearchList(Map<String, String> parameter){
+        return mainMapper.getLikeSearchList(parameter);
+    }
+
+    @Override
+    public String getLikeSearchListCount(Map<String, String> parameter){
+        return mainMapper.getLikeSearchListCount(parameter);
+    }
 
 }

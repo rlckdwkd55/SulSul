@@ -10,4 +10,15 @@
         SELECT * FROM PRODUCT ORDER BY UPDATE_DATE DESC LIMIT 8;
     </select>
 
+    <select id="getLikeList" parameterType="java.util.Map" resultType="String">
+        SELECT PRODUCT_NAME FROM PRODUCT WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUEST_STRING}, '%') LIMIT 5;
+    </select>
+
+    <select id="getLikeSearchList" parameterType="java.util.Map" resultType="com.sulsulmarket.sulsul.main.dto.Product">
+        SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUESTLIST_STRING}, '%') LIMIT 12;
+    </select>
+
+    <select id="getLikeSearchListCount" parameterType="java.util.Map" resultType="String">
+        SELECT COUNT(*) FROM PRODUCT WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUESTLIST_STRING}, '%');
+    </select>
 </mapper>

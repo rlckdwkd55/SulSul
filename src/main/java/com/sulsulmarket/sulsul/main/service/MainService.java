@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sulsulmarket.sulsul.main.dto.Product;
 
-import javax.annotation.PostConstruct;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,5 +32,22 @@ public class MainService {
         return mainResult;
     }
 
+    /**
+     * 검색(비동기) 서비스
+     */
+    public List<String> getLikeList(Map<String, String> parameter){
+        List<String> resultList = mainDao.getLikeList(parameter);
+        return resultList;
+    }
+
+    public List<Product> getLikeSearchList(Map<String, String> parameter){
+        List<Product> resultList = mainDao.getLikeSearchList(parameter);
+        return resultList;
+    }
+
+    public String getLikeSearchListCount(Map<String, String> parameter){
+        String resultListCount = mainDao.getLikeSearchListCount(parameter);
+        return resultListCount;
+    }
 
 }

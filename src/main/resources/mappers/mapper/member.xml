@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sulsulmarket.sulsul.member.mapper.MemberMapper">
+
+    <select id="getMemberList" resultType="com.sulsulmarket.sulsul.member.dto.MemberDTO">
+        SELECT * FROM MEMBER
+    </select>
+
+    <select id="getMemberById" resultType="com.sulsulmarket.sulsul.member.dto.MemberDTO">
+        SELECT * FROM MEMBER WHERE MEMBER_ID = #{MEMBER_ID}
+    </select>
+
+    <insert id="memberSign">
+        INSERT INTO MEMBER(
+               MEMBER_ID
+              ,MEMBER_PW
+              ,MEMBER_NAME
+              ,MEMBER_BIRTHDATE
+              ,MEMBER_GENDER
+              ,MEMBER_ADDRESS
+              ,MEMBER_PHONE
+              ,MEMBER_EMAIL
+              ,MEMBER_ENROLLDATE
+              ,MEMBER_STATUS
+        )
+        VALUES(
+               #{MEMBER_ID}
+              ,#{MEMBER_PW}
+              ,#{MEMBER_NAME}
+              ,#{MEMBER_BIRTHDATE}
+              ,#{MEMBER_GENDER}
+              ,#{MEMBER_ADDRESS}
+              ,#{MEMBER_PHONE}
+              ,#{MEMBER_EMAIL}
+              ,CURRENT_TIMESTAMP
+              ,#{MEMBER_STATUS}
+              )
+    </insert>
+
+    <select id="memberLogin">
+        SELECT *
+          FROM MEMBER
+        WHERER MEMBER_ID = #{MEMBER_ID}
+        AND MEMBER_PW = #{MEMBER_PW}
+    </select>
+
+</mapper>
