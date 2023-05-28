@@ -99,9 +99,10 @@ public class MainController {
     public ResponseEntity<Object> productList(@RequestBody Map<String, String> productListMap) {
 
         String json = null;
+        Gson gson = new GsonBuilder().create();
 
-            String requestListString = productListMap.get("requestString").toString();
-            int pageNum = Integer.parseInt(productListMap.get("page"));
+            String requestListString = productListMap.get("requestString").toString(); //제
+            int pageNum = Integer.parseInt(productListMap.get("page")); // 2
 
 
         log.info("요기 도달하는 리퀘스트 이름은 뭐니 : {}", requestListString);
@@ -119,21 +120,32 @@ public class MainController {
                 Map<String, Object> resultMap = new HashMap<>();
                 resultMap.put("requestList", resultList);
                 resultMap.put("totalCount", totalCount);
-                Gson gson = new GsonBuilder().create();
                 json = gson.toJson(resultMap);
             }
         } else if (pageNum > 1){
             //TODO pageNum 이 0보다 큰 경우 ex) 1,2,3,4,5,6,7...의 경우 page 값을 쿼리문에 담아갈 필요가 있다.
             Map<String, String> parameter = new HashMap<>();
-            parameter.put("REQUESTLIST_STRING", requestListString);
-            String totalCount = mainService.getLikeSearchListCount(parameter);
+            parameter.put("REQUESTLIST_STRING", requestListString); // 검색을 할 단어 (제)
+            String totalCount = mainService.getLikeSearchListCount(parameter); // 제라는 단어로 검색해서 나온 총 갯수
             log.info("요청 하는 값을 찍어보자 : {}, : {}", pageNum, Integer.parseInt((totalCount)));
             Map<String, Integer> page = SulSulUil.getPage(pageNum, Integer.parseInt((totalCount)));
             int startPage = page.get("startNum");
             int endPage = page.get("endNum");
-            parameter.put("START_PAGE", String.valueOf(startPage));
+            parameter.put("START_PAGE", String.valueOf(startPage)); //PK가 PRIMARY KEY값을 기준으로 쿼리문 WHERE절 조건 START_PAGE <= PRIMARY KEY >= END_PAGE
             parameter.put("END_PAGE", String.valueOf(endPage));
+            //TODO 제, 2 라는 값으로 요청을 하였는데, 요청이 수행되지 않고, 아무것도 없는 이유가 뭐냐면
+            //일단, 페이지 넘버가 1이 아닌 경우는 검색창에 나온 상품의 1페이지를 보고 사용자가 2페이지를 누른 경우,
+            //그러면 너가 리턴을 해줘야하는 값은, 전체 검색이 아니라, 2페이지의 상품들을 보여줘야하잖아
+            //지금 그게 구현되어 있지 않잖아 JSON을 가져온다해서 해결될게 아니고 JSON에 값을 담을 어떤 동작을 구현해야하는거지
+            //10개가 상품이라는 객체를 10개를 담아서 프론트로 보내줘야해
+
             log.info("시작 페이지 : {}, 조건 절에 들어갈 페이지 : {}", startPage, endPage);
+
+            List<Product> pagingList = mainService.getPagingList(parameter);
+            log.info("pagingList 값을 찍어 보자 : {}" , pagingList.size());
+            //이미 페이지 생각해서 데이터 말아서 리스트로 받아왔는데? 그냥 전달만 하면 되잖아?!
+            json = gson.toJson(pagingList);
+
         }else {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
@@ -143,5 +155,6 @@ public class MainController {
 
 
     }
+
 
 }

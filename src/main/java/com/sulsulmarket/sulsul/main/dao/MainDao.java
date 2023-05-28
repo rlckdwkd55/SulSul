@@ -39,4 +39,9 @@ public class MainDao implements MainMapper {
         return mainMapper.getLikeSearchListCount(parameter);
     }
 
+    @Override // 재정의 //
+    public List<Product> getPagingList(Map<String, String> parameter){
+        return mainMapper.getPagingList(parameter);
+    }
+
 }

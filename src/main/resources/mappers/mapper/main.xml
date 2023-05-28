@@ -24,4 +24,15 @@
     <select id="getLikeSearchListCount" parameterType="java.util.Map" resultType="String">
         SELECT COUNT(*) FROM PRODUCT WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUESTLIST_STRING}, '%');
     </select>
+
+    <select id="getPagingList"  parameterType="java.util.Map" resultType="com.sulsulmarket.sulsul.main.dto.Product">
+    <![CDATA[
+        SELECT * FROM PRODUCT
+        WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUESTLIST_STRING}, '%')
+          AND PRODUCT_NO >= CAST(#{START_PAGE} AS Integer)
+          AND PRODUCT_NO <= CAST(#{END_PAGE} AS Integer)
+        ORDER BY PRODUCT_NO ASC
+        ]]>
+    </select>
+
 </mapper>

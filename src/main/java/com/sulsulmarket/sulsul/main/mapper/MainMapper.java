@@ -20,4 +20,5 @@ public interface MainMapper {
 
     String getLikeSearchListCount(Map<String, String> parameter);
 
+    List<Product> getPagingList(Map<String, String> parameter);
 }

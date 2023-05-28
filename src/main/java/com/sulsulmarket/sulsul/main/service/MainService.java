@@ -50,4 +50,9 @@ public class MainService {
         return resultListCount;
     }
 
+    public List<Product> getPagingList(Map<String, String> parameter){
+        List<Product> pagingList = mainDao.getPagingList(parameter);
+        return pagingList;
+    }
+
 }
