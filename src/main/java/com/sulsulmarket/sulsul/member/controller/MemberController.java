@@ -91,4 +91,15 @@ public class MemberController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
+    @PostMapping("/api/member/password/change")
+    public ResponseEntity<Object> changePassword(@RequestBody MemberDTO memberDTO) {
+        
+        try {
+            memberService.memberPasswordUpdate(memberDTO.getMEMBER_PW(), memberDTO.getMEMBER_ID());
+            return ResponseEntity.status(HttpStatus.OK).body("패스워드 변경 성공");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 }

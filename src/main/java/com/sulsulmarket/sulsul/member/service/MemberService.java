@@ -1,6 +1,5 @@
 package com.sulsulmarket.sulsul.member.service;
 
-import com.sulsulmarket.sulsul.Util.SulSulUil;
 import com.sulsulmarket.sulsul.member.dao.MemberDao;
 import com.sulsulmarket.sulsul.member.dto.MemberDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +12,8 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class MemberService {
+public class
+MemberService {
 
     @Autowired
     private MemberDao memberDao;
@@ -116,7 +116,9 @@ public class MemberService {
 
         if(updateCount == null || updateCount <= 0) {
             log.info("[ERROR] Update Fail Member Password");
+            throw new NullPointerException("패스워드 변경에 실패했습니다");
         }
+        log.info("[INFO] Update New Password -> {}", newPassword);
         return updateCount;
     }
 }
