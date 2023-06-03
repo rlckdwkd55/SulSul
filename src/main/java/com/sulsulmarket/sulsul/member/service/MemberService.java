@@ -12,8 +12,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class
-MemberService {
+public class MemberService {
 
     @Autowired
     private MemberDao memberDao;
@@ -110,15 +109,17 @@ MemberService {
         log.info("[INFO] -> Use Ok Email -> {}", email);
     }
 
-    public int memberPasswordUpdate(String newPassword, String id) {
+    public String memberPasswordUpdate(String newPassword, String id) {
 
-        Integer updateCount = memberDao.memberPasswordUpdate(newPassword, id);
+        String encodePassword = passwordEncoder.encode(newPassword);
+        Integer updateCount = memberDao.memberPasswordUpdate(encodePassword, id);
 
+        System.out.println(updateCount);
         if(updateCount == null || updateCount <= 0) {
-            log.info("[ERROR] Update Fail Member Password");
+            log.info("[ERROR] -> Update Fail Member Password");
             throw new NullPointerException("패스워드 변경에 실패했습니다");
         }
-        log.info("[INFO] Update New Password -> {}", newPassword);
-        return updateCount;
+        log.info("[INFO] -> update new password Success {}", newPassword);
+        return newPassword;
     }
 }

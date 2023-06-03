@@ -12,19 +12,19 @@
 
     <insert id="memberSign">
         INSERT INTO MEMBER(
-                MEMBER_ID
-               ,MEMBER_PW
-               ,MEMBER_NAME
-               ,MEMBER_BIRTHDATE
-               ,MEMBER_GENDER
-               ,MEMBER_ADDRESS
-               ,MEMBER_PHONE
-               ,MEMBER_EMAIL
-               ,MEMBER_ENROLLDATE
-               ,MEMBER_STATUS
+               MEMBER_ID
+              ,MEMBER_PW
+              ,MEMBER_NAME
+              ,MEMBER_BIRTHDATE
+              ,MEMBER_GENDER
+              ,MEMBER_ADDRESS
+              ,MEMBER_PHONE
+              ,MEMBER_EMAIL
+              ,MEMBER_ENROLLDATE
+              ,MEMBER_STATUS
         )
         VALUES(
-               #{MEMBER_ID}
+                  #{MEMBER_ID}
               ,#{MEMBER_PW}
               ,#{MEMBER_NAME}
               ,#{MEMBER_BIRTHDATE}
@@ -39,21 +39,21 @@
 
     <select id="memberLogin">
         SELECT *
-          FROM MEMBER
-        WHERER MEMBER_ID = #{MEMBER_ID}
-        AND MEMBER_PW = #{MEMBER_PW}
+            FROM MEMBER
+         WHERER MEMBER_ID = #{MEMBER_ID}
+            AND MEMBER_PW = #{MEMBER_PW}
     </select>
 
     <select id="getMemberByEmail">
         SELECT *
-          FROM MEMBER
+            FROM MEMBER
         WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
     </select>
-    
-    <update id="memberPasswordUpdate">
+
+    <update id="memberPasswordUpdate" parameterType="com.sulsulmarket.sulsul.member.dto.MemberDTO">
         UPDATE MEMBER
-            SET MEMBER_PW = #{MEMBER_PW}
-        WHERE MEMBER_ID = #{MEMBER_ID}
+            SET MEMBER_PW = #{newPassword}
+        WHERE MEMBER_ID = #{id}
     </update>
 
 </mapper>
