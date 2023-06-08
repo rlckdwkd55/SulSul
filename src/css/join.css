@@ -1,0 +1,22 @@
+#join-form {
+    margin: 0 25%;
+}
+
+.input-area, .button-area {
+    margin: 0 25%;
+    padding-bottom: 20px;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-area input {
+    width: 70%;
+}
+
+.input-field {
+    display: flex;
+    align-items: center;
+}
