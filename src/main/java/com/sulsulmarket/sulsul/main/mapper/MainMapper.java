@@ -14,7 +14,7 @@ public interface MainMapper {
 
     List<Product> getNewProduct();
 
-    List<String> getLikeList(Map<String, String> parameter);
+    List<String> getProductNameList(Map<String, String> parameter);
 
     List<Product> getLikeSearchList(Map<String, String> parameter);
 

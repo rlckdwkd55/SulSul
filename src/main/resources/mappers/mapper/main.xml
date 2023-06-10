@@ -10,8 +10,10 @@
         SELECT * FROM PRODUCT ORDER BY UPDATE_DATE DESC LIMIT 8;
     </select>
 
-    <select id="getLikeList" parameterType="java.util.Map" resultType="String">
+    <select id="getProductNameList" parameterType="java.util.Map" resultType="String">
+       <![CDATA[
         SELECT PRODUCT_NAME FROM PRODUCT WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUEST_STRING}, '%') LIMIT 5;
+        ]]>
     </select>
 
     <select id="getLikeSearchList" parameterType="java.util.Map" resultType="com.sulsulmarket.sulsul.main.dto.Product">
@@ -29,8 +31,8 @@
     <![CDATA[
         SELECT * FROM PRODUCT
         WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUESTLIST_STRING}, '%')
-          AND PRODUCT_NO >= CAST(#{START_PAGE} AS Integer)
-          AND PRODUCT_NO <= CAST(#{END_PAGE} AS Integer)
+        AND PRODUCT_NO >= CAST(#{START_PAGE} AS Integer)
+        AND PRODUCT_NO <= CAST(#{END_PAGE} AS Integer)
         ORDER BY PRODUCT_NO ASC
         ]]>
     </select>

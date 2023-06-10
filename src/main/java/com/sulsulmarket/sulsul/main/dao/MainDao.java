@@ -2,6 +2,7 @@ package com.sulsulmarket.sulsul.main.dao;
 
 import com.sulsulmarket.sulsul.main.dto.Product;
 import com.sulsulmarket.sulsul.main.mapper.MainMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class MainDao implements MainMapper {
 
     @Autowired
@@ -25,8 +27,10 @@ public class MainDao implements MainMapper {
     }
 
     @Override
-    public List<String> getLikeList(Map<String, String> parameter){
-        return mainMapper.getLikeList(parameter);
+    public List<String> getProductNameList(Map<String, String> parameter){
+
+        log.info("줫같은 에러 씨발 : {}", parameter.get("REQUEST_STRING"));
+        return mainMapper.getProductNameList(parameter);
     }
 
     @Override

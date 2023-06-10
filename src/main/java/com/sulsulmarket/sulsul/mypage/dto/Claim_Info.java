@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class Claim_Info {
     private int CLAIM_NO; //클레임번호
     private int DETAIL_NO; //상세번호
+    private String MEMBER_ID; //아이디
     private int CLAIM_CODE; //클레임코드
     private int PAYBACK_CODE; //환불코드
     private String CLAIM_CONTENT; //클레임사유
