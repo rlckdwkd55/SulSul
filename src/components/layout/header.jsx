@@ -1,35 +1,45 @@
 import { Link } from "react-router-dom";
 import SearchBar from "./searchBar";
-import axios from 'axios';
+import axios from "axios";
 
 function LoginOut() {
-  const isLogin = sessionStorage.getItem('isLogin');
+  const isLogin = sessionStorage.getItem("isLogin");
   let contents;
 
-  if (isLogin !== 'true') {
-    contents = <Link to="/login">
-                <span className="btn" id="move-login-btn">회원가입 / 로그인</span>
-              </Link>
+  if (isLogin !== "true") {
+    contents = (
+      <Link to="/login">
+        <span className="btn" id="move-login-btn">
+          회원가입 / 로그인
+        </span>
+      </Link>
+    );
   } else {
-    contents = <>
-      <span className="btn" id="logout-btn" onClick={() => {
-        axios.post('/logout');
-      }}>로그아웃</span>
-      <Link to="/myPage">
-        <div className="btn" id="move-mypage-btn">
-          <i className="icon bi bi-bag"></i>
-        </div>
-      </Link>
-      <Link to="/cart">
-        <div className="btn" id="move-cart-btn">
-          <i className="icon bi bi-bag"></i>
-        </div>
-      </Link>
-    </>
+    contents = (
+      <>
+        <span
+          className="btn"
+          id="logout-btn"
+          onClick={() => {
+            axios.post("/logout");
+          }}
+        >
+          로그아웃
+        </span>
+        {/* <Link to="/MyPage">
+          <div className="btn" id="move-mypage-btn">
+            <i className="icon bi bi-bag"></i>
+          </div>
+        </Link> */}
+        <Link to="/cart">
+          <div className="btn" id="move-cart-btn">
+            <i className="icon bi bi-bag"></i>
+          </div>
+        </Link>
+      </>
+    );
   }
-  return(
-    contents
-  );
+  return contents;
 }
 
 function Header() {
