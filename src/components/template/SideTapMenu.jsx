@@ -6,6 +6,7 @@ const SideTapWrap = styled.div`
   border-radius: 8px;
   width: 100%;
   max-width: 180px;
+  min-width: 180px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,7 +79,7 @@ const tabList = [
   }
 ];
 
-const SideTap = (props) => {
+const SideTapMenu = (props) => {
   const {} = props;
   return (
     <SideTapWrap>
@@ -98,4 +99,4 @@ const SideTap = (props) => {
   );
 };
 
-export default SideTap;
+export default SideTapMenu;

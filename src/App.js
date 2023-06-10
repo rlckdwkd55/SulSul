@@ -7,7 +7,7 @@ import Login from "./components/pages/login";
 import Main from "./components/pages/main";
 import Join from "./components/pages/join";
 import Search from "./components/pages/search";
-import MyPage from "./components/pages/MyPage";
+import UserMy from "./components/pages/userMy";
 import GlobalStyle from "./Util/GlobalStyle";
 import styled from "styled-components";
 const AppWrapper = styled.div`
@@ -34,7 +34,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
               <Route path="/search" element={<Search />} />
-              <Route path="/my" element={<MyPage />} />
+              <Route path="/my" element={<UserMy />} />
             </Routes>
           </PagesWrapper>
           {/* <Footer/> */}
