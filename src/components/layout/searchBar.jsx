@@ -1,17 +1,20 @@
 import { useState } from "react";
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function SearchList(props) {
   const lis = [];
 
   props.nameList.forEach((item, index) => {
     lis.push(
-      <li key={index} onClick={(e) => {
+      <li
+        key={index}
+        onClick={(e) => {
           e.preventDefault();
           props.setSearch(item);
         }}
-      >{item}
+      >
+        {item}
       </li>
     );
   });
@@ -36,21 +39,23 @@ function SearchBar() {
 
     const data = {
       requestString: searchVal
-    }
+    };
 
     try {
-      const result = await axios.post('http://192.168.0.18:8080/product/productNameList', data);
+      const result = await axios.post(
+        "http://192.168.0.18:8080/product/productNameList",
+        data
+      );
 
-      
       setNameList(result.data); // 서버 연결 후 확인
-    } catch(e) {
+    } catch (e) {
       console.error(e);
     }
   }
 
   async function doSearch(e) {
     if (search.length === 0) e.preventDefault();
-    navigate('/search', {state: {word: search}});
+    navigate("/search", { state: { word: search } });
   }
 
   let contents;
@@ -61,15 +66,19 @@ function SearchBar() {
   return (
     <div className="search-wrapper">
       <div className="search">
-        <input type="text" id="search-input" name="searchBar" onChange={(e) => {
+        <input
+          type="text"
+          id="search-input"
+          name="searchBar"
+          onChange={(e) => {
             changeSearch(e);
           }}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') doSearch(e);
+            if (e.key === "Enter") doSearch(e);
           }}
           value={search}
         />
-        <div id="searchBtn" onClick={(e)=>doSearch(e)}>
+        <div id="searchBtn" onClick={(e) => doSearch(e)}>
           <i className="icon fa-solid fa-magnifying-glass"></i>
         </div>
       </div>

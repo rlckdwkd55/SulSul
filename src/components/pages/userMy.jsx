@@ -11,6 +11,8 @@ const MyPageWraper = styled.div`
   > div:nth-child(1) {
   }
   > div:nth-child(2) {
+    display: flex;
+    justify-content: center;
     width: 100%;
   }
 `;

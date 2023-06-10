@@ -26,11 +26,11 @@ function LoginOut() {
         >
           로그아웃
         </span>
-        {/* <Link to="/MyPage">
+        <Link to="/my">
           <div className="btn" id="move-mypage-btn">
             <i className="icon bi bi-bag"></i>
           </div>
-        </Link> */}
+        </Link>
         <Link to="/cart">
           <div className="btn" id="move-cart-btn">
             <i className="icon bi bi-bag"></i>
