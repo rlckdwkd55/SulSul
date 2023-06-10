@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import UserService from "../../service/UserService";
+import OrderItem from "../atoms/OrderItem";
 const OrderWrap = styled.div`
   width: 80%;
   > div:nth-child(1) {
@@ -11,13 +12,16 @@ const OrderWrap = styled.div`
       font-size: 20px;
     }
   }
-  > div:nth-child(2) {
-    padding-top: 16px;
-    border-bottom: solid 1px;
-    padding-bottom: 8px;
-  }
-  > div:nth-child(3) {
-    padding-top: 16px;
+
+  > div {
+    > div:nth-child(2) {
+      padding-top: 16px;
+      border-bottom: solid 1px;
+      padding-bottom: 8px;
+    }
+    > div:nth-child(3) {
+      padding-top: 16px;
+    }
   }
 `;
 
@@ -29,7 +33,7 @@ const UserOrderPage = (props) => {
     const response = await UserService.postOrderData();
     if (response.status === "success") {
       console.log(response);
-      // setOrderList
+      setOrderList(response.data);
     } else {
     }
   }
@@ -38,20 +42,15 @@ const UserOrderPage = (props) => {
   useEffect(() => {
     postOrderData();
   }, []);
-
+  console.log(orderList);
   return (
     <OrderWrap>
       <div>
         <h1>주문내역</h1>
       </div>
-      <div>
-        <p>날짜</p>
-      </div>
-      <div>
-        <div>
-          <img></img>
-        </div>
-      </div>
+      {orderList.map((item, i) => {
+        return <OrderItem item={item} key={i} />;
+      })}
     </OrderWrap>
   );
 };

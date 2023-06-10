@@ -7,7 +7,7 @@ import UserOrderPage from "../template/UserOrderPage";
 const MyPageWraper = styled.div`
   width: 100%;
   display: flex;
-  border: solid 1px;
+
   > div:nth-child(1) {
   }
   > div:nth-child(2) {
