@@ -22,7 +22,8 @@ public class NaverLoginController {
     }
 
     /**
-     * Naver Login redirect url 로그인 페이지 이동 후 인증 요청 Controller
+     * Naver Login redirect url
+     * 로그인 페이지 이동 후 인증 요청 Controller
      */
     @GetMapping("/api/login/naver")
     public String naverLogin() {

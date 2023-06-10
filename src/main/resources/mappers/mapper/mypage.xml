@@ -10,4 +10,17 @@
         SELECT * FROM REVIEW WHERE MEMBER_ID LIKE CONCAT(#{MEMBER_ID})
     </select>
 
+    <select id="getUserInfo" resultType="com.sulsulmarket.sulsul.mypage.dto.Member">
+        SELECT * FROM MEMBER WHERE MEMBER_ID LIKE CONCAT(#{MEMBER_ID})
+    </select>
+
+    <select id="getAddressList" resultType="com.sulsulmarket.sulsul.mypage.dto.Address">
+        SELECT * FROM ADDRESS WHERE MEMBER_ID LIKE CONCAT(#{MEMBER_ID})
+    </select>
+
+    <select id="getCancelRefundList" resultType="com.sulsulmarket.sulsul.mypage.dto.Claim_Info">
+        SELECT * FROM CLAIM_INFO INNER JOIN CLAIM ON CLAIM_INFO.CLAIM_CODE = CLAIM.CLAIM_CODE
+        WHERE MEMBER_ID LIKE CONCAT(#{MEMBER_ID})
+    </select>
+
 </mapper>

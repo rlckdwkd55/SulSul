@@ -21,7 +21,7 @@
               ,MEMBER_PHONE
               ,MEMBER_EMAIL
               ,MEMBER_ENROLLDATE
-              ,MEMBER_STATUS
+              ,MEMBER_ROLE
         )
         VALUES(
                   #{MEMBER_ID}
@@ -33,7 +33,7 @@
               ,#{MEMBER_PHONE}
               ,#{MEMBER_EMAIL}
               ,now()
-              ,'N'
+              ,'ACTIVE'
               )
     </insert>
 

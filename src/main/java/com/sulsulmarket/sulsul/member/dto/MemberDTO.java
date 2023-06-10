@@ -1,6 +1,7 @@
 package com.sulsulmarket.sulsul.member.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sulsulmarket.sulsul.ennumurate.MemberRoleType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,11 +21,9 @@ public class MemberDTO {
     private String MEMBER_PW;
 
     @JsonProperty("memberName")
-    @NotNull(message = "이름은 필수 입력 값")
     private String MEMBER_NAME;
 
     @JsonProperty("memberBirthDate")
-    @NotNull(message = "생년월일은 필수 입력 값")
     private String MEMBER_BIRTHDATE;
 
     @JsonProperty("memberGender")
@@ -46,6 +45,6 @@ public class MemberDTO {
     @JsonProperty("memberEnrollDate")
     private LocalDateTime MEMBER_ENROLLDATE;
 
-    @JsonProperty("memberStatus")
-    private String MEMBER_STATUS;
+    @JsonProperty("memberRole")
+    private MemberRoleType MEMBER_ROLE;
 }

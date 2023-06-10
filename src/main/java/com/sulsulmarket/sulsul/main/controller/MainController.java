@@ -44,7 +44,7 @@ public class MainController {
 
             if (bestItemList != null) {
                 resultMap.put("bestItems", bestItemList);
-            } else if (newProductList != null) {
+            } if(newProductList != null) {
                 resultMap.put("newItems", newProductList);
             }
             if (bestItemList == null || newProductList == null) {
@@ -53,6 +53,9 @@ public class MainController {
                 log.error("bestItem List Or newProductList is null, bestItemList Size : {}, new ProductList Size : {}",bestItemList.size(), newProductList.size());
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
+            json = gson.toJson(resultMap);
+
+            log.info("값 잘 받아오니?{}", resultMap);
 
         } catch (Exception e) {
             //Exception이 발생하는 경우는 DB의 연결이 끊어진 경우,
@@ -61,7 +64,7 @@ public class MainController {
             log.error("Main Service has been Exception : ", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(json.getBytes(), HttpStatus.OK);
+        return new ResponseEntity<>(json, HttpStatus.OK);
     }
     /**
      * 검색창에 특정 키워드를 입력하면

@@ -18,4 +18,9 @@ public class ProductDao implements ProductMapper {
     public Product getProductDetail(Map<String, Integer> parameter) {
         return productMapper.getProductDetail(parameter);
     }
+
+    @Override
+    public Product getProductByProductNo(int productNo) {
+        return productMapper.getProductByProductNo(productNo);
+    }
 }

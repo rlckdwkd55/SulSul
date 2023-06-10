@@ -1,8 +1,7 @@
 package com.sulsulmarket.sulsul.mypage.service;
 
 import com.sulsulmarket.sulsul.mypage.dao.MypageDao;
-import com.sulsulmarket.sulsul.mypage.dto.Orders;
-import com.sulsulmarket.sulsul.mypage.dto.Review;
+import com.sulsulmarket.sulsul.mypage.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +21,21 @@ public class MypageService {
 
     public List<Review> getReviewList(Map<String, String> parameter){
         List<Review> resultList = mypageDao.getReviewList(parameter);
+        return resultList;
+    }
+
+    public List<Member> getUserInfo(Map<String, String> parameter){
+        List<Member> resultList = mypageDao.getUserInfo(parameter);
+        return resultList;
+    }
+
+    public List<Address> getAddressList(Map<String, String> parameter){
+        List<Address> resultList = mypageDao.getAddressList(parameter);
+        return resultList;
+    }
+
+    public List<Claim_Info> getCancelRefundList(Map<String, String> parameter){
+        List<Claim_Info> resultList = mypageDao.getCancelRefundList(parameter);
         return resultList;
     }
 }

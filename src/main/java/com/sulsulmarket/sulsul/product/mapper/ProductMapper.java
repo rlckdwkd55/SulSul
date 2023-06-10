@@ -10,4 +10,6 @@ import java.util.Map;
 public interface ProductMapper {
 
     Product getProductDetail(Map<String, Integer> parameter);
+
+    Product getProductByProductNo(int productNo);
 }
