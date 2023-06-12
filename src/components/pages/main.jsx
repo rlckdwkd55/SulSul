@@ -1,5 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import ProductList from '../template/productList'
+import styled from 'styled-components';
+
+const MainWrap = styled.div`
+    max-width: 1144px;
+`;
+const BestItemsWrap = styled.div`
+
+`;
+const NewItemsWrap = styled.div`
+
+`;
+
 
 const ContentHead = (props) => {
     const navigate = useNavigate();
@@ -16,18 +28,18 @@ const ContentHead = (props) => {
 
 const Main = () => {
     return(
-        <div className="container" id="main-wrapper">
+        <MainWrap>
             <div id="banner">
 
             </div>
-            <div className='bestItems-wrapper'>
+            <BestItemsWrap>
                 <ContentHead title={'BEST PICK!'} cate={'best'} />
-            </div>
-            <div className='newItems-wrapper'>
+            </BestItemsWrap>
+            <NewItemsWrap>
                 <ContentHead title={'NEW!'} cate={'new'} />
                 <ProductList itemKey={'newItems'} />
-            </div>
-        </div>
+            </NewItemsWrap>
+        </MainWrap>
     );
 }
 

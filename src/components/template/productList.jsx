@@ -4,7 +4,8 @@ import Product from "../atoms/product";
 import styled from 'styled-components';
 
 const ProductWrap = styled.div`
-
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 
