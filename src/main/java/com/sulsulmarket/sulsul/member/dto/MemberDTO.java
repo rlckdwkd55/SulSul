@@ -1,11 +1,9 @@
 package com.sulsulmarket.sulsul.member.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sulsulmarket.sulsul.ennumurate.MemberRoleType;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -46,5 +44,5 @@ public class MemberDTO {
     private LocalDateTime MEMBER_ENROLLDATE;
 
     @JsonProperty("memberRole")
-    private MemberRoleType MEMBER_ROLE;
+    private String MEMBER_ROLE;
 }
