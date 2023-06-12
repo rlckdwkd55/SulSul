@@ -1,6 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import ProductService from "../../service/ProductService";
 
 function SearchList(props) {
   const lis = [];
@@ -30,7 +31,7 @@ function SearchList(props) {
 
 function SearchBar() {
   const [search, setSearch] = useState("");
-  const [nameList, setNameList] = useState([]);
+  const [nameList, setNameList] = useState([]); // 연관 검색어
   const navigate = useNavigate();
 
   async function changeSearch(e) {
@@ -41,15 +42,9 @@ function SearchBar() {
       requestString: searchVal
     };
 
-    try {
-      const result = await axios.post(
-        "http://192.168.0.18:8080/product/productNameList",
-        data
-      );
-
-      setNameList(result.data); // 서버 연결 후 확인
-    } catch (e) {
-      console.error(e);
+    const response = await ProductService.postProductName(data);
+    if (response.status === 'success') {
+      setNameList(response.data)
     }
   }
 
@@ -66,13 +61,7 @@ function SearchBar() {
   return (
     <div className="search-wrapper">
       <div className="search">
-        <input
-          type="text"
-          id="search-input"
-          name="searchBar"
-          onChange={(e) => {
-            changeSearch(e);
-          }}
+        <input type="text" id="search-input" name="searchBar" onChange={(e) => {changeSearch(e);}}
           onKeyDown={(e) => {
             if (e.key === "Enter") doSearch(e);
           }}

@@ -25,7 +25,7 @@ const Main = () => {
             </div>
             <div className='newItems-wrapper'>
                 <ContentHead title={'NEW!'} cate={'new'} />
-                <ProductList key={'newItems'} />
+                <ProductList itemKey={'newItems'} />
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import MainService from '../../service/MainService';
+import ProductService from '../../service/ProductService';
 import Product from "../atoms/product";
 import styled from 'styled-components';
 
@@ -14,7 +14,7 @@ const ProductList = (props) => {
 
   useEffect(()=>{
     async function getProduct() {
-      // const response = await MainService.getMainItemList();
+      // const response = await ProductService.getMainItemList();
 
       // if (response.status === "success") {
       //   setProductList(response.data[props.key]);
@@ -113,7 +113,7 @@ const ProductList = (props) => {
     }
 
     getProduct();
-  }, [props.key]);
+  }, [props.itemKey]);
 
   return(
     <ProductWrap>

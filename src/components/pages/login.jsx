@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
+import LoginService from '../../service/LoginService';
 import '../../css/login.css';
-import axios from 'axios';
 
 function Login() {
     const [id, setId] = useState('');
@@ -16,23 +16,19 @@ function Login() {
             userId: id,
             userPwd: pwd
         }
-        try {
-            const res = await axios.post('login', data);
-            if (res.code === 200) {
-                res.redirectUrl ? window.location.href = res.redirectUrl : window.location.href = '/'; // redirect 처리
-                // const userInfo = {
-                //     userId: res.userId,
-                //     userName: res.userName
-                // }
-                
-                // 로그인 이후 세션 처리
-                sessionStorage.setItem('isLogin', 'true');
-            } else {
-                alert(res.msg);
-            }
-        } catch(e) {
-            alert(e);
+        const response = await LoginService.postLogin(data);
+        if (response.status === 'success') {
+            response.data.redirectUrl ? window.location.href = response.redirectUrl : window.location.href = '/'; // redirect 처리
+
+            // const userInfo = {
+            //     userId: respose.data.userId
+            //     userName: response.data.userName
+            // }
+            
+            // 로그인 이후 세션 처리
+            sessionStorage.setItem('isLogin', 'true');
         }
+        
     }
 
     return(

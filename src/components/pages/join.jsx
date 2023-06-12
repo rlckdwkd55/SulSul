@@ -1,9 +1,10 @@
 import {useState} from 'react';
-import axios from 'axios';
-import '../../css/join.css';
-import * as common from '../../js/common';
-import DaumPostPopup from '../module/daumPost';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
+import DaumPostPopup from '../module/daumPost';
+import LoginService from '../../service/LoginService';
+import * as common from '../../js/common';
+import '../../css/join.css';
 
 const JoinBtn = (props) => {
     return (
@@ -60,31 +61,31 @@ const Join = () => {
     async function checkIdEmail(id) {
         let data;
         let url;
+        let msg;
 
         if (id === 'userId') {
             url = '/login/checkId';
             data = {
                 userId: input[id]
-            }
+            };
+            msg = '아이디 중복체크를 해주세요.';
         } else if (id === 'userEmail') {
             url = '/login/checkEmail';
             data = {
                 userEmail: input[id]
             };
+            msg = '이메일 중복체크를 해주세요.';
         }
 
         if (validateInfo(id)) {
-            try {
-                const res = await axios.post(url, data);
-
-                if (res) { //res === true ??
-                    setIsChecked({
-                        ...isChecked,
-                        [id]: true
-                    });
-                }
-            } catch (e) {
-                alert(e);
+            const response = await LoginService.postCheckInfo(url, data);
+            if (response.status === 'success') {
+                setIsChecked({
+                    ...isChecked,
+                    [id]: true
+                });
+            } else {
+                alert(msg);
             }
         }
 
@@ -95,12 +96,11 @@ const Join = () => {
             if (!validateInfo(key)) return false;
         }
 
-        try {
-            const res = await axios.post('/join', input);
-
-            if (res) <Link to='/'/> //res === true ??
-        } catch (e) {
-            alert(e);
+        const response = await LoginService.postJoin(input);
+        if (response.status === 'success') {
+            <Link to='/'/>
+        } else {
+            alert('회원가입에 실패했습니다.');
         }
     }
 

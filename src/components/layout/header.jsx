@@ -10,7 +10,7 @@ function LoginOut() {
     contents = (
       <Link to="/login">
         <span className="btn" id="move-login-btn">
-          회원가입 / 로그인
+          로그인
         </span>
       </Link>
     );
