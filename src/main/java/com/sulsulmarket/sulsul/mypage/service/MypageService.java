@@ -14,8 +14,13 @@ public class MypageService {
     @Autowired
     private MypageDao mypageDao;
 
-    public List<Orders> getOrderList(Map<String, String> parameter){
+    public List<Orders> getOrderList(Map<String, Object> parameter){
         List<Orders> resultList = mypageDao.getOrderList(parameter);
+        return resultList;
+    }
+
+    public List<Order_Detail> getOrderDetailList(Map<String, Object> parameter){
+        List<Order_Detail> resultList = mypageDao.getOrderDetailList(parameter);
         return resultList;
     }
 

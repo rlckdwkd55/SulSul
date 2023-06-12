@@ -8,7 +8,9 @@ import java.util.Map;
 
 @Mapper
 public interface MypageMapper {
-    List<Orders> getOrderList(Map<String, String> parameter);
+    List<Orders> getOrderList(Map<String, Object> parameter);
+
+    List<Order_Detail> getOrderDetailList(Map<String, Object> parameter);
 
     List<Review> getReviewList(Map<String, String> parameter);
 

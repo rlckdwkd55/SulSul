@@ -70,5 +70,4 @@ public class CartService {
             return new CartDTO().toDTO(productNo, cartAmount);
         }
     }
-
 }

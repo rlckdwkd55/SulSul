@@ -6,6 +6,10 @@
         SELECT * FROM ORDERS WHERE MEMBER_ID LIKE CONCAT(#{MEMBER_ID})
     </select>
 
+    <select id="getOrderDetailList" resultType="com.sulsulmarket.sulsul.mypage.dto.Order_Detail">
+        SELECT * FROM ORDER_DETAIL WHERE ORDER_NO = (#{ORDER_NO})
+    </select>
+
     <select id="getReviewList" resultType="com.sulsulmarket.sulsul.mypage.dto.Review">
         SELECT * FROM REVIEW WHERE MEMBER_ID LIKE CONCAT(#{MEMBER_ID})
     </select>

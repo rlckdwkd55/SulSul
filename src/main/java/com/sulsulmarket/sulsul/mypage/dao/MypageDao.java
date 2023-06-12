@@ -15,8 +15,13 @@ public class MypageDao implements MypageMapper{
     private MypageMapper mypageMapper;
 
     @Override
-    public List<Orders> getOrderList(Map<String, String> parameter) {
+    public List<Orders> getOrderList(Map<String, Object> parameter) {
         return mypageMapper.getOrderList(parameter);
+    }
+
+    @Override
+    public List<Order_Detail> getOrderDetailList(Map<String, Object> parameter) {
+        return mypageMapper.getOrderDetailList(parameter);
     }
 
     @Override
