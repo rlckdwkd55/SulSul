@@ -38,28 +38,33 @@ public class CartService {
         return cart;
     }
 
+    /**
+     * 회원 기준 장바구니 추가하는 메서드
+     */
     @Transactional
     public CartDTO addCartByMemberIdAndProduct(String memberId, int productNo, int cartAmount) {
 
         MemberDTO member = memberDao.getMemberById(memberId);
-
         if (member == null) {
-            throw new NullPointerException("회원 아이디가 일치 하지 않습니다.");
-        } else {
-            Product product = productDao.getProductByProductNo(productNo);
-            if (product == null) {
-                throw new NullPointerException("해당 상품이 존재하지 않습니다");
-            } else {
-                Integer insertCount = cartDao.addCartByMemberIdAndProduct(memberId, productNo, cartAmount);
-                if (insertCount == null || insertCount == 0) {
-                    throw new NullPointerException("장바구니에 담는 것을 실패하였습니다.");
-                } else {
-                    return new CartDTO().toDTO(memberId, productNo, cartAmount);
-                }
-            }
+            throw new NullPointerException("회원 아이디가 일치하지 않습니다.");
         }
+
+        Product product = productDao.getProductByProductNo(productNo);
+        if (product == null) {
+            throw new NullPointerException("해당 상품이 존재하지 않습니다.");
+        }
+
+        Integer insertCount = cartDao.addCartByMemberIdAndProduct(memberId, productNo, cartAmount);
+        if (insertCount == null || insertCount == 0) {
+            throw new NullPointerException("장바구니에 담는 것을 실패하였습니다.");
+        }
+
+        return new CartDTO().toDTO(memberId, productNo, cartAmount);
     }
 
+    /**
+     * TODO 비회원 구현 필요
+     */
     public CartDTO addCartByNotLoginMember(int productNo, int cartAmount) {
 
         Product product = productDao.getProductByProductNo(productNo);
