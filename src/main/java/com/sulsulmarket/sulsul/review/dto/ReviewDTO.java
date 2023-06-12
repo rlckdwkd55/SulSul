@@ -1,54 +1,31 @@
 package com.sulsulmarket.sulsul.review.dto;
 
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class ReviewDTO {
 
+    @JsonProperty("reviewNo")
     private int REVIEW_NO;
+    @JsonProperty("memberId")
     private String MEMBER_ID;
+    @JsonProperty("detailNo")
     private int DETAIL_NO;
+    @JsonProperty("reviewContent")
     private String REVIEW_CONTENT;
+    @JsonProperty("reviewScore")
     private int REVIEW_SCORE;
+    @JsonProperty("reviewDate")
     private LocalDateTime REVIEW_DATE;
+    @JsonProperty("reviewStatus")
     private String REVIEW_STATUS;
+    @JsonProperty("reviewOldImage")
     private String REVIEW_OLDIMAGE;
+    @JsonProperty("reviewNewImage")
     private String REVIEW_NEWIMAGE;
 
-    public int getREVIEW_NO() {
-        return REVIEW_NO;
-    }
-
-    public String getMEMBER_ID() {
-        return MEMBER_ID;
-    }
-
-    public int getDETAIL_NO() {
-        return DETAIL_NO;
-    }
-
-    public String getREVIEW_CONTENT() {
-        return REVIEW_CONTENT;
-    }
-
-    public int getREVIEW_SCORE() {
-        return REVIEW_SCORE;
-    }
-
-    public LocalDateTime getREVIEW_DATE() {
-        return REVIEW_DATE;
-    }
-
-    public String getREVIEW_STATUS() {
-        return REVIEW_STATUS;
-    }
-
-    public String getREVIEW_OLDIMAGE() {
-        return REVIEW_OLDIMAGE;
-    }
-
-    public String getREVIEW_NEWIMAGE() {
-        return REVIEW_NEWIMAGE;
-    }
 }
