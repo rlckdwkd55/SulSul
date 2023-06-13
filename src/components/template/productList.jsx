@@ -3,22 +3,15 @@ import ProductService from '../../service/ProductService';
 import Product from "../atoms/product";
 import styled from 'styled-components';
 
-const ProductWrap = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-
 const ProductList = (props) => {
   const [productList, setProductList] = useState([]);
-  let contents = [];
 
   useEffect(()=>{
     async function getProduct() {
       // const response = await ProductService.getMainItemList();
 
       // if (response.status === "success") {
-      //   setProductList(response.data[props.key]);
+      //   setProductList(response.data["newItems"]);
       //   console.log(response.data);
       // }
       setProductList([
@@ -114,14 +107,14 @@ const ProductList = (props) => {
     }
 
     getProduct();
-  }, [props.itemKey]);
+  }, []);
 
   return(
-    <ProductWrap>
+    <div>
       {productList.map((item, i) => {
         return <Product key={i} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/product01.jpg"}/>
       })}
-    </ProductWrap>
+    </div>
   )
 }
 

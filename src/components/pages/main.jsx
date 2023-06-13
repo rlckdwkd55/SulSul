@@ -1,15 +1,21 @@
 import { useNavigate } from 'react-router-dom';
-import ProductList from '../template/productList'
 import styled from 'styled-components';
+import ProductList from '../template/productList';
+import BestItemSlider from '../template/BestItemSlider';
 
 const MainWrap = styled.div`
     max-width: 1144px;
+    margin: 0 80px;
 `;
 const BestItemsWrap = styled.div`
 
 `;
 const NewItemsWrap = styled.div`
-
+    > div {
+        display: flex;
+        flex-wrap: wrap;
+        width: calc(100% + 20px);
+    }
 `;
 
 
@@ -34,6 +40,7 @@ const Main = () => {
             </div>
             <BestItemsWrap>
                 <ContentHead title={'BEST PICK!'} cate={'best'} />
+                <BestItemSlider/>
             </BestItemsWrap>
             <NewItemsWrap>
                 <ContentHead title={'NEW!'} cate={'new'} />
