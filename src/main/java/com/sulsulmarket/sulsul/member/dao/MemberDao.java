@@ -39,7 +39,7 @@ public class MemberDao implements MemberMapper {
     }
 
     @Override
-    public boolean getMemberByEmail(String email) {
+    public MemberDTO getMemberByEmail(String email) {
 
         return memberMapper.getMemberByEmail(email);
     }

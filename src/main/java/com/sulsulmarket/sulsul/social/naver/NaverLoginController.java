@@ -27,9 +27,9 @@ public class NaverLoginController {
      */
     @GetMapping("/api/login/naver")
     public String naverLogin() {
-
         String authorizationUrl = naverLoginService.getAuthorizationUrl();
         log.info("[INFO] authorizationUrl -> {}", authorizationUrl);
+
         return "redirect:" + authorizationUrl;
     }
 

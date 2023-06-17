@@ -16,7 +16,7 @@ public interface MemberMapper {
 
     int memberSign(MemberDTO memberDTO);
 
-    boolean getMemberByEmail(String email);
+    MemberDTO getMemberByEmail(String email);
 
-    int memberPasswordUpdate(String newPassword, String id);
+    int memberPasswordUpdate(String password, String memberId);
 }

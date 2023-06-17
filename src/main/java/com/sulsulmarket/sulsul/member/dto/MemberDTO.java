@@ -45,4 +45,11 @@ public class MemberDTO {
     private LocalDateTime MEMBER_ENROLLDATE;
 
     private String MEMBER_ROLE;
+
+    public MemberDTO toLoginDTO(String id, String name) {
+        this.MEMBER_ID = id;
+        this.MEMBER_NAME = name;
+
+        return this;
+    }
 }

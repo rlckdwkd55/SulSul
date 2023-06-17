@@ -6,54 +6,54 @@
         SELECT * FROM MEMBER
     </select>
 
-    <select id="getMemberById" >
+    <select id="getMemberById" resultType="com.sulsulmarket.sulsul.member.dto.MemberDTO">
         SELECT * FROM MEMBER WHERE MEMBER_ID = #{MEMBER_ID}
     </select>
 
     <insert id="memberSign">
         INSERT INTO MEMBER(
-               MEMBER_ID
-              ,MEMBER_PW
-              ,MEMBER_NAME
-              ,MEMBER_BIRTHDATE
-              ,MEMBER_GENDER
-              ,MEMBER_ADDRESS
-              ,MEMBER_PHONE
-              ,MEMBER_EMAIL
-              ,MEMBER_ENROLLDATE
-              ,MEMBER_ROLE
+             MEMBER_ID
+            ,MEMBER_PW
+            ,MEMBER_NAME
+            ,MEMBER_BIRTHDATE
+            ,MEMBER_GENDER
+            ,MEMBER_ADDRESS
+            ,MEMBER_PHONE
+            ,MEMBER_EMAIL
+            ,MEMBER_ENROLLDATE
+            ,MEMBER_ROLE
         )
         VALUES(
-              #{MEMBER_ID}
-              ,#{MEMBER_PW}
-              ,#{MEMBER_NAME}
-              ,#{MEMBER_BIRTHDATE}
-              ,#{MEMBER_GENDER}
-              ,#{MEMBER_ADDRESS}
-              ,#{MEMBER_PHONE}
-              ,#{MEMBER_EMAIL}
-              ,now()
-              ,'ACTIVE'
-              )
+             #{MEMBER_ID}
+            ,#{MEMBER_PW}
+            ,#{MEMBER_NAME}
+            ,#{MEMBER_BIRTHDATE}
+            ,#{MEMBER_GENDER}
+            ,#{MEMBER_ADDRESS}
+            ,#{MEMBER_PHONE}
+            ,#{MEMBER_EMAIL}
+            ,now()
+            ,'ACTIVE'
+        )
     </insert>
 
     <select id="memberLogin">
         SELECT *
-            FROM MEMBER
-         WHERER MEMBER_ID = #{MEMBER_ID}
-            AND MEMBER_PW = #{MEMBER_PW}
+        FROM MEMBER
+        WHERER MEMBER_ID = #{MEMBER_ID}
+        AND MEMBER_PW = #{MEMBER_PW}
     </select>
 
-    <select id="getMemberByEmail">
+    <select id="getMemberByEmail" resultType="com.sulsulmarket.sulsul.member.dto.MemberDTO">
         SELECT *
-            FROM MEMBER
+        FROM MEMBER
         WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
     </select>
 
-    <update id="memberPasswordUpdate" parameterType="com.sulsulmarket.sulsul.member.dto.MemberDTO">
+    <update id="memberPasswordUpdate">
         UPDATE MEMBER
-            SET MEMBER_PW = #{newPassword}
-        WHERE MEMBER_ID = #{id}
+            SET MEMBER_PW = #{password}
+        WHERE MEMBER_ID = #{memberId}
     </update>
 
 </mapper>
