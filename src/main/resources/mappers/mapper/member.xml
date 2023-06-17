@@ -6,7 +6,7 @@
         SELECT * FROM MEMBER
     </select>
 
-    <select id="getMemberById" resultType="com.sulsulmarket.sulsul.member.dto.MemberDTO">
+    <select id="getMemberById" >
         SELECT * FROM MEMBER WHERE MEMBER_ID = #{MEMBER_ID}
     </select>
 
@@ -24,7 +24,7 @@
               ,MEMBER_ROLE
         )
         VALUES(
-                  #{MEMBER_ID}
+              #{MEMBER_ID}
               ,#{MEMBER_PW}
               ,#{MEMBER_NAME}
               ,#{MEMBER_BIRTHDATE}

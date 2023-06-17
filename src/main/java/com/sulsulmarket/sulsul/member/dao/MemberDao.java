@@ -39,9 +39,9 @@ public class MemberDao implements MemberMapper {
     }
 
     @Override
-    public MemberDTO getMemberEmail(String email) {
+    public boolean getMemberByEmail(String email) {
 
-        return memberMapper.getMemberEmail(email);
+        return memberMapper.getMemberByEmail(email);
     }
 
     @Override
