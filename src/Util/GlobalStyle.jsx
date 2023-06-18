@@ -10,14 +10,14 @@ const GlobalStyle = createGlobalStyle`
   font-family:  -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
-}
+  }
   h1 {
     font-size: 1rem;
     margin: 0;
   }
   h2 {
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 500;
     margin: 0;
   }
   h3 {
@@ -44,7 +44,9 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
     margin: 0;
   }
-
+  img {
+    border-radius: 10px;
+  }
 `;
 
 export default GlobalStyle;

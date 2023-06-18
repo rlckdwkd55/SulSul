@@ -3,16 +3,31 @@ import ProductService from '../../service/ProductService';
 import Product from "../atoms/product";
 import styled from 'styled-components';
 
+const ListWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% + 20px);
+  justify-content: space-between;
+`;
+
 const ProductList = (props) => {
   const [productList, setProductList] = useState([]);
 
   useEffect(()=>{
-    async function getProduct() {
-      // const response = await ProductService.getMainItemList();
-
-      // if (response.status === "success") {
-      //   setProductList(response.data["newItems"]);
-      //   console.log(response.data);
+    async function getProduct(itemKey) {
+      // if (/^newItems$|^bestItems$/.test(itemKey)) {
+        // const response = await ProductService.getMainItemList();
+  
+        // if (response.status === "success") {
+        //   setProductList(response.data["newItems"]);
+        //   console.log(response.data);
+        // }
+      // } else {
+        // const response = await ProductService.getProductList();
+  
+        // if (response.status === "success") {
+        //   setProductList(response.data["???"]);
+        //   console.log(response.data);
       // }
       setProductList([
         {
@@ -106,15 +121,15 @@ const ProductList = (props) => {
     ]); 
     }
 
-    getProduct();
+    getProduct(props.itemKey);
   }, []);
 
   return(
-    <div>
-      {productList.map((item, i) => {
-        return <Product key={i} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/product01.jpg"}/>
+    <ListWrap>
+      {productList.map((item) => {
+        return <Product key={item.PRODUCT_NO} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/product01.jpg"}/>
       })}
-    </div>
+    </ListWrap>
   )
 }
 

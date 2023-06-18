@@ -6,6 +6,7 @@ import Header from "./components/layout/header";
 import Login from "./components/pages/login";
 import Main from "./components/pages/main";
 import Join from "./components/pages/join";
+import List from "./components/pages/list";
 import Search from "./components/pages/search";
 import UserMy from "./components/pages/userMy";
 import GlobalStyle from "./Util/GlobalStyle";
@@ -33,6 +34,7 @@ function App() {
               <Route path="/" element={<Main />} />
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
+              <Route path="/list" element={<List />} />
               <Route path="/search" element={<Search />} />
               <Route path="/my" element={<UserMy />} />
             </Routes>

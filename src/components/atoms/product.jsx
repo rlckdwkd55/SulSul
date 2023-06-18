@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const ProductWrap = styled.div`
@@ -5,10 +6,16 @@ const ProductWrap = styled.div`
 `;
 
 const Product = (props) => {
+  const navigate = useNavigate();
+
+  function navigateByPrdNo(prdNo) {
+    navigate('/detail', {state: {prdNo: prdNo}});
+  };
+
   return(
-    <ProductWrap>
+    <ProductWrap onClick={() => navigateByPrdNo(props.key)}>
       <div>
-        <img src={props.imgPath} alt={props.prdName} width="220" height="280"/>
+        <img src={props.imgPath} alt={props.prdName} width="230" height="280"/>
       </div>
       <div>
         <h3>{props.prdName}</h3>

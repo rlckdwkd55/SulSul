@@ -1,8 +1,19 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Product from "../atoms/product";
+import styled from "styled-components";
+
+const StyledSlider = styled(Slider)`
+// .slider .slick-list {
+//   margin:0 -20px;
+// }
+
+// .slick-slide {
+//   margin:0 20px;
+// }
+`;
 
 const BestItemSlider = () => {
   const [productList, setProductList] = useState([]);
@@ -142,11 +153,11 @@ const BestItemSlider = () => {
   
   return (
     <div>
-      <Slider {...settings}>
+      <StyledSlider {...settings}>
         {productList.map((item, i) => {
-          return <div><Product key={i} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/product01.jpg"}/></div>
+          return <Product key={item.PRODUCT_NO} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/product01.jpg"}/>
         })}
-      </Slider>
+      </StyledSlider>
     </div>
   )
 }

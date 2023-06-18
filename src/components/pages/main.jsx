@@ -5,17 +5,17 @@ import BestItemSlider from '../template/BestItemSlider';
 
 const MainWrap = styled.div`
     max-width: 1144px;
-    margin: 0 80px;
+    margin: 0 15%;
 `;
 const BestItemsWrap = styled.div`
 
 `;
 const NewItemsWrap = styled.div`
-    > div {
-        display: flex;
-        flex-wrap: wrap;
-        width: calc(100% + 20px);
-    }
+    // > div {
+    //     display: flex;
+    //     flex-wrap: wrap;
+    //     width: calc(100% + 20px);
+    // }
 `;
 
 
@@ -25,7 +25,7 @@ const ContentHead = (props) => {
         <div className="wrapper-header">
             <span className="leftItem">{props.title}</span>
             <span className="rightItem" onClick={()=>{
-                navigate('/product', {state: {cate: props.cate}});
+                navigate('/list', {state: {cate: props.cate}});
             }}>더보기</span>
             <i className="fa-solid fa-chevron-right wrapper-header rightItem"></i>
         </div>
