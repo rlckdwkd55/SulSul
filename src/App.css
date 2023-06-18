@@ -90,38 +90,3 @@ header {
   margin: 5px 0;
   padding-left: 10px;
 }
-
-/* nav */
-.nav {
-  padding: 0 70px;
-  border-top: 1px solid lightgrey;
-  justify-content: center;
-}
-.menu-list-warpper {
-  display: flex;
-  justify-content: space-around;
-  padding-top: 15px;
-  height: 55px;
-}
-.menu-list {
-  display: flex;
-  list-style: none;
-  padding: 0;
-}
-.menu-list li {
-  float: left;
-  margin: 0 20px;
-  font-size: 13pt;
-}
-.menu-list li a {
-  font-size: 13pt;
-  color: dimgrey;
-  text-decoration-line: none;
-}
-
-/* footer */
-.footer {
-  width: 100%;
-  height: 130px;
-  background-color: #a1a1a1;
-}

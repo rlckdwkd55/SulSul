@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import SearchBar from "./searchBar";
 import axios from "axios";
+import MenuList from "../template/menuList";
 
 function LoginOut() {
   const isLogin = sessionStorage.getItem("isLogin");
@@ -65,24 +66,7 @@ function Header() {
           </div>
         </div>
       </header>
-      <nav className="nav">
-        <div className="menu-list-warpper">
-          <ul className="menu-list">
-            <li>
-              <a href="/">소주 · 증류주</a>
-            </li>
-            <li>
-              <a href="/">막걸리</a>
-            </li>
-            <li>
-              <a href="/">약주 · 청주</a>
-            </li>
-            <li>
-              <a href="/">과실주</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <MenuList />
     </>
   );
 }
