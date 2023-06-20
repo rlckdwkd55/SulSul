@@ -76,7 +76,6 @@ public class NaverLoginService {
                 HttpHeaders userInfoHeader = new HttpHeaders();
                 userInfoHeader.set("Authorization", "Bearer " + getToken);
 
-
                 HttpEntity<String> userInfoEntity = new HttpEntity<>(userInfoHeader);
                 ResponseEntity<String> responseEntity = restTemplate.exchange(getUserInfoUrl, HttpMethod.GET, userInfoEntity, String.class);
 

@@ -27,9 +27,9 @@ public class NaverLoginController {
      */
     @GetMapping("/api/login/naver")
     public String naverLogin() {
-
         String authorizationUrl = naverLoginService.getAuthorizationUrl();
         log.info("[INFO] authorizationUrl -> {}", authorizationUrl);
+
         return "redirect:" + authorizationUrl;
     }
 
@@ -45,6 +45,5 @@ public class NaverLoginController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-
     }
 }

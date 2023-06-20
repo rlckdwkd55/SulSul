@@ -1,17 +1,20 @@
 package com.sulsulmarket.sulsul.member.controller;
 
+import com.sulsulmarket.sulsul.member.dto.LoginMemberDTO;
 import com.sulsulmarket.sulsul.member.dto.MemberDTO;
 import com.sulsulmarket.sulsul.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -33,19 +36,24 @@ public class MemberController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
-
+    /**
+     * 아이디로 회원 조회 컨트롤러
+     */
     @PostMapping("/api/member/id")
     public ResponseEntity<Object> getMemberById(@RequestBody MemberDTO memberDTO) {
 
         try {
-            MemberDTO member = memberService.getMemberById(memberDTO.getMEMBER_ID());
+            MemberDTO member = memberService.getMemberById(memberDTO);
             return ResponseEntity.status(HttpStatus.OK).body(member);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @PostMapping("/api/duplicate/check")
+    /**
+     * 아이디 중복 체크 컨트롤러
+     */
+    @PostMapping("/api/duplicate/check/id")
     public ResponseEntity<Object> duplicateCheckId(@RequestBody MemberDTO memberDTO) {
 
         try {
@@ -56,30 +64,39 @@ public class MemberController {
         }
     }
 
+    /**
+     * 회원 로그인 컨틀롤러
+     */
     @PostMapping("/api/member/login")
-    public ResponseEntity<Object> loginMember(@RequestBody MemberDTO memberDTO) {
+    public ResponseEntity<Object> loginMember(@RequestBody Map<String, String> parameter) {
 
         try {
-            MemberDTO loginMember = memberService.memberLogin(memberDTO.getMEMBER_ID(), memberDTO.getMEMBER_PW());
+            LoginMemberDTO loginMember = memberService.memberLogin(parameter.get("memberId"), parameter.get("password"));
             return ResponseEntity.status(HttpStatus.OK).body(loginMember);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
+    /**
+     * 회원가입 컨트롤러
+     */
     @PostMapping("/api/member/sign")
-    //TODO DTO Field Validation Check
-    public ResponseEntity<Object> memberSign(@RequestBody MemberDTO memberDTO) {
+    public ResponseEntity<Object> memberSign(@Validated @RequestBody MemberDTO memberDTO) {
 
         try {
-            MemberDTO signMember = memberService.memberSign(memberDTO);
-            return ResponseEntity.status(HttpStatus.OK).body(signMember);
+            memberService.memberSign(memberDTO);
+            return ResponseEntity.status(HttpStatus.OK).body("회원가입에 성공하였습니다.");
         } catch (Exception e) {
+            log.error("MEMBER SIGN FAIL ! ! ! -> [{}]", e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @PostMapping("/api/member/email")
+    /**
+     * 이메일 중복 체크 컨트롤러
+     */
+    @PostMapping("/api/duplicate/check/email")
     public ResponseEntity<Object> duplicateEmail(@RequestBody MemberDTO memberDTO) {
 
         try {
@@ -90,12 +107,15 @@ public class MemberController {
         }
     }
 
+    /**
+     * 패스워드 변경 컨트롤러
+     */
     @PostMapping("/api/member/new/password")
     public ResponseEntity<Object> updateNewPassword(@RequestBody MemberDTO memberDTO) {
 
         try {
-            String newPassword = memberService.memberPasswordUpdate(memberDTO.getMEMBER_PW(), memberDTO.getMEMBER_ID());
-            return ResponseEntity.status(HttpStatus.OK).body(newPassword);
+            memberService.memberPasswordUpdate(memberDTO.getMEMBER_PW(), memberDTO.getMEMBER_ID());
+            return ResponseEntity.status(HttpStatus.OK).body("비밀번호 변경 되었습니다.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
