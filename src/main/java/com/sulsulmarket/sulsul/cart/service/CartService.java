@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Objects;
 
 @Service
 @Slf4j
@@ -60,19 +59,5 @@ public class CartService {
         }
 
         return new CartDTO().toDTO(memberId, productNo, cartAmount);
-    }
-
-    /**
-     * TODO 비회원 구현 필요
-     */
-    public CartDTO addCartByNotLoginMember(int productNo, int cartAmount) {
-
-        Product product = productDao.getProductByProductNo(productNo);
-
-        if(product == null) {
-            throw new NullPointerException("해당 상품이 존재하지 않습니다.");
-        } else {
-            return new CartDTO().toDTO(productNo, cartAmount);
-        }
     }
 }

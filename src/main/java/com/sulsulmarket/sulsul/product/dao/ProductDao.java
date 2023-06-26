@@ -21,6 +21,7 @@ public class ProductDao implements ProductMapper {
 
     @Override
     public Product getProductByProductNo(int productNo) {
+
         return productMapper.getProductByProductNo(productNo);
     }
 }

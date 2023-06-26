@@ -23,9 +23,8 @@ public class ReviewDTO {
     private LocalDateTime REVIEW_DATE;
     @JsonProperty("reviewStatus")
     private String REVIEW_STATUS;
-    @JsonProperty("reviewOldImage")
-    private String REVIEW_OLDIMAGE;
-    @JsonProperty("reviewNewImage")
-    private String REVIEW_NEWIMAGE;
-
+    @JsonProperty("reviewImage")
+    private String REVIEW_IMAGE;
+    @JsonProperty("updateTime")
+    private LocalDateTime UPDATE_TIME;
 }

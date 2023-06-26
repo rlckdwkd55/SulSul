@@ -5,6 +5,8 @@ import com.sulsulmarket.sulsul.review.mapper.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ReviewDao implements ReviewMapper {
 
@@ -14,5 +16,10 @@ public class ReviewDao implements ReviewMapper {
     @Override
     public int writeReview(ReviewDTO reviewDTO) {
         return reviewMapper.writeReview(reviewDTO);
+    }
+
+    @Override
+    public List<ReviewDTO> getReviewListAll() {
+        return reviewMapper.getReviewListAll();
     }
 }

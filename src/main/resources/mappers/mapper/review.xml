@@ -11,8 +11,7 @@
             ,REVIEW_SCORE
             ,REVIEW_DATE
             ,REVIEW_STATUS
-            ,REVIEW_OLDIMAGE
-            ,REVIEW_NEWIMAGE
+            ,REVIEW_IMAGE
         ) VALUES(
              #{REVIEW_NO}
             ,#{MEMBER_ID}
@@ -22,9 +21,15 @@
             ,NOW()
             ,#{REVIEW_STATUS}
             ,#{REVIEW_OLDIMAGE}
-            ,#{REVIEW_NEWIMAGE}
         )
-
     </insert>
+    
+    <select id="getReviewListAll" resultType="com.sulsulmarket.sulsul.review.dto.ReviewDTO">
+        SELECT *
+          FROM REVIEW;
+        ORDER BY REVIEW_DATE DESC;
+    </select>
+
+
 
 </mapper>
