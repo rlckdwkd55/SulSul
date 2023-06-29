@@ -4,18 +4,14 @@ import ProductList from '../template/productList';
 import BestItemSlider from '../template/BestItemSlider';
 
 const MainWrap = styled.div`
-    max-width: 1144px;
-    margin: 0 15%;
+    padding: 0 70px;
 `;
 const BestItemsWrap = styled.div`
-
+    margin: 0 80px;
 `;
 const NewItemsWrap = styled.div`
-    // > div {
-    //     display: flex;
-    //     flex-wrap: wrap;
-    //     width: calc(100% + 20px);
-    // }
+    margin: 0 80px;
+    maxw-width: 1144px;
 `;
 
 

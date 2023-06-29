@@ -9,6 +9,7 @@ import Join from "./components/pages/join";
 import List from "./components/pages/list";
 import Search from "./components/pages/search";
 import UserMy from "./components/pages/userMy";
+import Detail from "./components/pages/detail";
 import GlobalStyle from "./Util/GlobalStyle";
 import styled from "styled-components";
 const AppWrapper = styled.div`
@@ -37,6 +38,7 @@ function App() {
               <Route path="/list" element={<List />} />
               <Route path="/search" element={<Search />} />
               <Route path="/my" element={<UserMy />} />
+              <Route path="/detail" element={<Detail />} />
             </Routes>
           </PagesWrapper>
           {/* <Footer/> */}
