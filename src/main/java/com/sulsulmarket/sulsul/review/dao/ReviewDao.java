@@ -1,6 +1,7 @@
 package com.sulsulmarket.sulsul.review.dao;
 
 import com.sulsulmarket.sulsul.review.dto.ReviewDTO;
+import com.sulsulmarket.sulsul.review.dto.ReviewOrderByMemberId;
 import com.sulsulmarket.sulsul.review.mapper.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,12 @@ public class ReviewDao implements ReviewMapper {
     }
 
     @Override
-    public List<ReviewDTO> getReviewListAll() {
-        return reviewMapper.getReviewListAll();
+    public List<ReviewDTO> getReviewListAllByOrderDetail() {
+        return reviewMapper.getReviewListAllByOrderDetail();
+    }
+
+    @Override
+    public List<ReviewOrderByMemberId> getReviewListAllByMemberId(String memberId) {
+        return reviewMapper.getReviewListAllByMemberId(memberId);
     }
 }
