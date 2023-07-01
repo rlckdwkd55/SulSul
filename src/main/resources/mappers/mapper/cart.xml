@@ -5,20 +5,33 @@
 
     <select id="getCartListByMemberId" resultType="com.sulsulmarket.sulsul.cart.dto.CartDTO">
         SELECT *
-            FROM CART
+        FROM CART
         WHERE MEMBER_ID = #{memberId}
     </select>
 
     <insert id="addCartByMemberIdAndProduct">
         INSERT INTO CART(
-             MEMBER_ID
-            ,PRODUCT_NO
-            ,CART_AMOUNT
+                         MEMBER_ID
+                        ,PRODUCT_NO
+                        ,CART_AMOUNT
         ) VALUES(
-             #{memberId}
-            ,#{productNo}
-            ,#{cartAmount}
-        )
+                    #{memberId}
+                ,#{productNo}
+                ,#{cartAmount}
+                )
     </insert>
 
+    <select id="productJoinImageList" resultType="com.sulsulmarket.sulsul.cart.dto.ProductJoinDTO">
+        SELECT *
+        FROM PRODUCT A JOIN
+             PRODUCT_IMAGE B
+             ON A.PRODUCT_NO = B.PRODUCT_NO
+        WHERE A.PRODUCT_NO = #{PRODUCT_NO}
+    </select>
+
+    <select id="getProductImage" resultType="com.sulsulmarket.sulsul.cart.dto.ProductImage">
+        SELECT *
+        FROM PRODUCT_IMAGE
+        WHERE PRODUCT_NO = #{PRODUCT_NO}
+    </select>
 </mapper>

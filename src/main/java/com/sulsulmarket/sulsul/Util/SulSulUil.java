@@ -5,9 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
 public class SulSulUil {
+
+    private static AtomicLong sequence = new AtomicLong(1);
+
 
     public static Date getCurrentTime(){
 
@@ -41,4 +45,10 @@ public class SulSulUil {
         }
         return null;
     }
+
+    public synchronized static Long getNextSequence(){
+        return sequence.getAndIncrement();
+    }
+
+
 }
