@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Claim_Info {
+public class ClaimInfo {
     private int CLAIM_NO; //클레임번호
     private int DETAIL_NO; //상세번호
     private String MEMBER_ID; //아이디 -

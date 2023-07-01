@@ -35,15 +35,37 @@
         SELECT *
           FROM REVIEW A
          JOIN MEMBER B ON A.MEMBER_ID = B.MEMBER_ID
-          JOIN ORDER_DETAIL C ON A.ORDER_NO = C.ORDER_NO
+          JOIN ORDER_DETAIL C ON A.DETAIL_NO = C.DETAIL_NO
          WHERE B.MEMBER_ID = #{MEMBER_ID}
     </select>
 
-    <update id="updateReview" parameterType="com.sulsulmarket.sulsul.review.dto.ReviewDTO">
+    <update id="updateReviewByMemberId" parameterType="com.sulsulmarket.sulsul.review.dto.ReviewDTO">
         UPDATE REVIEW
         <set>
-            <if test="REVIEW_IMAGE != null">
+            <if test="REVIEW_CONTENT != null">
+                REVIEW_CONTENT = #{REVIEW_CONTENT},
             </if>
+            <if test="REVIEW_IMAGE != null">
+                REVIEW_IMAGE = #{REVIEW_IMAGE},
+            </if>
+            <if test="REVIEW_SCORE != null">
+                REVIEW_SCORE = #{REVIEW_SCORE},
+            </if>
+            UPDATE_TIME = NOW()
         </set>
+            WHERE MEMBER_ID = #{MEMBER_ID}
+            AND DETAIL_NO = #{DETAIL_NO}
     </update>
+
+    <delete id="deleteReviewByMemberId">
+        DELETE FROM REVIEW
+          WHERE MEMBER_ID = #{MEMBER_ID}
+        AND DETAIL_NO = #{DETAIL_NO}
+    </delete>
+    
+    <select id="getOrderDetailList" resultType="com.sulsulmarket.sulsul.mypage.dto.OrderDetail">
+        SELECT *
+          FROM ORDER_DETAIL
+        WHERE DETAIL_NO = #{DETAIL_NO}
+    </select>
 </mapper>

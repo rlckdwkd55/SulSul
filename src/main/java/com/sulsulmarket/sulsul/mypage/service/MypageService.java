@@ -19,8 +19,8 @@ public class MypageService {
         return resultList;
     }
 
-    public List<Order_Detail> getOrderDetailList(Map<String, Object> parameter){
-        List<Order_Detail> resultList = mypageDao.getOrderDetailList(parameter);
+    public List<OrderDetail> getOrderDetailList(Map<String, Object> parameter){
+        List<OrderDetail> resultList = mypageDao.getOrderDetailList(parameter);
         return resultList;
     }
 
@@ -39,8 +39,8 @@ public class MypageService {
         return resultList;
     }
 
-    public List<Claim_Info> getCancelRefundList(Map<String, String> parameter){
-        List<Claim_Info> resultList = mypageDao.getCancelRefundList(parameter);
+    public List<ClaimInfo> getCancelRefundList(Map<String, String> parameter){
+        List<ClaimInfo> resultList = mypageDao.getCancelRefundList(parameter);
         return resultList;
     }
 }

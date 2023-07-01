@@ -25,11 +25,13 @@ public class ReviewController {
     @PostMapping("/api/review/write")
     public ResponseEntity<Object> writeReview(@RequestBody ReviewDTO reviewDTO) {
 
-        log.info("REVIEW_DTO -> {}", reviewDTO.getREVIEW_NO());
-        log.info("REVIEW_DTO -> {}", reviewDTO.getREVIEW_CONTENT());
-        reviewService.writeReview(reviewDTO);
-
-        return ResponseEntity.status(HttpStatus.OK).body("리뷰 작성 성공");
+        try {
+            reviewService.writeReview(reviewDTO);
+            return ResponseEntity.status(HttpStatus.OK).body("리뷰 작성 성공");
+        } catch (Exception e) {
+            log.error("error");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @GetMapping("/api/review/list/get")
@@ -40,7 +42,7 @@ public class ReviewController {
             return ResponseEntity.status(HttpStatus.OK).body(reviewList);
         } catch (Exception e) {
             log.error("Review List Is Null ! ! !");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("리뷰 리스트 가져오는 것에 실패하였습니다.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
@@ -52,7 +54,30 @@ public class ReviewController {
             return ResponseEntity.status(HttpStatus.OK).body(reviewList);
         } catch (Exception e) {
             log.error("ERROR ! ! !");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/api/review/update")
+    public ResponseEntity<Object> reviewUpdateByMemberId(@RequestBody ReviewDTO reviewDTO) {
+
+        try {
+            reviewService.updateReviewByMemberId(reviewDTO);
+            return ResponseEntity.status(HttpStatus.OK).body("수정 성공");
+        } catch (Exception e) {
+            log.error("Update Is Fail ! ! !");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/api/review/delete")
+    public ResponseEntity<Object> reviewDelete(@RequestBody ReviewDTO reviewDTO) {
+        try {
+            reviewService.deleteReviewByMemberId(reviewDTO.getMEMBER_ID(), reviewDTO.getDETAIL_NO());
+            return ResponseEntity.status(HttpStatus.OK).body("삭제 성공");
+        } catch (Exception e) {
+            log.error("Delete Is Fail ! ! !");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 }
