@@ -39,7 +39,11 @@
          WHERE B.MEMBER_ID = #{MEMBER_ID}
     </select>
 
-    <delete id="">
-
-    </delete>
+    <update id="updateReview" parameterType="com.sulsulmarket.sulsul.review.dto.ReviewDTO">
+        UPDATE REVIEW
+        <set>
+            <if test="REVIEW_IMAGE != null">
+            </if>
+        </set>
+    </update>
 </mapper>

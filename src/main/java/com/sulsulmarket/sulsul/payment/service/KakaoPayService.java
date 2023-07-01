@@ -20,7 +20,6 @@ public class KakaoPayService {
 
     @Autowired
     private PaymentDao paymentDao;
-
     @Autowired
     private ProductDao productDao;
     private KakaoReadyResponse response;
