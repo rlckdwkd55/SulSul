@@ -1,6 +1,5 @@
 package com.sulsulmarket.sulsul.review.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
@@ -9,8 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @ToString
-public class ReviewDTO {
-
+public class ReviewOrderByMemberId {
     @JsonProperty("reviewNo")
     private int REVIEW_NO;
     @JsonProperty("memberId")
@@ -29,4 +27,8 @@ public class ReviewDTO {
     private String REVIEW_IMAGE;
     @JsonProperty("updateTime")
     private LocalDateTime UPDATE_TIME;
+    @JsonProperty("orderNumber")
+    private int ORDER_NUMBER;
+    @JsonProperty("productNumber")
+    private int PRODUCT_NO;
 }
