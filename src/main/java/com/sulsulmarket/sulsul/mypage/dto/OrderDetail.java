@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Order_Detail{
+public class OrderDetail {
 
     private int DETAIL_NO; //상세번호
     private int ORDER_NO; //주문번호

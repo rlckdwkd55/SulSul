@@ -68,7 +68,7 @@ public class MypageController {
 
                         //얘가 조회해올 데이터는 우리가 키로 잡는 order_no를 where의 조건으로
                         //가져온 리스트를 담아야해
-                        List<Order_Detail> detailList = mypageService.getOrderDetailList(parameter); //Order Detail Table에서
+                        List<OrderDetail> detailList = mypageService.getOrderDetailList(parameter); //Order Detail Table에서
                         log.info("detailList 결과 입니다. : {}", detailList );
 
                         //5번 다 다른 ORDER_NO의 LIST를 반환하지?
@@ -175,7 +175,7 @@ public class MypageController {
         if (requestBody != null) {
             Map<String, String> parameter = new HashMap<>();
             parameter.put("MEMBER_ID", requestBody.get("userId"));
-            List<Claim_Info> resultList = mypageService.getCancelRefundList(parameter);
+            List<ClaimInfo> resultList = mypageService.getCancelRefundList(parameter);
             log.info("[INFO] result List CLAIM NAME -> {}", resultList.get(0).getCLAIM_NAME());
 
             if (resultList.size() > 0) {

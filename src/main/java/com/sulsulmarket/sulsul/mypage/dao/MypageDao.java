@@ -20,7 +20,7 @@ public class MypageDao implements MypageMapper{
     }
 
     @Override
-    public List<Order_Detail> getOrderDetailList(Map<String, Object> parameter) {
+    public List<OrderDetail> getOrderDetailList(Map<String, Object> parameter) {
         return mypageMapper.getOrderDetailList(parameter);
     }
 
@@ -40,7 +40,7 @@ public class MypageDao implements MypageMapper{
     }
 
     @Override
-    public List<Claim_Info> getCancelRefundList(Map<String, String> parameter) {
+    public List<ClaimInfo> getCancelRefundList(Map<String, String> parameter) {
         return mypageMapper.getCancelRefundList(parameter);
     }
 

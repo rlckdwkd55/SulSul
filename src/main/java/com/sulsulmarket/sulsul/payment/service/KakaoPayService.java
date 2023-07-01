@@ -115,12 +115,12 @@ public class KakaoPayService {
 
 
 
-        if(response != null) {
-            kakaoPayDao.approveInsert(pgToken, tid);
-            // dao <= 데이터 베이스 적재(Insert),
-        } else{
-            log.error("Request KKO approveResponse Tid : {}, PG_TOKEN : {}", tid, pgToken);
-        }
+//        if(response != null) {
+//            kakaoPayDao.approveInsert(pgToken, tid);
+//            // dao <= 데이터 베이스 적재(Insert),
+//        } else{
+//            log.error("Request KKO approveResponse Tid : {}, PG_TOKEN : {}", tid, pgToken);
+//        }
 
 
         log.info("Success -> [{}]", response.toString());

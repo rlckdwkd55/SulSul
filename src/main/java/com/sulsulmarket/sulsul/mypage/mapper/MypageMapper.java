@@ -10,7 +10,7 @@ import java.util.Map;
 public interface MypageMapper {
     List<Orders> getOrderList(Map<String, Object> parameter);
 
-    List<Order_Detail> getOrderDetailList(Map<String, Object> parameter);
+    List<OrderDetail> getOrderDetailList(Map<String, Object> parameter);
 
     List<Review> getReviewList(Map<String, String> parameter);
 
@@ -18,5 +18,5 @@ public interface MypageMapper {
 
     List<Address> getAddressList(Map<String, String> parameter);
 
-    List<Claim_Info> getCancelRefundList(Map<String, String> parameter);
+    List<ClaimInfo> getCancelRefundList(Map<String, String> parameter);
 }

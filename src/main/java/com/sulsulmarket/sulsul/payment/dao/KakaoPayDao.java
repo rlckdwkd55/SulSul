@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 public class KakaoPayDao {
 
     @Autowired
-    private KakaoPayMapper paymentMapper;
+    private KakaoPayMapper kakaoPayMapper;
 
-    @Override
-    public void KakaoApproveResponse approveResponse(String pgToken, int tid) {
-        return kakaoPayMapper.approveInsert(pgToken, tid);
-    }
+//    @Override
+//    public void approveResponse(String pgToken, int tid) {
+//        return kakaoPayMapper.approveInsert(pgToken, tid);
+//    }
 }
