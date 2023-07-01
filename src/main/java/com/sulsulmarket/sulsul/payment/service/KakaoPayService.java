@@ -1,6 +1,9 @@
 package com.sulsulmarket.sulsul.payment.service;
 
 import com.sulsulmarket.sulsul.payment.dao.PaymentDao;
+import com.sulsulmarket.sulsul.payment.dto.ApprovedCancelAmount;
+import com.sulsulmarket.sulsul.payment.dto.KakaoApproveResponse;
+import com.sulsulmarket.sulsul.payment.dto.KakaoCancelResponse;
 import com.sulsulmarket.sulsul.payment.dto.KakaoReadyResponse;
 import com.sulsulmarket.sulsul.product.dao.ProductDao;
 import com.sulsulmarket.sulsul.product.dto.Product;
@@ -23,6 +26,7 @@ public class KakaoPayService {
     @Autowired
     private ProductDao productDao;
     private KakaoReadyResponse response;
+    private ApprovedCancelAmount cancelAmount;
 
     @Value("${kakao.pay.cid}")
     private String cid;
@@ -39,6 +43,9 @@ public class KakaoPayService {
     @Value("${kakao.pay.cancel_url}")
     private String cancelUrl;
 
+    /**
+     * 결제요청
+     */
     public KakaoReadyResponse kakaoReady(int productNo, int quantity) {
         log.info("PRODUCT_NO -> [{}], Quantity -> {}", productNo, quantity);
         Product product = productDao.getProductByProductNo(productNo);
@@ -78,6 +85,66 @@ public class KakaoPayService {
     }
 
     /**
+     * 결제 완료 승인
+     */
+    public KakaoApproveResponse approveResponse(String pgToken) {
+
+        // 카카오 요청
+        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+        parameters.add("cid", cid);
+        parameters.add("tid", response.getTid());
+        parameters.add("partner_order_id", partnerOrderId);
+        parameters.add("partner_user_id", partnerUserId);
+        parameters.add("pg_token", pgToken);
+
+        log.info("SuccessMultiValueMap -> [{}]", parameters);
+        // 파라미터, 헤더
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
+
+        // 외부에 보낼 url
+        RestTemplate restTemplate = new RestTemplate();
+
+        KakaoApproveResponse response = restTemplate.postForObject(
+                "https://kapi.kakao.com/v1/payment/approve",
+                requestEntity,
+                KakaoApproveResponse.class);
+
+        log.info("Success -> [{}]", response.toString());
+
+        return response;
+    }
+
+    /**
+     * 결제 환불
+     */
+    public KakaoCancelResponse kakaoCancel() {
+
+        // 카카오페이 요청
+        MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<>();
+        parameters.add("cid", cid);
+        parameters.add("tid", response.getTid());
+        parameters.add("cancel_amount", cancelAmount.getTotal());
+        parameters.add("cancel_tax_free_amount", 0);
+
+        log.info("SuccessMultiValueMap -> [{}]", parameters);
+
+        // 파라미터, 헤더
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
+
+        // 외부에 보낼 url
+        RestTemplate restTemplate = new RestTemplate();
+
+        KakaoCancelResponse response = restTemplate.postForObject(
+                "https://kapi.kakao.com/v1/payment/cancel",
+                requestEntity,
+                KakaoCancelResponse.class);
+
+        log.info("Success -> [{}]", response.toString());
+
+        return response;
+    }
+
+    /**
      * 카카오 요구 헤더값
      */
     private HttpHeaders getHeaders () {
@@ -91,10 +158,6 @@ public class KakaoPayService {
         return httpHeaders;
     }
 
-    /**
-     * 카카오 결제 승인 API
-     */
-    private void kakaoReadySuccess(){
 
-    }
+
 }

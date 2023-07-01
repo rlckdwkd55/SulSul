@@ -1,5 +1,7 @@
 package com.sulsulmarket.sulsul.payment.controller;
 
+import com.sulsulmarket.sulsul.payment.dto.KakaoApproveResponse;
+import com.sulsulmarket.sulsul.payment.dto.KakaoCancelResponse;
 import com.sulsulmarket.sulsul.payment.dto.KakaoReadyResponse;
 import com.sulsulmarket.sulsul.payment.service.KakaoPayService;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +40,36 @@ public class KakaoPayController {
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * 결제 성공
+     */
+    @GetMapping("/success")
+    public ResponseEntity afterPayRequest(@RequestParam("pg_token") String pgToken) {
+
+        KakaoApproveResponse kakaoApprove = kakaoPayService.approveResponse(pgToken);
+
+        if(kakaoApprove == null) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
+    }
+
+    /**
+     * 환불
+     */
+    @PostMapping("/refund")
+    public ResponseEntity refund() {
+
+        KakaoCancelResponse kakaoCancelResponse = kakaoPayService.kakaoCancel();
+
+        if(kakaoCancelResponse == null) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(kakaoCancelResponse, HttpStatus.OK);
     }
 
     /**
