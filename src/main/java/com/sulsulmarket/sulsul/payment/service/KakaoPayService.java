@@ -1,6 +1,6 @@
 package com.sulsulmarket.sulsul.payment.service;
 
-import com.sulsulmarket.sulsul.payment.dao.PaymentDao;
+import com.sulsulmarket.sulsul.payment.dao.KakaoPayDao;
 import com.sulsulmarket.sulsul.payment.dto.ApprovedCancelAmount;
 import com.sulsulmarket.sulsul.payment.dto.KakaoApproveResponse;
 import com.sulsulmarket.sulsul.payment.dto.KakaoCancelResponse;
@@ -17,12 +17,14 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.http.HttpResponse;
+
 @Service
 @Slf4j
 public class KakaoPayService {
 
     @Autowired
-    private PaymentDao paymentDao;
+    private KakaoPayDao kakaoPayDao;
 
     @Autowired
     private ProductDao productDao;
@@ -88,19 +90,20 @@ public class KakaoPayService {
     /**
      * 결제 완료 승인
      */
-    public KakaoApproveResponse approveResponse(String pgToken) {
+    public KakaoApproveResponse approveResponse(String pgToken, int tid) {
 
         // 카카오 요청
-        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+        MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<>();
         parameters.add("cid", cid);
-        parameters.add("tid", response.getTid());
+        parameters.add("tid", tid);
         parameters.add("partner_order_id", partnerOrderId);
         parameters.add("partner_user_id", partnerUserId);
         parameters.add("pg_token", pgToken);
 
+
         log.info("SuccessMultiValueMap -> [{}]", parameters);
         // 파라미터, 헤더
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
 
         // 외부에 보낼 url
         RestTemplate restTemplate = new RestTemplate();
@@ -109,6 +112,16 @@ public class KakaoPayService {
                 "https://kapi.kakao.com/v1/payment/approve",
                 requestEntity,
                 KakaoApproveResponse.class);
+
+
+
+        if(response != null) {
+            kakaoPayDao.approveInsert(pgToken, tid);
+            // dao <= 데이터 베이스 적재(Insert),
+        } else{
+            log.error("Request KKO approveResponse Tid : {}, PG_TOKEN : {}", tid, pgToken);
+        }
+
 
         log.info("Success -> [{}]", response.toString());
 

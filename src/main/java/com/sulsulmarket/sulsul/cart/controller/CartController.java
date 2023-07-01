@@ -21,6 +21,7 @@ public class CartController {
     public ResponseEntity<Object> getCartListByMemberId(@RequestBody CartDTO cartDTO) {
 
         CartDTO cart = cartService.getCartListByMemberId(cartDTO.getMEMBER_ID());
+        //TODO cart에 담기는 product_no로 product 객체 리스트로 반환하기
 
         return ResponseEntity.status(HttpStatus.OK).body(cart);
     }

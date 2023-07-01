@@ -45,10 +45,10 @@ public class KakaoPayController {
     /**
      * 결제 성공
      */
-    @GetMapping("/success")
-    public ResponseEntity afterPayRequest(@RequestParam("pg_token") String pgToken) {
-
-        KakaoApproveResponse kakaoApprove = kakaoPayService.approveResponse(pgToken);
+    @GetMapping("/success") //"tid":"123145123"
+    public ResponseEntity afterPayRequest(@RequestParam("pgToken") String pgToken, @RequestParam("tid") int tid) {
+        //TODO null 검증하고 넘기기
+        KakaoApproveResponse kakaoApprove = kakaoPayService.approveResponse(pgToken, tid);
 
         if(kakaoApprove == null) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
