@@ -2,7 +2,7 @@ package com.sulsulmarket.sulsul.cart.dao;
 
 import com.sulsulmarket.sulsul.cart.dto.CartDTO;
 import com.sulsulmarket.sulsul.cart.dto.ProductImage;
-import com.sulsulmarket.sulsul.cart.dto.ProductJoinDTO;
+import com.sulsulmarket.sulsul.cart.dto.ProductDTO;
 import com.sulsulmarket.sulsul.cart.mapper.CartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,22 +16,37 @@ public class CartDao implements CartMapper {
     private CartMapper cartMapper;
 
     @Override
-    public List<CartDTO> getCartListByMemberId(String memberId) {
-        return cartMapper.getCartListByMemberId(memberId);
-    }
-
-    @Override
     public int addCartByMemberIdAndProduct(String memberId, int productNo, int cartAmount) {
         return cartMapper.addCartByMemberIdAndProduct(memberId, productNo, cartAmount);
     }
 
     @Override
-    public ProductJoinDTO productJoinImageList(int productNo) {
-        return cartMapper.productJoinImageList(productNo);
+    public CartDTO getCartByMemberIdAndProductNo(String memberId, int productNo) {
+        return cartMapper.getCartByMemberIdAndProductNo(memberId, productNo);
     }
 
     @Override
-    public ProductImage getProductImage(int productNo) {
-        return cartMapper.getProductImage(productNo);
+    public int updateCartCount(String memberId, int productNo, int cartAmount) {
+        return cartMapper.updateCartCount(memberId, productNo, cartAmount);
+    }
+
+    @Override
+    public int deleteCartByMemberId(String memberId, int productNo) {
+        return cartMapper.deleteCartByMemberId(memberId, productNo);
+    }
+
+    @Override
+    public ProductDTO productListByProductNo(int productNo) {
+        return cartMapper.productListByProductNo(productNo);
+    }
+
+    @Override
+    public ProductImage productImageByProductNo(int productNo) {
+        return cartMapper.productImageByProductNo(productNo);
+    }
+
+    @Override
+    public List<CartDTO> getCartListByMemberId(String memberId) {
+        return cartMapper.getCartListByMemberId(memberId);
     }
 }

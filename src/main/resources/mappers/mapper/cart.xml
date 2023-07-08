@@ -2,12 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sulsulmarket.sulsul.cart.mapper.CartMapper">
 
-
-    <select id="getCartListByMemberId" resultType="com.sulsulmarket.sulsul.cart.dto.CartDTO">
-        SELECT *
+    <select id="getCartByMemberIdAndProductNo" resultType="com.sulsulmarket.sulsul.cart.dto.CartDTO">
         FROM CART
         WHERE MEMBER_ID = #{memberId}
+        AND PRODUCT_NO = #{productNo}
     </select>
+
+    <update id="updateCartCount">
+        UPDATE CART
+        SET CART_AMOUNT = #{cartAmount}
+        WHERE MEMBER_ID = #{memberId}
+          AND PRODUCT_NO = #{productNo}
+    </update>
 
     <insert id="addCartByMemberIdAndProduct">
         INSERT INTO CART(
@@ -21,17 +27,28 @@
                 )
     </insert>
 
-    <select id="productJoinImageList" resultType="com.sulsulmarket.sulsul.cart.dto.ProductJoinDTO">
+    <delete id="deleteCartByMemberId">
+        DELETE FROM CART
+        WHERE MEMBER_ID = #{memberId}
+          AND PRODUCT_NO = #{productNo}
+    </delete>
+
+    <select id="productListByProductNo" resultType="com.sulsulmarket.sulsul.cart.dto.ProductDTO">
         SELECT *
-        FROM PRODUCT A JOIN
-             PRODUCT_IMAGE B
-             ON A.PRODUCT_NO = B.PRODUCT_NO
-        WHERE A.PRODUCT_NO = #{PRODUCT_NO}
+        FROM PRODUCT
+        WHERE PRODUCT_NO = #{productNo}
     </select>
 
-    <select id="getProductImage" resultType="com.sulsulmarket.sulsul.cart.dto.ProductImage">
+    <select id="productImageByProductNo" resultType="com.sulsulmarket.sulsul.cart.dto.ProductImage">
         SELECT *
         FROM PRODUCT_IMAGE
-        WHERE PRODUCT_NO = #{PRODUCT_NO}
+        WHERE PRODUCT_NO = #{productNo}
     </select>
+
+    <select id="getCartListByMemberId" resultType="com.sulsulmarket.sulsul.cart.dto.CartDTO">
+        SELECT *
+        FROM CART
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
 </mapper>

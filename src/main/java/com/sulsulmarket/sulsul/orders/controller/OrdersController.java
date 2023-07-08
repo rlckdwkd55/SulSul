@@ -25,7 +25,7 @@ public class OrdersController {
     private OrdersService ordersService;
 
     @PostMapping("/orders")
-    public ResponseEntity<Object> doOrder(@RequestBody HashMap<String, Object> orderMap){
+    public ResponseEntity<Object> doOrder(@RequestBody Map<String, Object> orderMap){
 
         if(orderMap != null){
             ordersService.insertOrders(orderMap);

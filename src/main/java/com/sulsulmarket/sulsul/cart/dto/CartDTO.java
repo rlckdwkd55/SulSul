@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,8 +18,8 @@ public class CartDTO {
     private String MEMBER_ID;
     @JsonProperty("productNo")
     private int PRODUCT_NO;
-    @JsonProperty("productList")
-    private HashMap<Integer, ProductJoinDTO> param;
     @JsonProperty("cartAmount")
     private int CART_AMOUNT;
+    @JsonProperty("product")
+    private ProductDTO PRODUCT;
 }

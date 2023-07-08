@@ -8,9 +8,9 @@ import lombok.ToString;
 import java.util.Date;
 
 @Getter
-@ToString
 @Setter
-public class ProductJoinDTO {
+@ToString
+public class ProductDTO {
     @JsonProperty("productNo")
     private Integer PRODUCT_NO; // 제품NO
     @JsonProperty("categoryNo")
@@ -29,8 +29,7 @@ public class ProductJoinDTO {
     private Integer PRODUCT_COUNT; // 상품조회수
     @JsonProperty("paymentCount")
     private Integer PAYMENT_COUNT; // 상품주문횟수
-    @JsonProperty("uploadDate")
     private Date UPLOAD_DATE; // 상품등록일
     @JsonProperty("productImage")
-    private ProductImage productImage;
+    private ProductImage PRODUCT_IMAGE;
 }

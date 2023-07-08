@@ -47,6 +47,7 @@ public class SulSulUil {
     }
 
     public synchronized static Long getNextSequence(){
+
         return sequence.getAndIncrement();
     }
 

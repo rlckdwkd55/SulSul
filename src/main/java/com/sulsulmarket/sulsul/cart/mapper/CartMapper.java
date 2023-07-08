@@ -2,7 +2,7 @@ package com.sulsulmarket.sulsul.cart.mapper;
 
 import com.sulsulmarket.sulsul.cart.dto.CartDTO;
 import com.sulsulmarket.sulsul.cart.dto.ProductImage;
-import com.sulsulmarket.sulsul.cart.dto.ProductJoinDTO;
+import com.sulsulmarket.sulsul.cart.dto.ProductDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,11 +10,17 @@ import java.util.List;
 @Mapper
 public interface CartMapper {
 
-    List<CartDTO> getCartListByMemberId(String memberId);
-
     int addCartByMemberIdAndProduct(String memberId, int productNo, int cartAmount);
 
-    ProductJoinDTO productJoinImageList(int productNo);
+    CartDTO getCartByMemberIdAndProductNo(String memberId, int productNo);
 
-    ProductImage getProductImage(int productNo);
+    int updateCartCount(String memberId, int productNo, int cartAmount);
+
+    int deleteCartByMemberId(String memberId, int productNo);
+
+    ProductDTO productListByProductNo(int productNo);
+
+    ProductImage productImageByProductNo(int productNo);
+
+    List<CartDTO> getCartListByMemberId(String memberId);
 }

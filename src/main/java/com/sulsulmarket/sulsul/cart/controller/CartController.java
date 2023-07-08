@@ -23,7 +23,6 @@ public class CartController {
     public ResponseEntity<Object> getCartListByMemberId(@RequestBody CartDTO cartDTO) {
 
         List<CartDTO> cartList = cartService.getCartListByMemberId(cartDTO.getMEMBER_ID());
-        //TODO cart에 담기는 product_no로 product 객체 리스트로 반환하기
 
         return ResponseEntity.status(HttpStatus.OK).body(cartList);
     }
@@ -31,8 +30,24 @@ public class CartController {
     @PostMapping("/api/cart/add")
     public ResponseEntity<Object> addCartByMemberIdAndProduct(@RequestBody CartDTO cartDTO) {
 
-        cartService.addCartByMemberIdAndProduct(cartDTO.getMEMBER_ID(), cartDTO.getPRODUCT_NO(), cartDTO.getCART_AMOUNT());
+        try {
+            cartService.addCartByMemberIdAndProduct(cartDTO.getMEMBER_ID(), cartDTO.getPRODUCT_NO(), cartDTO.getCART_AMOUNT());
+            return ResponseEntity.status(HttpStatus.OK).body("장바구니 추가 성공!");
+        } catch (Exception e) {
+            log.error("Cart Add Fail ! ! ! {}", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).body("");
+    @PostMapping("/api/cart/remove")
+    public ResponseEntity<Object> deleteCartByMemberIdAndProductNo(@RequestBody CartDTO cartDTO) {
+
+        try {
+            cartService.deleteCartByMemberId(cartDTO.getMEMBER_ID(), cartDTO.getPRODUCT_NO());
+            return ResponseEntity.status(HttpStatus.OK).body("장바구니 삭제 성공");
+        } catch (Exception e) {
+            log.error("Cart Delete Is Fail ! ! !");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }
