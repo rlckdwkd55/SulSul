@@ -39,7 +39,7 @@
         WHERE PRODUCT_NO = #{productNo}
     </select>
 
-    <select id="productImageByProductNo" resultType="com.sulsulmarket.sulsul.cart.dto.ProductImage">
+    <select id="productImageByProductNo" resultType="com.sulsulmarket.sulsul.cart.dto.ProductImageDTO">
         SELECT *
         FROM PRODUCT_IMAGE
         WHERE PRODUCT_NO = #{productNo}
