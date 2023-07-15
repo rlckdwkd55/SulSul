@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sulsulmarket.sulsul.review.mapper.ReviewMapper">
+
+    <insert id="reviewReplyAdd" parameterType="com.sulsulmarket.sulsul.reviewReply.dto.ReviewReplyDTO">
+        INSERT INTO REVIEW_REPLY
+        (
+              REPLY_ID
+            , REVIEW_NO
+            , RESPONDER_ID
+            , REPLY_CONTENT
+            , CREATED_DATETIME
+        )
+        VALUES (
+             #{replyId}
+            ,#{reviewNo}
+            ,#{responseId}
+            ,#{replyContent}
+            ,NOW()
+        )
+    </insert>
+</mapper>

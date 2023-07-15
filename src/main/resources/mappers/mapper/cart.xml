@@ -17,11 +17,11 @@
 
     <insert id="addCartByMemberIdAndProduct">
         INSERT INTO CART(
-                         MEMBER_ID
-                        ,PRODUCT_NO
-                        ,CART_AMOUNT
+                 MEMBER_ID
+                ,PRODUCT_NO
+                ,CART_AMOUNT
         ) VALUES(
-                    #{memberId}
+                 #{memberId}
                 ,#{productNo}
                 ,#{cartAmount}
                 )

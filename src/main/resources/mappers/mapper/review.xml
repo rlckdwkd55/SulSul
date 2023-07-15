@@ -68,4 +68,10 @@
           FROM ORDER_DETAIL
         WHERE DETAIL_NO = #{DETAIL_NO}
     </select>
+
+    <select id="getReviewByReviewNo">
+        SELECT *
+          FROM REVIEW
+        WHERE #{reviewNo}
+    </select>
 </mapper>

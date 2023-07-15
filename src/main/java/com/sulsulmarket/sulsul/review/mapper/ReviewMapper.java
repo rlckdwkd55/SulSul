@@ -21,4 +21,6 @@ public interface ReviewMapper {
     int updateReviewByMemberId(ReviewDTO reviewDTO);
 
     int deleteReviewByMemberId(String memberId, int detailNo);
+
+    ReviewDTO getReviewByReviewNo(int reviewNo);
 }
