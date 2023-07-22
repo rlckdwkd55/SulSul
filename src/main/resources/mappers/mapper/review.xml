@@ -68,4 +68,10 @@
           FROM ORDER_DETAIL
         WHERE DETAIL_NO = #{DETAIL_NO}
     </select>
+
+    <select id="getReviewByReviewNo" resultType="com.sulsulmarket.sulsul.review.dto.ReviewDTO">
+        SELECT *
+          FROM REVIEW
+        WHERE REVIEW_NO = #{reviewNo}
+    </select>
 </mapper>

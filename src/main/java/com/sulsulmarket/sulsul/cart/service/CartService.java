@@ -3,10 +3,9 @@ package com.sulsulmarket.sulsul.cart.service;
 import com.sulsulmarket.sulsul.cart.dao.CartDao;
 import com.sulsulmarket.sulsul.cart.dto.CartDTO;
 import com.sulsulmarket.sulsul.cart.dto.ProductDTO;
-import com.sulsulmarket.sulsul.cart.dto.ProductImage;
+import com.sulsulmarket.sulsul.cart.dto.ProductImageDTO;
 import com.sulsulmarket.sulsul.member.dao.MemberDao;
 import com.sulsulmarket.sulsul.member.dto.MemberDTO;
-import com.sulsulmarket.sulsul.product.dto.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -43,12 +41,11 @@ public class CartService {
 
         if(cartList.size() < 0) {
             log.error("[ERROR] GET CART LIST BY MEMBER_ID IS NULL ! ! !");
-            throw new NullPointerException("회원 아이디로 장바구니 리스트를 가져오기 실패했습니다.");
+            throw new IllegalArgumentException("회원 아이디로 장바구니 리스트를 가져오기 실패했습니다.");
         }
 
         for (CartDTO cart : cartList) {
             int productNo = cart.getPRODUCT_NO();
-            log.info("PRODUCT_NO CHECK ++===>>>>>> {}", productNo);
             ProductDTO product = cartDao.productListByProductNo(productNo);
 
             if(product == null || Objects.isNull(product)) {
@@ -57,19 +54,20 @@ public class CartService {
             }
 
             cart.setPRODUCT(product);
-            log.info("CART PRODUCT CHECK ==>> [{}]", cart.getPRODUCT().toString());
-            ProductImage productImage = cartDao.productImageByProductNo(productNo);
+            ProductImageDTO productImageDto = cartDao.productImageByProductNo(productNo);
 
-            if (productImage == null || Objects.isNull(productImage)) {
+            if (productImageDto == null || Objects.isNull(productImageDto)) {
                 log.error("ProductImage Is Null");
                 throw new NullPointerException("상품 이미지가 없습니다.");
             }
 
-            product.setPRODUCT_IMAGE(productImage);
-            log.info("CART PRODUCT IMAGE CHECK ==>> [{}]", cart.getPRODUCT().getPRODUCT_IMAGE());
+            product.setPRODUCT_IMAGE(productImageDto);
+            log.info("ProductImage ==>> [{}]", productImageDto);
+            log.info("CART PRODUCT IMAGE CHECK ==>> [{}]", product.getPRODUCT_IMAGE());
             cartDTOList.add(cart);
-            log.info("CART_LIST ===>>>> [{}]", cartList.stream().map(Objects::toString).collect(Collectors.joining(",")));
+            log.info("cart Check ! ! !  ==>> [{}]", cart.toString());
         }
+        log.info("CartDtoList Check", cartDTOList.toString());
         return cartDTOList;
     }
 

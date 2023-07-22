@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Getter
 @Setter
 @ToString
@@ -29,7 +27,6 @@ public class ProductDTO {
     private Integer PRODUCT_COUNT; // 상품조회수
     @JsonProperty("paymentCount")
     private Integer PAYMENT_COUNT; // 상품주문횟수
-    private Date UPLOAD_DATE; // 상품등록일
     @JsonProperty("productImage")
-    private ProductImage PRODUCT_IMAGE;
+    private ProductImageDTO PRODUCT_IMAGE;
 }

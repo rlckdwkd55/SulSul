@@ -44,4 +44,9 @@ public class ReviewDao implements ReviewMapper {
     public int deleteReviewByMemberId(String memberId, int detailNo) {
         return reviewMapper.deleteReviewByMemberId(memberId, detailNo);
     }
+
+    @Override
+    public ReviewDTO getReviewByReviewNo(int reviewNo) {
+        return reviewMapper.getReviewByReviewNo(reviewNo);
+    }
 }

@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class ProductImage {
+public class ProductImageDTO {
     @JsonProperty("productNo")
     private int PRODUCT_NO;
     @JsonProperty("productImageNo")

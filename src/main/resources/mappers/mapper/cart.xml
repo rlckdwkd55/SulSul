@@ -17,11 +17,11 @@
 
     <insert id="addCartByMemberIdAndProduct">
         INSERT INTO CART(
-                         MEMBER_ID
-                        ,PRODUCT_NO
-                        ,CART_AMOUNT
+                 MEMBER_ID
+                ,PRODUCT_NO
+                ,CART_AMOUNT
         ) VALUES(
-                    #{memberId}
+                 #{memberId}
                 ,#{productNo}
                 ,#{cartAmount}
                 )
@@ -39,7 +39,7 @@
         WHERE PRODUCT_NO = #{productNo}
     </select>
 
-    <select id="productImageByProductNo" resultType="com.sulsulmarket.sulsul.cart.dto.ProductImage">
+    <select id="productImageByProductNo" resultType="com.sulsulmarket.sulsul.cart.dto.ProductImageDTO">
         SELECT *
         FROM PRODUCT_IMAGE
         WHERE PRODUCT_NO = #{productNo}

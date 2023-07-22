@@ -1,7 +1,7 @@
 package com.sulsulmarket.sulsul.cart.dao;
 
 import com.sulsulmarket.sulsul.cart.dto.CartDTO;
-import com.sulsulmarket.sulsul.cart.dto.ProductImage;
+import com.sulsulmarket.sulsul.cart.dto.ProductImageDTO;
 import com.sulsulmarket.sulsul.cart.dto.ProductDTO;
 import com.sulsulmarket.sulsul.cart.mapper.CartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class CartDao implements CartMapper {
     }
 
     @Override
-    public ProductImage productImageByProductNo(int productNo) {
+    public ProductImageDTO productImageByProductNo(int productNo) {
         return cartMapper.productImageByProductNo(productNo);
     }
 

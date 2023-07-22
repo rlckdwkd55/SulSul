@@ -1,7 +1,7 @@
 package com.sulsulmarket.sulsul.cart.mapper;
 
 import com.sulsulmarket.sulsul.cart.dto.CartDTO;
-import com.sulsulmarket.sulsul.cart.dto.ProductImage;
+import com.sulsulmarket.sulsul.cart.dto.ProductImageDTO;
 import com.sulsulmarket.sulsul.cart.dto.ProductDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,7 +20,7 @@ public interface CartMapper {
 
     ProductDTO productListByProductNo(int productNo);
 
-    ProductImage productImageByProductNo(int productNo);
+    ProductImageDTO productImageByProductNo(int productNo);
 
     List<CartDTO> getCartListByMemberId(String memberId);
 }
