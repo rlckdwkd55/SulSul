@@ -6,6 +6,7 @@ import com.sulsulmarket.sulsul.payment.dto.KakaoReadyResponse;
 import com.sulsulmarket.sulsul.payment.service.KakaoPayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,22 +21,24 @@ import java.util.Map;
 public class KakaoPayController {
 
     private final KakaoPayService kakaoPayService;
+
     /**
      * 결제요청
      */
     @PostMapping("/ready")
     public ResponseEntity<Object> readyToKakaoPay(@RequestBody Map<String, Object> requestBody) {
 
+        int orderNo = (int) requestBody.get("orderNo");
         int productNo = (int) requestBody.get("productNo");
         int quantity = (int) requestBody.get("quantity");
 
-        KakaoReadyResponse response = kakaoPayService.kakaoReady(productNo, quantity);
+        KakaoReadyResponse response = kakaoPayService.kakaoReady(orderNo, productNo, quantity);
 
         // tid, redirect url, create-at
         // pg-token, tid를 받아서
         // 결제 승인
 
-        if(response == null) {
+        if (response == null) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
@@ -45,17 +48,22 @@ public class KakaoPayController {
     /**
      * 결제 성공
      */
-    @GetMapping("/success") //"tid":"123145123"
-    public ResponseEntity afterPayRequest(@RequestParam("pgToken") String pgToken, @RequestParam("tid") int tid) {
+    @PostMapping("/success") //"tid":"123145123"
+    public ResponseEntity afterPayRequest(@RequestBody Map<String, Object> paymentMap) {
         //TODO null 검증하고 넘기기
-        KakaoApproveResponse kakaoApprove = kakaoPayService.approveResponse(pgToken, tid);
 
-        if(kakaoApprove == null) {
+
+        if (paymentMap != null) {
+            KakaoApproveResponse kakaoApprove = kakaoPayService.approveResponse(paymentMap);
+
+            return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-
-        return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
     }
+
+
+
 
     /**
      * 환불

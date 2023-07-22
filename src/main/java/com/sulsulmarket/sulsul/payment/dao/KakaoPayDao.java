@@ -5,15 +5,19 @@ import com.sulsulmarket.sulsul.payment.mapper.KakaoPayMapper;
 import com.sulsulmarket.sulsul.product.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.Map;
 
 @Component
-public class KakaoPayDao {
+public class KakaoPayDao implements KakaoPayMapper{
 
     @Autowired
     private KakaoPayMapper kakaoPayMapper;
 
-//    @Override
-//    public void approveResponse(String pgToken, int tid) {
-//        return kakaoPayMapper.approveInsert(pgToken, tid);
-//    }
+    @Override
+    public String getResponsePayment(@RequestBody Map<String, Object> paymentMap){
+        return kakaoPayMapper.getResponsePayment(paymentMap);
+    }
+
 }
