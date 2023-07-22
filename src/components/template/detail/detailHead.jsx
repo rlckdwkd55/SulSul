@@ -63,7 +63,7 @@ const DetailHead = (props) => {
                   <td>
                     <div>
                       <span>{prdInfo.prdName}</span>
-                      <CountBtn cnt={0} setTotal={setTotal}/>
+                      <CountBtn cnt={0} setTotal={setTotal} price={prdInfo.price}/>
                     </div>
                   </td>
                 </tr>

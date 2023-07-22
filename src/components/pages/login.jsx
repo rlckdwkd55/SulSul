@@ -27,6 +27,7 @@ function Login() {
             
             // 로그인 이후 세션 처리
             sessionStorage.setItem('isLogin', 'true');
+            sessionStorage.setItem('userId', data.userId);
         }
         
     }

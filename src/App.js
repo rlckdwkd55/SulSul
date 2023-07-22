@@ -10,8 +10,11 @@ import List from "./components/pages/list";
 import Search from "./components/pages/search";
 import UserMy from "./components/pages/userMy";
 import Detail from "./components/pages/detail";
+import Cart from "./components/pages/cart";
+import Order from "./components/pages/Order";
 import GlobalStyle from "./Util/GlobalStyle";
 import styled from "styled-components";
+
 const AppWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -39,6 +42,8 @@ function App() {
               <Route path="/search" element={<Search />} />
               <Route path="/my" element={<UserMy />} />
               <Route path="/detail" element={<Detail />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/order" element={<Order />} />
             </Routes>
           </PagesWrapper>
           {/* <Footer/> */}
