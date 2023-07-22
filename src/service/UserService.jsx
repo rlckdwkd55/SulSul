@@ -20,7 +20,26 @@ const UserService = {
         status: FAIL
       };
     }
-  }
+  },
+  postUserInfo: async () => {
+    const userId = {
+      userId: sessionStorage.getItem('userId')
+    };
+    try {
+      const response = await request.post(`/myPage/orderList`, userId);
+      if (request.isSuccess(response)) {
+        return {
+          ...response,
+          status: SUCCESS
+        };
+      }
+      return { status: FAIL };
+    } catch (error) {
+      return {
+        status: FAIL
+      };
+    }
+  },
 };
 
 export default UserService;

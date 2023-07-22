@@ -32,7 +32,23 @@ const ProductService = {
         status: FAIL
       };
     }
-  }
+  },
+  postProductList: async (data) => {
+    try {
+      const response = await request.post('/product/proList', data);
+      if (request.isSuccess(response)) {
+        return {
+          ...response,
+          status: SUCCESS
+        };
+      }
+      return { status: FAIL };
+    } catch (error) {
+      return {
+        status: FAIL
+      };
+    }
+  },
 };
 
 export default ProductService;
