@@ -5,8 +5,11 @@ const BtnWrap = styled.button`
 `;
 
 const BtnRed = (props) => {
+  
   return (
-    <BtnWrap>{props.name}</BtnWrap>
+    <BtnWrap onClick={() => {
+      props.clickEvent();
+    }}>{props.name}</BtnWrap>
   )
 }
 
