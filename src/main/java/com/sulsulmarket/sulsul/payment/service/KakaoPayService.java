@@ -1,10 +1,7 @@
 package com.sulsulmarket.sulsul.payment.service;
 
 import com.sulsulmarket.sulsul.payment.dao.KakaoPayDao;
-import com.sulsulmarket.sulsul.payment.dto.ApprovedCancelAmount;
-import com.sulsulmarket.sulsul.payment.dto.KakaoApproveResponse;
-import com.sulsulmarket.sulsul.payment.dto.KakaoCancelResponse;
-import com.sulsulmarket.sulsul.payment.dto.KakaoReadyResponse;
+import com.sulsulmarket.sulsul.payment.dto.*;
 import com.sulsulmarket.sulsul.product.dao.ProductDao;
 import com.sulsulmarket.sulsul.product.dto.Product;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +12,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.http.HttpResponse;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -49,8 +47,9 @@ public class KakaoPayService {
     /**
      * 결제요청
      */
-    public KakaoReadyResponse kakaoReady(int productNo, int quantity) {
-        log.info("PRODUCT_NO -> [{}], Quantity -> {}", productNo, quantity);
+    public KakaoReadyResponse kakaoReady(int orderNo, int productNo, int quantity) {
+        log.info("ORDER_NO -> [{}], PRODUCT_NO -> [{}], Quantity -> {}", orderNo, productNo, quantity);
+        Orders order = OrdersDao.get
         Product product = productDao.getProductByProductNo(productNo);
 
         log.info("PRODUCT -> [{}]", product.toString());
@@ -90,7 +89,10 @@ public class KakaoPayService {
     /**
      * 결제 완료 승인
      */
-    public KakaoApproveResponse approveResponse(String pgToken, int tid) {
+    public KakaoApproveResponse approveResponse(@RequestBody Map<String, Object> paymentMap) {
+
+        String tid = (String) paymentMap.get("tid");
+        String pgToken = (String) paymentMap.get("pgToken");
 
         // 카카오 요청
         MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<>();
@@ -124,6 +126,8 @@ public class KakaoPayService {
 
 
         log.info("Success -> [{}]", response.toString());
+
+        String responsePayment = kakaoPayDao.getResponsePayment(paymentMap);
 
         return response;
     }

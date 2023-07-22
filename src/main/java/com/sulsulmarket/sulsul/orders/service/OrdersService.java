@@ -120,11 +120,6 @@ public class OrdersService {
         }
 
 
-
-
-        //memberId로 memeber 객체 받아와 아래꺼 구현해줭
-//        Member member = ordersDao.getMember(memberId);
-
         return result;
     }
 
