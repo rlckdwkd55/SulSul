@@ -26,9 +26,9 @@ const Agreements = (props) => {
 
   function viewDetail() {
     if (!isDetailView) {
-      contents = <Detail detail={details[props.type]}/>
+      contents = (<Detail detail={details[props.type]}/>)
     } else {
-      contents = <></>;
+      contents = (<></>);
     }
 
     setIsDetailView(!isDetailView);

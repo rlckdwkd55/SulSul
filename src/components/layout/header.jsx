@@ -4,6 +4,7 @@ import axios from "axios";
 import MenuList from "../template/menuList";
 
 function LoginOut() {
+  sessionStorage.setItem('isLogin', true);
   const isLogin = sessionStorage.getItem("isLogin");
   let contents;
 
@@ -29,7 +30,7 @@ function LoginOut() {
         </span>
         <Link to="/my">
           <div className="btn" id="move-mypage-btn">
-            <i className="icon bi bi-bag"></i>
+            My Page
           </div>
         </Link>
         <Link to="/cart">

@@ -4,7 +4,7 @@ import ProductList from '../template/productList';
 import BestItemSlider from '../template/BestItemSlider';
 
 const MainWrap = styled.div`
-    padding: 0 70px;
+    // padding: 0 70px;
 `;
 const BestItemsWrap = styled.div`
     margin: 0 80px;

@@ -21,6 +21,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 70px;
 `;
 const PagesWrapper = styled.div`
   width: 100%;

@@ -15,7 +15,9 @@ const PaymentMethod = (props) => {
       setPayment('');
       setPaymentCheck(false);
     } else {
-      setPayment(methodName);
+      if (methodName === '카카오페이') {
+        setPayment('KKO');
+      }
       setPaymentCheck(true);
     }
   }
