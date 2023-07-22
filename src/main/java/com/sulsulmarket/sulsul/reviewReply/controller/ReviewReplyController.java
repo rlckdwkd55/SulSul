@@ -1,6 +1,5 @@
 package com.sulsulmarket.sulsul.reviewReply.controller;
 
-import com.sulsulmarket.sulsul.reviewReply.dao.ReviewReplyDao;
 import com.sulsulmarket.sulsul.reviewReply.dto.ReviewReplyDTO;
 import com.sulsulmarket.sulsul.reviewReply.service.ReviewReplyService;
 import lombok.extern.slf4j.Slf4j;
