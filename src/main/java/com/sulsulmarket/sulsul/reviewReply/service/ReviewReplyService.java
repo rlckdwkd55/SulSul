@@ -57,7 +57,7 @@ public class ReviewReplyService {
         }
 
         try {
-            reviewReplyDTO.setREPLY_ID(Math.toIntExact(SulSulUil.getNextSequence()));
+            reviewReplyDTO.setREPLY_ID(SulSulUil.getNextSequence().intValue());
             log.info("ReviewReplyDTO ===>>> [{}]", reviewReplyDTO.toString());
             reviewReplyDao.reviewReplyAdd(reviewReplyDTO);
             log.info("Review Reply Insert Is Success ! ! !");
