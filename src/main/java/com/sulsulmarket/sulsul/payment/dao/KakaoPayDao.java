@@ -1,13 +1,8 @@
 package com.sulsulmarket.sulsul.payment.dao;
 
-import com.sulsulmarket.sulsul.payment.dto.KakaoApproveResponse;
 import com.sulsulmarket.sulsul.payment.mapper.KakaoPayMapper;
-import com.sulsulmarket.sulsul.product.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.Map;
 
 @Component
 public class KakaoPayDao implements KakaoPayMapper{
@@ -16,8 +11,14 @@ public class KakaoPayDao implements KakaoPayMapper{
     private KakaoPayMapper kakaoPayMapper;
 
     @Override
-    public String getResponsePayment(@RequestBody Map<String, Object> paymentMap){
-        return kakaoPayMapper.getResponsePayment(paymentMap);
+    public void putTid(String tid, String orderNo){
+
+        kakaoPayMapper.putTid(tid, orderNo);
+    }
+
+    @Override
+    public void cancelTid(String tid, String orderNo){
+        kakaoPayMapper.cancelTid(tid, orderNo);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.sulsulmarket.sulsul.orders.dao;
 
+import com.sulsulmarket.sulsul.orders.dto.Orders;
 import com.sulsulmarket.sulsul.orders.mapper.OrdersMapper;
 import com.sulsulmarket.sulsul.product.dto.Product;
 import lombok.extern.slf4j.Slf4j;
@@ -24,5 +25,10 @@ public class OrdersDao implements OrdersMapper {
     @Override
     public int getInsertOrderDetail(Map<String, Object> detailParameter) {
         return ordersMapper.getInsertOrderDetail(detailParameter);
+    }
+
+    @Override
+    public Orders getOrderData(int orderNo){
+        return ordersMapper.getOrderData(orderNo);
     }
 }

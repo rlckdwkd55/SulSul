@@ -62,24 +62,6 @@ public class KakaoPayController {
         }
     }
 
-
-
-
-    /**
-     * 환불
-     */
-    @PostMapping("/refund")
-    public ResponseEntity refund() {
-
-        KakaoCancelResponse kakaoCancelResponse = kakaoPayService.kakaoCancel();
-
-        if(kakaoCancelResponse == null) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(kakaoCancelResponse, HttpStatus.OK);
-    }
-
     /**
      * 결제 진행 중 취소
      */
@@ -94,5 +76,18 @@ public class KakaoPayController {
     @GetMapping("/fail")
     public void fail() throws Exception {
 
+    }
+
+    /**
+     * 환불
+     */
+    @PostMapping("/refund")
+    public ResponseEntity refund(@RequestBody Map<String, Object> cancelBody) {
+
+        int orderNo = (int) cancelBody.get("orderNo");
+
+        KakaoCancelResponse kakaoCancelResponse = kakaoPayService.kakaoCancel(orderNo);
+
+        return new ResponseEntity<>(kakaoCancelResponse, HttpStatus.OK);
     }
 }

@@ -16,6 +16,7 @@ public class ProductService {
     private ProductDao productDao;
 
     public Product getProductDetail(Map<String, Integer> parameter){
+
         return productDao.getProductDetail(parameter);
     }
 }

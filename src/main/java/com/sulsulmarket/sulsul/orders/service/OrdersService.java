@@ -2,9 +2,7 @@ package com.sulsulmarket.sulsul.orders.service;
 
 import com.sulsulmarket.sulsul.Util.SulSulUil;
 import com.sulsulmarket.sulsul.orders.dao.OrdersDao;
-import com.sulsulmarket.sulsul.orders.dto.Member;
-import com.sulsulmarket.sulsul.orders.dto.OrderDetail;
-import com.sulsulmarket.sulsul.orders.dto.Product;
+import com.sulsulmarket.sulsul.orders.dto.Orders;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -121,6 +119,11 @@ public class OrdersService {
 
 
         return result;
+    }
+
+    public Orders getOrderData(int orderNo){
+
+        return ordersDao.getOrderData(orderNo);
     }
 
 }

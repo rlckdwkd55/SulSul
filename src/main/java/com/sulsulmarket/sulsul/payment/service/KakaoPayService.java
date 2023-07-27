@@ -1,6 +1,8 @@
 package com.sulsulmarket.sulsul.payment.service;
 
+import com.sulsulmarket.sulsul.orders.service.OrdersService;
 import com.sulsulmarket.sulsul.payment.dao.KakaoPayDao;
+import com.sulsulmarket.sulsul.orders.dto.Orders;
 import com.sulsulmarket.sulsul.payment.dto.*;
 import com.sulsulmarket.sulsul.product.dao.ProductDao;
 import com.sulsulmarket.sulsul.product.dto.Product;
@@ -14,6 +16,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
+import org.yaml.snakeyaml.parser.ParserImpl;
 
 import java.util.Map;
 
@@ -23,6 +26,9 @@ public class KakaoPayService {
 
     @Autowired
     private KakaoPayDao kakaoPayDao;
+
+    @Autowired
+    private OrdersService ordersService;
 
     @Autowired
     private ProductDao productDao;
@@ -49,8 +55,27 @@ public class KakaoPayService {
      */
     public KakaoReadyResponse kakaoReady(int orderNo, int productNo, int quantity) {
         log.info("ORDER_NO -> [{}], PRODUCT_NO -> [{}], Quantity -> {}", orderNo, productNo, quantity);
-        Orders order = OrdersDao.get
+        // 주문내역(Order객체)이 없는데 결제가 이루어지면 안되기 때문에
+        // 주문내역에 존재하는 내역인지 확인 후 결제가 이루어져야한다
+        // 그 이후에 결제요청 메소드가 돌아야한다.
+        Orders orderData = ordersService.getOrderData(orderNo);
+
+        if (orderData == null) {
+            return null;
+        }
+
+        // 위에서 검증이 끝난 후
+        // 아래 코드 작동
         Product product = productDao.getProductByProductNo(productNo);
+
+        if (product == null) {
+            return null;
+        }
+
+        // 결제 요청하는 제품의 수량이 실제로 존재 하는지 검증
+        if (product.getPRODUCT_AMOUNT() == 0) {
+            return null;
+        }
 
         log.info("PRODUCT -> [{}]", product.toString());
 
@@ -69,6 +94,11 @@ public class KakaoPayService {
         parameters.add("cancel_url", failUrl); // 취소 시 redirect url
         parameters.add("fail_url", cancelUrl); // 실패 시 redirect url
 
+        // 우리가 보유한 재고보다 결제하는 수량이 많을경우 결제 취소
+        if (product.getPRODUCT_AMOUNT() < quantity) {
+            return null;
+        }
+
         log.info("MultiValueMap -> [{}]", parameters);
         // 파라미터, 헤더
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
@@ -82,8 +112,12 @@ public class KakaoPayService {
                 KakaoReadyResponse.class);
         log.info("Kakao Response -> [{}]", response.toString());
 
-        return response;
+        if (response.getTid() != null) {
+            kakaoPayDao.putTid(response.getTid(), String.valueOf(orderNo));
+        }
+
         // response 객체에 담겨져 있는 값은 TID, REDIRECT_URL
+            return response;
     }
 
     /**
@@ -127,7 +161,9 @@ public class KakaoPayService {
 
         log.info("Success -> [{}]", response.toString());
 
-        String responsePayment = kakaoPayDao.getResponsePayment(paymentMap);
+//        if (response.getTid() != null) {
+//            kakaoPayDao.putTid(response.getTid());
+//        }
 
         return response;
     }
@@ -135,8 +171,15 @@ public class KakaoPayService {
     /**
      * 결제 환불
      */
-    public KakaoCancelResponse kakaoCancel() {
+    public KakaoCancelResponse kakaoCancel(int orderNo) {
 
+        Orders orderData = ordersService.getOrderData(orderNo);
+
+        if (orderData == null) {
+            return null;
+        }
+
+        // order_detail에 있는 가격을 가져와야한다.
         // 카카오페이 요청
         MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<>();
         parameters.add("cid", cid);
@@ -158,6 +201,10 @@ public class KakaoPayService {
                 KakaoCancelResponse.class);
 
         log.info("Success -> [{}]", response.toString());
+
+        if (response.getTid() != null) {
+            kakaoPayDao.cancelTid(response.getTid(), String.valueOf(orderNo));
+        }
 
         return response;
     }

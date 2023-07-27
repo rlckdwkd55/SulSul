@@ -1,5 +1,9 @@
 package com.sulsulmarket.sulsul.payment.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter@Setter
 public class CardInfo {
     private String purchase_corp;
     private String purchase_corp_code;

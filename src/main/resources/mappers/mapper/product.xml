@@ -7,7 +7,7 @@
         WHERE PRODUCT_NO = #{PRODUCT_NO}
     </select>
 
-    <select id="getProductByProductNo" resultType="com.sulsulmarket.sulsul.product.dto.Product">
+    <select id="getProductByProductNo" parameterType="Integer" resultType="com.sulsulmarket.sulsul.product.dto.Product">
         SELECT * FROM PRODUCT
         WHERE PRODUCT_NO = #{PRODUCT_NO}
     </select>

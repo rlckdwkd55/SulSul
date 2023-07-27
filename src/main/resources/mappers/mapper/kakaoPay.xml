@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sulsulmarket.sulsul.payment.mapper.KakaoPayMapper">
+
+    <update id="putTid" parameterType="String">
+        UPDATE ORDERS SET TID = (#{tid})
+        WHERE ORDER_NO = Cast(#{orderNo} as Integer)
+    </update>
+
+    <update id="cancelTid" parameterType="String">
+        UPDATE ORDERS SET TID = NULL
+        WHERE ORDER_NO = CAST(#{orderNo} as Integer)
+    </update>
+
+</mapper>
