@@ -3,8 +3,10 @@ import styled from "styled-components";
 
 const CountWrap = styled.div`
   display: flex;
-  
-  height: 25px;
+  height: 30px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 3px;
 
   > input[type="number"]::-webkit-outer-spin-button,
     input[type="number"]::-webkit-inner-spin-button {
@@ -14,11 +16,17 @@ const CountWrap = styled.div`
 
   > input {
     width: 60px;
+    border: none;
+    text-align: center;
   }
 
   
 `;
-const CntBtn = styled.button``;
+const CntBtn = styled.button`
+  line-height: initial;
+  border: none;
+  background-color: white;
+`;
 
 const CountBtn = (props) => {
   const [ count, setCount ] = useState(props.cnt);

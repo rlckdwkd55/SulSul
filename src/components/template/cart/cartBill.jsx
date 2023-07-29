@@ -2,10 +2,52 @@ import styled from "styled-components";
 import BtnRed from "../../atoms/btnRed";
 import { useNavigate } from "react-router-dom";
 
-const Wrap = styled.div``;
-const BillWrap = styled.div``;
-const Table = styled.table``;
-const Total = styled.div``;
+const Wrap = styled.div`
+  width: 25%;
+  margin-top: 25px;
+  height: 300px;
+
+  > div:nth-child(2) {
+    text-align: center;
+    margin-top: 20px;
+
+     > button {
+      width: 100%;
+     }
+  }
+`;
+const BillWrap = styled.div`
+  height: 70%;
+  padding: 15px;
+  border: solid 1px lightgray;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  > div:nth-child(1) {
+    border-bottom: solid 1px lightgray;
+    padding-bottom: 7px;
+  }
+`;
+const Table = styled.table`
+  width: 100%;
+  
+  > tr {
+    height: 30px;
+    > td:nth-child(2) {
+      text-align: right;
+    }
+  }
+`;
+const Total = styled.div`
+border-top: solid 1px lightgray;
+padding-top: 7px;
+
+  > span:nth-child(2) {
+    float: right;
+  }
+`;
 
 const CartBill = (props) => {
   const navigate = useNavigate();
@@ -45,7 +87,9 @@ const CartBill = (props) => {
           <span>{totalPrice} 원</span>
         </Total>
       </BillWrap>
-      <BtnRed clickEvent={doOrder} name={'주문하기'}/>
+      <div>
+        <BtnRed clickEvent={doOrder} name={'주문하기'}/>
+      </div>
     </Wrap>
   )
 }

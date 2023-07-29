@@ -2,12 +2,46 @@ import { useState } from "react";
 import styled from "styled-components";
 import CountBtn from "../../atoms/countBtn";
 
-const Wrap = styled.div``;
+const Wrap = styled.div`
+  width: 70%;
+`;
 const BtnWrap = styled.div`
   display: flex;
+  padding-bottom: 5px;
+  border-bottom: solid 1px dimgray;
+
+  > div {
+    margin-left: 20px;
+  }
+
 `;
 const PrdWrap = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+  border-bottom: solid 1px lightgray;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  > div:nth-child(1) {
+    width: 20%;
+  }
+
+  > div:nth-child(2) {
+    width: 70%;
+
+    div:nth-child(1) {
+      width: 40%;
+    }
+    div:nth-child(3) {
+      width: 25%;
+      text-align: right;
+    })
+  }
 `;
 
 const SelectBtnRed = (props) => {
@@ -38,13 +72,17 @@ const PrdList = (props) => {
 
   return(
     <PrdWrap>
-      <SelectBtnRed onChange={(e) => handleSingleCheck(e.target.checked, data.prdNo)}
-                // 체크된 아이템 배열에 해당 아이템이 있을 경우 선택 활성화, 아닐 시 해제
-                checked={props.checkItems.includes(data.prdNo) ? true : false}/>
-      <img src='' alt='' width='100' height='150'/>
-      <span>{data.prdName}</span>
-      <CountBtn cnt={orderCnt} setTotal={setOrderPrice} price={data.prdPrice}/>
-      <span>{orderPrice} 원</span>
+      <div>
+        <SelectBtnRed onChange={(e) => handleSingleCheck(e.target.checked, data.prdNo)}
+                  // 체크된 아이템 배열에 해당 아이템이 있을 경우 선택 활성화, 아닐 시 해제
+                  checked={props.checkItems.includes(data.prdNo) ? true : false}/>
+        <img src='' alt='' width='100' height='150'/>
+      </div>
+      <div>
+        <div>{data.prdName}</div>
+        <CountBtn cnt={orderCnt} setTotal={setOrderPrice} price={data.prdPrice}/>
+        <div>{orderPrice} 원</div>
+      </div>
     </PrdWrap>
   )
 }

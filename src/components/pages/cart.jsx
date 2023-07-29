@@ -6,6 +6,8 @@ import CartService from "../../service/CartService";
 
 const Wrap = styled.div`
   display: flex;
+  justify-content: space-between;
+  margin: 50px 150px;
 `;
 
 const Cart = () => {
