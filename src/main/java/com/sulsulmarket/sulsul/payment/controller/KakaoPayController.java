@@ -6,6 +6,7 @@ import com.sulsulmarket.sulsul.payment.dto.KakaoReadyResponse;
 import com.sulsulmarket.sulsul.payment.service.KakaoPayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,11 @@ import java.util.Map;
 @RequestMapping("/payment")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins="*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class KakaoPayController {
 
-    private final KakaoPayService kakaoPayService;
+    @Autowired
+    private KakaoPayService kakaoPayService;
 
     /**
      * 결제요청
@@ -63,6 +65,22 @@ public class KakaoPayController {
     }
 
     /**
+     * 환불
+     */
+    @PostMapping("/refund")
+    public ResponseEntity refund(@RequestBody Map<String, Object> cancelMap) {
+
+        log.info("Cancel Map ==>> [{}]",cancelMap.toString());
+        if (cancelMap != null) {
+            KakaoCancelResponse kakaoCancelResponse = kakaoPayService.kakaoCancelResponse(cancelMap);
+
+            return new ResponseEntity<>(kakaoCancelResponse, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
      * 결제 진행 중 취소
      */
     @GetMapping("/cancel")
@@ -76,18 +94,5 @@ public class KakaoPayController {
     @GetMapping("/fail")
     public void fail() throws Exception {
 
-    }
-
-    /**
-     * 환불
-     */
-    @PostMapping("/refund")
-    public ResponseEntity refund(@RequestBody Map<String, Object> cancelBody) {
-
-        int orderNo = (int) cancelBody.get("orderNo");
-
-        KakaoCancelResponse kakaoCancelResponse = kakaoPayService.kakaoCancel(orderNo);
-
-        return new ResponseEntity<>(kakaoCancelResponse, HttpStatus.OK);
     }
 }

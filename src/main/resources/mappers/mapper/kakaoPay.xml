@@ -7,6 +7,12 @@
         WHERE ORDER_NO = Cast(#{orderNo} as Integer)
     </update>
 
+    <select id="getOrderDetailData" parameterType="Integer" resultType="com.sulsulmarket.sulsul.payment.dto.OrderDetail">
+        SELECT * FROM ORDER_DETAIL
+        WHERE ORDER_NO = #{orderNo}
+    </select>
+
+    <!--  TODO 전체 취소일 경우에는 null로 업데이트 해도 상관없지만, 부분취소일 땐 TID가 남아있어야 한다.   -->
     <update id="cancelTid" parameterType="String">
         UPDATE ORDERS SET TID = NULL
         WHERE ORDER_NO = CAST(#{orderNo} as Integer)

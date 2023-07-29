@@ -1,5 +1,6 @@
 package com.sulsulmarket.sulsul.payment.service;
 
+import com.sulsulmarket.sulsul.payment.dto.OrderDetail;
 import com.sulsulmarket.sulsul.orders.service.OrdersService;
 import com.sulsulmarket.sulsul.payment.dao.KakaoPayDao;
 import com.sulsulmarket.sulsul.orders.dto.Orders;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 import org.yaml.snakeyaml.parser.ParserImpl;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -171,20 +173,30 @@ public class KakaoPayService {
     /**
      * 결제 환불
      */
-    public KakaoCancelResponse kakaoCancel(int orderNo) {
+    public KakaoCancelResponse kakaoCancelResponse(@RequestBody Map<String, Object> cancelMap) {
 
-        Orders orderData = ordersService.getOrderData(orderNo);
+        int orderNo = (int) cancelMap.get("orderNo");
+        log.info("Order No Check ==>> [{}]", orderNo);
+        List<OrderDetail> OrderDetailData = getOrderDetailData(orderNo);
 
-        if (orderData == null) {
+        String tid = (String) cancelMap.get("tid");
+        int cancelAmount = (int)cancelMap.get("cancel_amount");
+
+        // order_detail에 있는 가격을 가져와야한다.
+        // OrderDetailData 에 값이 없으면 return도 없다
+        if (OrderDetailData == null) {
+            log.error("Order Detail Data Is Null");
             return null;
         }
 
-        // order_detail에 있는 가격을 가져와야한다.
         // 카카오페이 요청
         MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<>();
         parameters.add("cid", cid);
-        parameters.add("tid", response.getTid());
-        parameters.add("cancel_amount", cancelAmount.getTotal());
+        log.info("CID CHECK : {}", cid);
+        parameters.add("tid", tid);
+        log.info("TID CHECK : {}", tid);
+        parameters.add("cancel_amount", cancelAmount);
+        log.info("Cancel_Amount : {}", cancelAmount);
         parameters.add("cancel_tax_free_amount", 0);
 
         log.info("SuccessMultiValueMap -> [{}]", parameters);
@@ -221,6 +233,11 @@ public class KakaoPayService {
         httpHeaders.set("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
         return httpHeaders;
+    }
+
+    public List<OrderDetail> getOrderDetailData(int orderNo){
+
+        return kakaoPayDao.getOrderDetailData(orderNo);
     }
 
 
