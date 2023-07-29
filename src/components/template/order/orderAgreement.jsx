@@ -1,9 +1,36 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const Wrap = styled.div``;
-const AgreementWrap = styled.div``;
-const AgreeCheckWrap = styled.div``;
+const Wrap = styled.div`
+  margin: 60px 0;
+  > div:nth-child(1) {
+    padding-bottom: 15px;
+    border-bottom: solid 1px dimgray;
+    margin-bottom: 20px;
+  }
+`;
+const AgreementWrap = styled.div`
+  > div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+
+    > button {
+      color: gray;
+      background-color: white;
+      border: none;
+      border-bottom: 1px solid gray;
+    }
+  }
+`;
+const AgreeCheckWrap = styled.div`
+  display: flex;
+  margin-top: 20px;
+
+  > div {
+    margin-right: 15px;
+  }
+
+`;
 
 const Detail = ({detail}) => {
   return(

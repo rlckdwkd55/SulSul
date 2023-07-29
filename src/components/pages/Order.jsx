@@ -11,7 +11,9 @@ import OrderAgreement from "../template/order/orderAgreement";
 import OrderButton from "../template/order/orderButton";
 import styled from "styled-components";
 
-const Wrap = styled.div``;
+const Wrap = styled.div`
+  margin: 50px 150px;
+`;
 
 const Order = () => {
   const [ orderList, setOrderList ] = useState([]);

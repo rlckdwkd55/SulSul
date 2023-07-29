@@ -1,17 +1,108 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const Wrap = styled.div``;
-const PaymentWrap = styled.div``;
-const PayInfoWrap = styled.div``;
-const PaymentMethodBtn = styled.button``;
-const PriceAreaWrap = styled.div``;
+const Wrap = styled.div`
+  margin-bottom: 60px;
+
+  > div:nth-child(1) {
+    margin-bottom: 15px;
+  }
+  
+  > div:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+const PaymentWrap = styled.div`
+  width: 70%;
+  > div {
+    display: flex;
+    padding-bottom: 10px;
+  }
+
+  > div:nth-child(1) {
+    padding-top: 10px;
+    border-top: solid 1px dimgray;
+    height: 70px;
+    align-items: center;
+
+    > div:nth-child(1) {
+      width: 200px;
+    }
+  }
+  > div:nth-child(2) {
+    flex-direction: column;
+    border-bottom: solid 1px lightgray;
+
+    > p {
+      padding-bottom: 10px;
+    }
+
+    > p:nth-child(1) {
+      font-weight: bold;
+    }
+    > p:nth-child(3) {
+      font-size: 0.8rem;
+    }
+  }
+`;
+const PaymentMethodBtn = styled.button`
+  padding: 3px 15px;
+  margin-right: 20px;
+    border: 1.5px solid lightgray;
+    border-radius: 5px;
+    background-color: white;
+    
+    &:hover {
+      border-color: rgb(233, 118, 118);
+    }
+`;
+const PayInfoWrap = styled.div`
+  width: 30%;
+  margin-left: 20px;
+`;
+const PriceAreaWrap = styled.div`
+  margin-top: 20px;
+  padding: 25px 20px;
+  height: 170px;
+  background-color: #f3f3f3;
+  border: 1.5px solid lightgray;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  > div {
+    display: flex;
+  }
+  .topArea {
+    display: flex;
+    flex-direction: column;
+
+    > div {
+      padding-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .bottomArea {
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1.5px solid lightgray;
+
+    > span:nth-child(2) {
+      color: rgb(233, 118, 118);
+      font-weight: bold;
+    }
+  }
+`;
 
 const PaymentMethod = (props) => {
-  const [ paymentCheck, setPaymentCheck ] = useState(false);
+  const [ isPaymentChecked, setPaymentCheck ] = useState(false);
 
   function handleBtnClick(setPayment, methodName) {
-    if (paymentCheck) {
+    if (isPaymentChecked) {
       setPayment('');
       setPaymentCheck(false);
     } else {
@@ -36,6 +127,7 @@ const PaymentMethodArea = ({setPayment}) => {
         <div>결제수단 선택</div>
         <div>
           <PaymentMethod methodName={'카카오페이'} setPayment={setPayment}/>
+          <PaymentMethod methodName={'무통장입금'} setPayment={setPayment}/>
         </div>
       </div>
       <div>
@@ -56,15 +148,17 @@ const PriceArea = (props) => {
 
   return(
     <PriceAreaWrap>
-      <div>
-        <span>주문금액</span>
-        <span>{params.price} 원</span>
+      <div className="topArea">
+        <div>
+          <span>주문금액</span>
+          <span>{params.price} 원</span>
+        </div>
+        <div>
+          <span>배송비</span>
+          <span>3000 원</span>
+        </div>
       </div>
-      <div>
-        <span>배송비</span>
-        <span>3000원</span>
-      </div>
-      <div>
+      <div className="bottomArea">
         <span>최종결재금액</span>
         <span>{params.total} 원</span>
       </div>

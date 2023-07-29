@@ -1,7 +1,17 @@
 import styled from "styled-components";
 
-const Wrap = styled.div``;
-const ButtonWrap = styled.button``;
+const Wrap = styled.div`
+  text-align: center;
+`;
+const ButtonWrap = styled.button`
+  border-radius: 7px;
+  border: none;
+  background-color: rgb(233, 118, 118);
+  color: white;
+  height: 50px;
+  width: 300px;
+  font-weight: bold;
+`;
 
 const OrderButton = (props) => {
   
@@ -17,7 +27,7 @@ const OrderButton = (props) => {
 
   return(
     <Wrap>
-      <ButtonWrap onClick={() => doOrder()}>{props.total} 원 결제하기</ButtonWrap>
+      <ButtonWrap onClick={() => doOrder()}>{props.total}원 결제하기</ButtonWrap>
     </Wrap>
   )
 }
