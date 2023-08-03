@@ -3,7 +3,7 @@
 <mapper namespace="com.sulsulmarket.sulsul.cart.mapper.CartMapper">
 
     <select id="getCartByMemberIdAndProductNo" resultType="com.sulsulmarket.sulsul.cart.dto.CartDTO">
-        FROM CART
+        SELECT FROM CART
         WHERE MEMBER_ID = #{memberId}
         AND PRODUCT_NO = #{productNo}
     </select>
@@ -15,7 +15,7 @@
           AND PRODUCT_NO = #{productNo}
     </update>
 
-    <insert id="addCartByMemberIdAndProduct">
+    <insert id="addCartByMemberIdAndProduct" parameterType="com.sulsulmarket.sulsul.cart.dto.CartDTO">
         INSERT INTO CART(
                  MEMBER_ID
                 ,PRODUCT_NO

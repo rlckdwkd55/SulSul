@@ -50,7 +50,7 @@
     <!-- QNA 테이블의 데이터를 삭제하는 DELETE 쿼리 -->
     <update id="qnaUpdateStatus">
         UPDATE QNA
-          SET DEL_STATUS = Y
+          SET DEL_STATUS = 'Y'
         WHERE QNA_NO = #{qnaNo}
     </update>
 </mapper>

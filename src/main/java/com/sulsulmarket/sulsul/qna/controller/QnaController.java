@@ -36,6 +36,18 @@ public class QnaController {
     }
 
     @GetMapping("/api/qna/get/qnaNo")
+    // url 작성 예시 http://localhsot:8080/api/qna/get/qnaNo 지금 요청 URL인데
+    // 제가 이제 RequestBody 를 이용해서 parameter 를  받아와서
+    // url은 저기고 해당 값은 Body 를 통해서 가져오는 겁니다.
+    // 제꺼 노션에서 해당 정리한 글이 있는데 GET / POST 한 번 읽어보시고 예시도 있어서 해보시면 뭐가 다른지 알 것 같아요
+    // @01.09 Spring Boot Controller, GET API 정리
+    //
+    //[Spring Boot Controller](https://www.notion.so/Spring-Boot-Controller-b5398272b89b45de83dfc5f3886e4172?pvs=21)
+    //
+    //@01.18 Spring Boot Controller, POST API 정리
+    //
+    //[Spring Boot Post API](https://www.notion.so/Spring-Boot-Post-API-e967b3c04c7246818fe3895dd2440d62?pvs=21)
+    //TODO @RequestParam 또는 @PathVariable 이거 두개가 URL ? = test 이런 식으로 쓰는 거에요 GET 방식 사용할 떄 보통 많이 써
     public ResponseEntity<Object> getQnaByQnaNo(@RequestBody Map<String, Integer> parameter) {
 
         try {

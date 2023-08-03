@@ -81,6 +81,7 @@ public class CartService {
         /**
          * 해당 멤버 아이디, 프로덕트 번호로 조회 했는데 정보가 없을 경우
          * 처음 추가하는 거라고 판단하여 INSERT 구문 실행
+         * 해당 상품이 이미 존재할 경우 UPDATE 구문을 사용하여 카운트를 증가시킴.
          */
         CartDTO cartDTO = cartDao.getCartByMemberIdAndProductNo(memberId, productNo);
         if(cartDTO == null || Objects.isNull(cartDTO)) {
@@ -89,6 +90,7 @@ public class CartService {
                 throw new IllegalArgumentException("수량이 0보다 작을 수 없습니다");
             }
             try {
+                // INSERT
                 cartDao.addCartByMemberIdAndProduct(memberId, productNo, cartAmount);
                 log.info("CART INSERT IS SUCCESS ! ! !");
             } catch (Exception e) {
@@ -101,6 +103,7 @@ public class CartService {
                 throw new IllegalArgumentException("수량이 0보다 작을 수 없습니다");
             }
             try {
+                // UPDATE
                 cartDao.updateCartCount(memberId, productNo, cartAmount);
                 log.info("Cart Product Amount Update Success => PRODUCT : [{}] AMOUNT : [{}]", productNo, cartAmount);
             } catch (Exception e) {
