@@ -1,5 +1,5 @@
 import axios from "axios";
-export const SERVER_URL = "http://172.20.10.5:8080";
+export const SERVER_URL = "http://43.202.105.155:8080";
 
 const request = {
   get: (url, config) => {

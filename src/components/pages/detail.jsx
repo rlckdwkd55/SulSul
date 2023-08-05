@@ -2,12 +2,21 @@ import { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import styled from "styled-components";
 import DetailHead from "../template/detail/detailHead";
+import DetailReview from "../template/detail/DetailReview";
+import DetailQnA from "../template/detail/DetailQnA";
 
 const Wrap = styled.div`
-
+  margin: 50px 150px;
 `;
 const DetailInfo = styled.div``;
-const DetailNav = styled.div``;
+const DetailNav = styled.div`
+  > a {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: 1px solid red;
+    border-radius: 5px;
+  }
+`;
 
 const DetailNavBtn = (props) => {
   return (
@@ -47,8 +56,8 @@ const Detail = () => {
         <DetailNavBtn btnName={'상품문의'} url={''}/>
       </DetailNav>
       <DetailInfo></DetailInfo>
-      {/* <DetailReview></DetailReview>
-      <DetailQnA></DetailQnA> */}
+      <DetailReview></DetailReview>
+      <DetailQnA></DetailQnA>
     </Wrap>    
   )
 }

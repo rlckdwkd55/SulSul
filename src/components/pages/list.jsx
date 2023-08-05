@@ -32,25 +32,25 @@ const List = () => {
           content: "술술의 새로운 상품들을 만나보세요!"
         });
         break;
-      case "soju":
+      case "소주":
         setContents({
           title: "소주 · 증류주",
           content: "소주"
         });
         break;
-      case "mag":
+      case "막걸리":
         setContents({
           title: "막걸리",
           content: "막걸리"
         });
         break;
-      case "yag":
+      case "약주":
         setContents({
           title: "약주 · 청주",
           content: "약주"
         });
         break;
-      case "gwa":
+      case "과실주":
         setContents({
           title: "과실주",
           content: "과실주"

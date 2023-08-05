@@ -7,6 +7,7 @@ const CountWrap = styled.div`
   border: 1px solid gray;
   border-radius: 5px;
   padding: 3px;
+  width: 109px;
 
   > input[type="number"]::-webkit-outer-spin-button,
     input[type="number"]::-webkit-inner-spin-button {

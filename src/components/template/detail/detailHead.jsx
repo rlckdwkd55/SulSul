@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import CountBtn from "../../atoms/countBtn";
 import BtnRed from "../../atoms/btnRed";
 
@@ -8,19 +9,77 @@ const Wrap = styled.div`
     display: flex;
   }
 
+  > div:nth-child(1) {
+    justify-content: space-between;
+  }
+
   > div:nth-child(2) {
+    flex-direction: column;
     > div {
+      margin-left: auto;
       display: flex;
+    }
+    > div: nth-child(1) {
+      padding: 15px 0;
+      > span {
+        margin-right: 15px;
+      }
+    }
+    > div:nth-child(2) {
+      width: 60%;
+
+      > button:nth-child(2) {
+        width: 100%;
+      }
     }
   }
 `;
-const HeadInfo = styled.div``;
-const Table = styled.table``;
-const BtnCart = styled.button``;
+const HeadInfo = styled.div`
+  width: 60%;
+`;
+const Table = styled.table`
+  width: 100%;
+
+  > tbody {
+    > tr {
+      border-top: 1px solid lightgray;
+      border-bottom: 1px solid lightgray;
+
+      > td {
+        padding: 10px 0;
+      }
+    }
+  }
+`;
+const BtnCart = styled.button`
+  margin-right: 15px;
+  border: 1px solid lightgray;
+  background-color: white;
+  color: lightgray;
+  border-radius: 5px;
+`;
 
 const DetailHead = (props) => {
   const [ total, setTotal ] = useState(0);
   const prdInfo = props.prdInfo;
+  const navigate = useNavigate();
+
+  const doOrder = () => {
+    if (total === 0) {
+      alert('수량을 선택해주세요.');
+      return;
+    }
+    navigate("/order", { state: { prdNo: [prdInfo.prdNo], total: total + 3000, price: total } });
+  }
+
+  const addCart = () => {
+    if (total === 0) {
+      alert('수량을 선택해주세요.');
+      return;
+    }
+
+    // 장바구니 저장 로직
+  }
 
   return (
     <Wrap>
@@ -33,7 +92,7 @@ const DetailHead = (props) => {
             <span>별 {prdInfo.rank}</span>
             <span>리뷰 {prdInfo.review}</span>
             <div>
-              <h2>{prdInfo.price} 원</h2>
+              <h2>{prdInfo.prdPrice} 원</h2>
             </div>
           </div>
           <div>
@@ -63,7 +122,7 @@ const DetailHead = (props) => {
                   <td>
                     <div>
                       <span>{prdInfo.prdName}</span>
-                      <CountBtn cnt={0} setTotal={setTotal} price={prdInfo.price}/>
+                      <CountBtn className="cntBtn" cnt={0} setTotal={setTotal} price={prdInfo.prdPrice}/>
                     </div>
                   </td>
                 </tr>
@@ -78,8 +137,8 @@ const DetailHead = (props) => {
           <h2>{total} 원</h2>
         </div>
         <div>
-          <BtnCart><i className="icon bi bi-bag"></i></BtnCart>
-          <BtnRed name = {'바로 구매하기'}/>
+          <BtnCart onClick={addCart}><i className="icon bi bi-bag"></i></BtnCart>
+          <BtnRed  clickEvent={doOrder} name = {'바로 구매하기'}/>
         </div>
       </div>
     </Wrap>
