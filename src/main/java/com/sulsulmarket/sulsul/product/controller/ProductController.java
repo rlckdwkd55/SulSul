@@ -2,7 +2,6 @@ package com.sulsulmarket.sulsul.product.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sulsulmarket.sulsul.product.dao.ProductDao;
 import com.sulsulmarket.sulsul.product.dto.Product;
 import com.sulsulmarket.sulsul.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -49,6 +47,23 @@ public class ProductController {
         }
 
         return new ResponseEntity<>(json, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/product/categoryList")
+    public ResponseEntity<List<Product>> categoryList(@RequestBody Product product){
+        try {
+        List<Product> categoryList = productService.getCategoryList(product);
+
+        if (categoryList == null){
+            return null;
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(categoryList);
+        } catch (Exception e){
+            log.error("Category Select Fail : {} ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 
 }
