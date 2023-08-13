@@ -3,11 +3,14 @@
 <mapper namespace="com.sulsulmarket.sulsul.member.mapper.MemberMapper">
 
     <select id="getMemberList" resultType="com.sulsulmarket.sulsul.dto.member.Member">
-        SELECT * FROM MEMBER
+        SELECT *
+          FROM MEMBER
     </select>
 
     <select id="getMemberById" resultType="com.sulsulmarket.sulsul.dto.member.Member">
-        SELECT * FROM MEMBER WHERE MEMBER_ID = #{MEMBER_ID}
+        SELECT *
+          FROM MEMBER
+        WHERE MEMBER_ID = #{MEMBER_ID}
     </select>
 
     <insert id="memberSign">
@@ -57,6 +60,6 @@
     <select id="getAddressByMemberId" resultType="com.sulsulmarket.sulsul.dto.member.Address">
         SELECT *
           FROM ADDRESS
-        WHERE BY MEMBER_ID = #{MEMBER_ID}
+        WHERE MEMBER_ID = #{MEMBER_ID}
     </select>
 </mapper>

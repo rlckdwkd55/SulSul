@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,23 +42,38 @@ public class MemberController {
             Member member = memberService.getMemberById(param.get("memberId"));
             return new ResponseEntity<>(member, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            if(e instanceof BadSqlGrammarException){
+                log.error("Exception : ", e);
+                return new ResponseEntity<>("DB Insert 실패.", HttpStatus.INTERNAL_SERVER_ERROR);
+                //TODO DB 에러에 대한 재시도, 뭐 여러가지 분기처리를 할 수 있겠지
+            } else if (e instanceof IllegalArgumentException) {
+                log.error("Exception : ", e);
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            } else {
+                log.error("Exception : ", e);
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
         }
     }
 
     /**
      * 회원 로그인 컨틀롤러
      */
-//    @PostMapping("/api/member/login")
-//    public ResponseEntity<Object> loginMember(@RequestBody Map<String, String> parameter) {
-//
-//        try {
-//            LoginMemberDTO loginMember = memberService.memberLogin(parameter.get("memberId"), parameter.get("password"));
-//            return ResponseEntity.status(HttpStatus.OK).body(loginMember);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-//        }
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<Object> loginMember(@RequestBody Map<String, String> parameter) {
+
+        try {
+            memberService.memberLogin(parameter.get("memberId"), parameter.get("password"));
+            return new ResponseEntity<>("로그인 성공" + parameter.get("memberId").toString(), HttpStatus.OK);
+        } catch (Exception e) {
+            if (e instanceof IllegalArgumentException) {
+                log.error("member login IllegalArgumentException : ", e);
+                return new ResponseEntity<>("비밀번호가 일치 하지 않습니다.", HttpStatus.BAD_REQUEST);
+            }
+            log.error("member login Exception : ", e);
+            return new ResponseEntity<>("로그인 실패", HttpStatus.BAD_REQUEST);
+        }
+    }
 
     /**
      * 회원가입 컨트롤러
@@ -70,22 +85,38 @@ public class MemberController {
             memberService.memberSign(member);
             return ResponseEntity.status(HttpStatus.OK).body("회원가입에 성공하였습니다.");
         } catch (Exception e) {
-            log.error("MEMBER SIGN FAIL ! ! ! -> [{}]", e.getMessage());
+            log.error("Member Sign Exception : ", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
     /**
+     * 아이디 중복 체크 컨트롤러
+     */
+    @PostMapping("/duplicate/id")
+    public ResponseEntity<String> duplicateIdCheck(@RequestBody Map<String, String> param) {
+        try {
+            memberService.duplicateCheckId(param.get("memberId"));
+            return new ResponseEntity<>("사용 가능한 아이디입니다.", HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Member Duplicate Id Check Exception :", e);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    /**
      * 이메일 중복 체크 컨트롤러
      */
-    @PostMapping("/api/duplicate/check/email")
-    public ResponseEntity<Object> duplicateEmail(@RequestBody Member member) {
+    @PostMapping("/duplicate/email")
+    public ResponseEntity<Object> duplicateEmailCheck(@RequestBody Map<String, String> param) {
 
         try {
-            memberService.duplicateCheckEmail(member.getMEMBER_EMAIL());
-            return ResponseEntity.status(HttpStatus.OK).body("사용 가능한 이메일입니다.");
+            memberService.duplicateCheckEmail(param.get("memberEmail"));
+            return new ResponseEntity<>("사용 가능한 이메일입니다.", HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            log.error("Member Duplicate Email Check Exception :", e);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 

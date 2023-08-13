@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class NaverUser {
-    private String resultCode;
+    private String resultcode;
     private String message;
     private NaverUserResponse response;
 }

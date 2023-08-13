@@ -27,6 +27,9 @@ public class NaverLoginService {
     @Value("${spring.security.oauth2.client.registration.naver.redirect-uri}")
     private String redirectUrl;
 
+    @Value("${spring.security.oauth2.client.provider.naver.authorization-uri}")
+    private String authorizationUrl;
+
     @Value("${spring.security.oauth2.client.provider.naver.token-uri}")
     private String tokenUrl;
 
@@ -37,7 +40,7 @@ public class NaverLoginService {
      * naver login 인증 요청하는 메서드 return by client_id, redirect-url
      */
     public String getAuthorizationUrl() {
-        return "https://nid.naver.com/oauth2.0/authorize?client_id=" + clientId + "&redirect_uri=" + redirectUrl + "&response_type=code";
+        return authorizationUrl + "?client_id=" + clientId + "&redirect_uri=" + redirectUrl + "&response_type=code";
     }
 
     /**
@@ -73,7 +76,6 @@ public class NaverLoginService {
             ObjectMapper objectMapper = new ObjectMapper();
 
             try {
-                int number;
                 // Json 객체의 특정 필드 값을 가져옴
                 JsonNode jsonNode = objectMapper.readTree(accessToken);
                 // JsonNode access_token By String type return
@@ -94,11 +96,11 @@ public class NaverLoginService {
                 return userDTO;
 
             } catch (Exception e) {
-                log.error("Failed to parse token", e);
-                throw new IllegalStateException("토큰으로 회원 정보 가져오기 실패.");
+                log.error("Failed to parse token : {}", e);
+                throw new IllegalStateException("토큰 파싱 실패  회원 정보 가져오기 실패");
             }
         } catch (HttpClientErrorException e) {
-            log.error("Failed to get token from  client", e);
+            log.error("Failed to get token from  client : {}", e);
             throw new IllegalStateException("토큰 조회 실패");
         }
     }

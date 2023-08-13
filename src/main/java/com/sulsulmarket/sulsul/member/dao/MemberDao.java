@@ -21,9 +21,9 @@ public class MemberDao implements MemberMapper {
     }
 
     @Override
-    public Member getMemberById(String id) {
+    public Member getMemberById(String memberId) {
 
-        return memberMapper.getMemberById(id);
+        return memberMapper.getMemberById(memberId);
     }
 
     @Override

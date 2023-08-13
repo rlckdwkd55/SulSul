@@ -11,7 +11,7 @@ public interface MemberMapper {
 
     List<Member> getMemberList();
 
-    Member getMemberById(String id);
+    Member getMemberById(String memberId);
 
     Member memberLogin(String id, String password);
 

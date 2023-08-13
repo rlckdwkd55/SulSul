@@ -20,7 +20,7 @@ public class NaverLoginController {
      *
      * @return redirect url
      */
-    @GetMapping("/naver/login")
+    @GetMapping("/login")
     public ResponseEntity<String> naverLogin() {
         try {
             String authorizationUrl = naverLoginService.getAuthorizationUrl();
@@ -34,8 +34,9 @@ public class NaverLoginController {
 
     /**
      * 위에서 받아온 authorization_code parameter 받아 createToken 발급 바독 해당 Token 가지고 User Info Get
+     * @return NaverUser
      */
-    @PostMapping("/naver/callback")
+    @PostMapping("/callback")
     public ResponseEntity<Object> naverLoginCallback(@RequestParam String code) {
 
         try {
