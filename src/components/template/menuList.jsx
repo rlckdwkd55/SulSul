@@ -35,19 +35,19 @@ const MenuList = () => {
   const [menuList, setMenuList] = useState([
     {
       title: "소주 · 증류주",
-      cate: "soju"
+      cate: "1"
     },
     {
       title: "막걸리",
-      cate: "mag"
+      cate: "2"
     },
     {
       title: "약주 · 청주",
-      cate: "yag"
+      cate: "3"
     },
     {
       title: "과실주",
-      cate: "gwa"
+      cate: "4"
     }
   ]);
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const MenuList = () => {
     <MenuWrap>
       <Ul>
         { menuList.map(item => {
-          return <Li cate={item.cate}><div onClick={() => navigatePage(item.cate)}>{item.title}</div></Li>
+          return <Li key={item.cate} cate={item.cate}><div onClick={() => navigatePage(item.cate)}>{item.title}</div></Li>
         }) }
       </Ul>
     </MenuWrap>
