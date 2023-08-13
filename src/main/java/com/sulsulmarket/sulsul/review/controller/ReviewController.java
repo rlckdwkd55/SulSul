@@ -1,7 +1,7 @@
 package com.sulsulmarket.sulsul.review.controller;
 
-import com.sulsulmarket.sulsul.review.dto.ReviewDTO;
-import com.sulsulmarket.sulsul.review.dto.ReviewOrderByMemberId;
+import com.sulsulmarket.sulsul.dto.review.Review;
+import com.sulsulmarket.sulsul.dto.review.ReviewOrderByMemberId;
 import com.sulsulmarket.sulsul.review.service.ReviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,10 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping("/api/review/write")
-    public ResponseEntity<Object> writeReview(@RequestBody ReviewDTO reviewDTO) {
+    public ResponseEntity<Object> writeReview(@RequestBody Review review) {
 
         try {
-            reviewService.writeReview(reviewDTO);
+            reviewService.writeReview(review);
             return ResponseEntity.status(HttpStatus.OK).body("리뷰 작성 성공");
         } catch (Exception e) {
             log.error("error");
@@ -38,7 +38,7 @@ public class ReviewController {
     public ResponseEntity<Object> getReviewListAll() {
 
         try {
-            List<ReviewDTO> reviewList = reviewService.getReviewListAll();
+            List<Review> reviewList = reviewService.getReviewListAll();
             return ResponseEntity.status(HttpStatus.OK).body(reviewList);
         } catch (Exception e) {
             log.error("Review List Is Null ! ! !");
@@ -59,10 +59,10 @@ public class ReviewController {
     }
 
     @PostMapping("/api/review/update")
-    public ResponseEntity<Object> reviewUpdateByMemberId(@RequestBody ReviewDTO reviewDTO) {
+    public ResponseEntity<Object> reviewUpdateByMemberId(@RequestBody Review review) {
 
         try {
-            reviewService.updateReviewByMemberId(reviewDTO);
+            reviewService.updateReviewByMemberId(review);
             return ResponseEntity.status(HttpStatus.OK).body("수정 성공");
         } catch (Exception e) {
             log.error("Update Is Fail ! ! !");
@@ -71,9 +71,9 @@ public class ReviewController {
     }
 
     @PostMapping("/api/review/delete")
-    public ResponseEntity<Object> reviewDelete(@RequestBody ReviewDTO reviewDTO) {
+    public ResponseEntity<Object> reviewDelete(@RequestBody Review review) {
         try {
-            reviewService.deleteReviewByMemberId(reviewDTO.getMEMBER_ID(), reviewDTO.getDETAIL_NO());
+            reviewService.deleteReviewByMemberId(review.getMEMBER_ID(), review.getDETAIL_NO());
             return ResponseEntity.status(HttpStatus.OK).body("삭제 성공");
         } catch (Exception e) {
             log.error("Delete Is Fail ! ! !");

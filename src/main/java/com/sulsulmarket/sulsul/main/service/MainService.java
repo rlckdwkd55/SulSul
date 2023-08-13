@@ -1,12 +1,11 @@
 package com.sulsulmarket.sulsul.main.service;
 
 import com.sulsulmarket.sulsul.Util.SulSulUil;
-import com.sulsulmarket.sulsul.config.DataBaseConfig;
+import com.sulsulmarket.sulsul.dto.product.Product;
 import com.sulsulmarket.sulsul.main.dao.MainDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.sulsulmarket.sulsul.main.dto.Product;
 
 import java.util.List;
 import java.util.Map;
@@ -40,7 +39,7 @@ public class MainService {
     public List<String> getProductNameList(Map<String, String> parameter) throws Exception{
 
         String result = parameter.get("REQUEST_STRING");
-        log.info("파라미터 값이 잘 가고 있늬? value : {} ",result);
+//        log.info("파라미터 값이 잘 가고 있늬? value : {} ",result);
         List<String> resultList = mainDao.getProductNameList(parameter);
 
         return resultList;

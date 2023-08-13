@@ -1,11 +1,11 @@
 package com.sulsulmarket.sulsul.cart.service;
 
 import com.sulsulmarket.sulsul.cart.dao.CartDao;
-import com.sulsulmarket.sulsul.cart.dto.CartDTO;
-import com.sulsulmarket.sulsul.cart.dto.ProductDTO;
-import com.sulsulmarket.sulsul.cart.dto.ProductImageDTO;
+import com.sulsulmarket.sulsul.dto.cart.Cart;
+import com.sulsulmarket.sulsul.dto.member.Member;
+import com.sulsulmarket.sulsul.dto.product.Product;
+import com.sulsulmarket.sulsul.dto.product.ProductImage;
 import com.sulsulmarket.sulsul.member.dao.MemberDao;
-import com.sulsulmarket.sulsul.member.dto.MemberDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,17 +26,17 @@ public class CartService {
     @Autowired
     private MemberDao memberDao;
 
-    public List<CartDTO> getCartListByMemberId(String memberId) {
+    public List<Cart> getCartListByMemberId(String memberId) {
 
-        MemberDTO member = memberDao.getMemberById(memberId);
+        Member member = memberDao.getMemberById(memberId);
         if (member == null || Objects.isNull(member)) {
             log.error("Not Found Member ! ! !");
             throw new NullPointerException("회원이 없음");
         }
 
-        List<CartDTO> cartDTOList = new ArrayList<>();
+        List<Cart> CartList = new ArrayList<>();
 
-        List<CartDTO> cartList = cartDao.getCartListByMemberId(memberId);
+        List<Cart> cartList = cartDao.getCartListByMemberId(memberId);
         log.info("cartList Size?? {}", cartList.size());
 
         if(cartList.size() < 0) {
@@ -44,9 +44,9 @@ public class CartService {
             throw new IllegalArgumentException("회원 아이디로 장바구니 리스트를 가져오기 실패했습니다.");
         }
 
-        for (CartDTO cart : cartList) {
+        for (Cart cart : cartList) {
             int productNo = cart.getPRODUCT_NO();
-            ProductDTO product = cartDao.productListByProductNo(productNo);
+            Product product = cartDao.productListByProductNo(productNo);
 
             if(product == null || Objects.isNull(product)) {
                 log.error("Product Is Null");
@@ -54,7 +54,7 @@ public class CartService {
             }
 
             cart.setPRODUCT(product);
-            ProductImageDTO productImageDto = cartDao.productImageByProductNo(productNo);
+            ProductImage productImageDto = cartDao.productImageByProductNo(productNo);
 
             if (productImageDto == null || Objects.isNull(productImageDto)) {
                 log.error("ProductImage Is Null");
@@ -64,11 +64,11 @@ public class CartService {
             product.setPRODUCT_IMAGE(productImageDto);
             log.info("ProductImage ==>> [{}]", productImageDto);
             log.info("CART PRODUCT IMAGE CHECK ==>> [{}]", product.getPRODUCT_IMAGE());
-            cartDTOList.add(cart);
+            CartList.add(cart);
             log.info("cart Check ! ! !  ==>> [{}]", cart.toString());
         }
-        log.info("CartDtoList Check", cartDTOList.toString());
-        return cartDTOList;
+        log.info("CartList Check", CartList.toString());
+        return CartList;
     }
 
     /**
@@ -83,8 +83,8 @@ public class CartService {
          * 처음 추가하는 거라고 판단하여 INSERT 구문 실행
          * 해당 상품이 이미 존재할 경우 UPDATE 구문을 사용하여 카운트를 증가시킴.
          */
-        CartDTO cartDTO = cartDao.getCartByMemberIdAndProductNo(memberId, productNo);
-        if(cartDTO == null || Objects.isNull(cartDTO)) {
+        Cart Cart = cartDao.getCartByMemberIdAndProductNo(memberId, productNo);
+        if(Cart == null || Objects.isNull(Cart)) {
             if(cartAmount <= 0) {
                 log.error("Insert Is Fail Amount > 0 ! ! !");
                 throw new IllegalArgumentException("수량이 0보다 작을 수 없습니다");
@@ -127,12 +127,12 @@ public class CartService {
 
     public void checkMemberProductNo(String memberId, int productNo) {
 
-        MemberDTO member = memberDao.getMemberById(memberId);
+        Member member = memberDao.getMemberById(memberId);
         if (member == null || Objects.isNull(member)) {
             throw new NullPointerException("회원 아이디가 일치하지 않습니다.");
         }
 
-        ProductDTO product = cartDao.productListByProductNo(productNo);
+        Product product = cartDao.productListByProductNo(productNo);
         if (product == null || Objects.isNull(product)) {
             throw new NullPointerException("해당 상품이 존재하지 않습니다.");
         }

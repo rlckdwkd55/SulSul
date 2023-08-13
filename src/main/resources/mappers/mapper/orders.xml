@@ -13,7 +13,7 @@
         VALUES (#{DETAIL_NO}, #{ORDER_NO}, #{PRODUCT_NO}, 1 , #{DETAIL_AMOUNT}, #{DETAIL_PRICE}, #{PAY_DATE})
     </insert>
 
-    <select id="getOrderData" parameterType="Integer" resultType="com.sulsulmarket.sulsul.orders.dto.Orders">
+    <select id="getOrderData" parameterType="Integer" resultType="com.sulsulmarket.sulsul.dto.order.Orders">
         SELECT * FROM ORDERS
         WHERE ORDER_NO = #{orderNo}
     </select>

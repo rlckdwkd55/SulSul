@@ -1,6 +1,11 @@
 package com.sulsulmarket.sulsul.mypage.dao;
 
-import com.sulsulmarket.sulsul.mypage.dto.*;
+import com.sulsulmarket.sulsul.dto.member.Address;
+import com.sulsulmarket.sulsul.dto.member.Member;
+import com.sulsulmarket.sulsul.dto.mypage.ClaimInfo;
+import com.sulsulmarket.sulsul.dto.order.OrderDetail;
+import com.sulsulmarket.sulsul.dto.order.Orders;
+import com.sulsulmarket.sulsul.dto.review.Review;
 import com.sulsulmarket.sulsul.mypage.mapper.MypageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

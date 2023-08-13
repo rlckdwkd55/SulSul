@@ -1,8 +1,8 @@
 package com.sulsulmarket.sulsul.cart.dao;
 
-import com.sulsulmarket.sulsul.cart.dto.CartDTO;
-import com.sulsulmarket.sulsul.cart.dto.ProductImageDTO;
-import com.sulsulmarket.sulsul.cart.dto.ProductDTO;
+import com.sulsulmarket.sulsul.dto.cart.Cart;
+import com.sulsulmarket.sulsul.dto.product.ProductImage;
+import com.sulsulmarket.sulsul.dto.product.Product;
 import com.sulsulmarket.sulsul.cart.mapper.CartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,7 +21,7 @@ public class CartDao implements CartMapper {
     }
 
     @Override
-    public CartDTO getCartByMemberIdAndProductNo(String memberId, int productNo) {
+    public Cart getCartByMemberIdAndProductNo(String memberId, int productNo) {
         return cartMapper.getCartByMemberIdAndProductNo(memberId, productNo);
     }
 
@@ -36,17 +36,17 @@ public class CartDao implements CartMapper {
     }
 
     @Override
-    public ProductDTO productListByProductNo(int productNo) {
+    public Product productListByProductNo(int productNo) {
         return cartMapper.productListByProductNo(productNo);
     }
 
     @Override
-    public ProductImageDTO productImageByProductNo(int productNo) {
+    public ProductImage productImageByProductNo(int productNo) {
         return cartMapper.productImageByProductNo(productNo);
     }
 
     @Override
-    public List<CartDTO> getCartListByMemberId(String memberId) {
+    public List<Cart> getCartListByMemberId(String memberId) {
         return cartMapper.getCartListByMemberId(memberId);
     }
 }

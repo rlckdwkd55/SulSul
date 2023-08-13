@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sulsulmarket.sulsul.reviewReply.mapper.ReviewReplyMapper">
 
-    <insert id="reviewReplyAdd" parameterType="com.sulsulmarket.sulsul.reviewReply.dto.ReviewReplyDTO">
+    <insert id="reviewReplyAdd" parameterType="com.sulsulmarket.sulsul.dto.reviewReply.ReviewReply">
         INSERT INTO REVIEW_REPLY
         (
               REPLY_ID
@@ -20,7 +20,7 @@
         )
     </insert>
 
-    <select id="getReviewReply" resultType="com.sulsulmarket.sulsul.reviewReply.dto.ReviewReplyDTO">
+    <select id="getReviewReply" resultType="com.sulsulmarket.sulsul.dto.reviewReply.ReviewReply">
         SELECT *
           FROM REVIEW_REPLY
         WHERE REVIEW_NO = #{reviewNo}

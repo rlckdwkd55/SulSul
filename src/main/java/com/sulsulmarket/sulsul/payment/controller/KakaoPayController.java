@@ -1,13 +1,12 @@
 package com.sulsulmarket.sulsul.payment.controller;
 
-import com.sulsulmarket.sulsul.payment.dto.KakaoApproveResponse;
-import com.sulsulmarket.sulsul.payment.dto.KakaoCancelResponse;
-import com.sulsulmarket.sulsul.payment.dto.KakaoReadyResponse;
+import com.sulsulmarket.sulsul.dto.kakao.KakaoApproveResponse;
+import com.sulsulmarket.sulsul.dto.kakao.KakaoCancelResponse;
+import com.sulsulmarket.sulsul.dto.kakao.KakaoReadyResponse;
 import com.sulsulmarket.sulsul.payment.service.KakaoPayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

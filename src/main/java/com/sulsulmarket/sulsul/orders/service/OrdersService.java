@@ -2,7 +2,7 @@ package com.sulsulmarket.sulsul.orders.service;
 
 import com.sulsulmarket.sulsul.Util.SulSulUil;
 import com.sulsulmarket.sulsul.orders.dao.OrdersDao;
-import com.sulsulmarket.sulsul.orders.dto.Orders;
+import com.sulsulmarket.sulsul.dto.order.Orders;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +32,8 @@ public class OrdersService {
         String orderRequest = (String)requestOrder.get("orderRequest");
         String orderPhone = (String)requestOrder.get("orderPhone");
         String payMethod = (String)requestOrder.get("payMethod");
-        log.info("갖고 오는 값을 다 찍어보자 씨팔 :, memberId :{}, orderAddress:{}, orderReceiver:{}, orderRequest:{}, orderPhone:{}, payMethod:{} "
-                , memberId, orderAddress,orderReceiver,orderRequest,orderPhone, payMethod);
+//        log.info("갖고 오는 값을 다 찍어보자 씨팔 :, memberId :{}, orderAddress:{}, orderReceiver:{}, orderRequest:{}, orderPhone:{}, payMethod:{} "
+//                , memberId, orderAddress,orderReceiver,orderRequest,orderPhone, payMethod);
         List<Map<String,Object>> orderDetailList = (List<Map<String,Object>>)requestOrder.get("orderDetailList");
         //프론트는 Product를 몰라, Product는 Back end에서 Database에 적재하기 쉽게 하기 위해 생성한 객체야
         //프론트와 소통하기 위한 규격이 필요해 이해해?

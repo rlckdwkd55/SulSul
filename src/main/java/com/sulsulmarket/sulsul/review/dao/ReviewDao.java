@@ -1,8 +1,8 @@
 package com.sulsulmarket.sulsul.review.dao;
 
-import com.sulsulmarket.sulsul.mypage.dto.OrderDetail;
-import com.sulsulmarket.sulsul.review.dto.ReviewDTO;
-import com.sulsulmarket.sulsul.review.dto.ReviewOrderByMemberId;
+import com.sulsulmarket.sulsul.dto.order.OrderDetail;
+import com.sulsulmarket.sulsul.dto.review.Review;
+import com.sulsulmarket.sulsul.dto.review.ReviewOrderByMemberId;
 import com.sulsulmarket.sulsul.review.mapper.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,12 +16,12 @@ public class ReviewDao implements ReviewMapper {
     private ReviewMapper reviewMapper;
 
     @Override
-    public int writeReview(ReviewDTO reviewDTO) {
-        return reviewMapper.writeReview(reviewDTO);
+    public int writeReview(Review review) {
+        return reviewMapper.writeReview(review);
     }
 
     @Override
-    public List<ReviewDTO> getReviewListAllByOrderDetail() {
+    public List<Review> getReviewListAllByOrderDetail() {
         return reviewMapper.getReviewListAllByOrderDetail();
     }
 
@@ -36,8 +36,8 @@ public class ReviewDao implements ReviewMapper {
     }
 
     @Override
-    public int updateReviewByMemberId(ReviewDTO reviewDTO) {
-        return reviewMapper.updateReviewByMemberId(reviewDTO);
+    public int updateReviewByMemberId(Review review) {
+        return reviewMapper.updateReviewByMemberId(review);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ReviewDao implements ReviewMapper {
     }
 
     @Override
-    public ReviewDTO getReviewByReviewNo(int reviewNo) {
+    public Review getReviewByReviewNo(int reviewNo) {
         return reviewMapper.getReviewByReviewNo(reviewNo);
     }
 }

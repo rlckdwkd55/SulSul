@@ -1,7 +1,6 @@
 package com.sulsulmarket.sulsul.orders.mapper;
 
-import com.sulsulmarket.sulsul.orders.dto.Orders;
-import com.sulsulmarket.sulsul.product.dto.Product;
+import com.sulsulmarket.sulsul.dto.order.Orders;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Map;

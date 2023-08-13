@@ -1,6 +1,6 @@
 package com.sulsulmarket.sulsul.qna.controller;
 
-import com.sulsulmarket.sulsul.qna.dto.QnaDTO;
+import com.sulsulmarket.sulsul.dto.qna.Qna;
 import com.sulsulmarket.sulsul.qna.service.QnaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,10 @@ public class QnaController {
     private QnaService qnaService;
 
     @PostMapping("/api/qna/write")
-    public ResponseEntity<Object> qnaWriteHandler(@RequestBody QnaDTO qnaDTO) {
+    public ResponseEntity<Object> qnaWriteHandler(@RequestBody Qna qna) {
 
         try {
-            qnaService.qnaWrite(qnaDTO);
+            qnaService.qnaWrite(qna);
             log.info("Qna Write Is Success");
             return ResponseEntity.status(HttpStatus.OK).body("문의 등록에 성공하였습니다.");
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class QnaController {
     public ResponseEntity<Object> getQnaByQnaNo(@RequestBody Map<String, Integer> parameter) {
 
         try {
-            QnaDTO qnaDTO = qnaService.getQnaByQnaNo(parameter.get("qnaNo"));
+            Qna qnaDTO = qnaService.getQnaByQnaNo(parameter.get("qnaNo"));
             log.info("Qna Data Get Is Success");
             return ResponseEntity.status(HttpStatus.OK).body(qnaDTO);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class QnaController {
     }
 
     @PostMapping("/api/qna/update")
-    public ResponseEntity<Object> qnaUpdate(@RequestBody QnaDTO qnaDTO) {
+    public ResponseEntity<Object> qnaUpdate(@RequestBody Qna qnaDTO) {
 
         try {
             qnaService.qnaUpdate(qnaDTO);

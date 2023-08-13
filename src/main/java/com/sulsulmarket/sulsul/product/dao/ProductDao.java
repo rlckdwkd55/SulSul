@@ -1,6 +1,6 @@
 package com.sulsulmarket.sulsul.product.dao;
 
-import com.sulsulmarket.sulsul.product.dto.Product;
+import com.sulsulmarket.sulsul.dto.product.Product;
 import com.sulsulmarket.sulsul.product.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

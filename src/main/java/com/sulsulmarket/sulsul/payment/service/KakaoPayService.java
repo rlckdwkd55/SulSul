@@ -1,12 +1,15 @@
 package com.sulsulmarket.sulsul.payment.service;
 
-import com.sulsulmarket.sulsul.payment.dto.OrderDetail;
+import com.sulsulmarket.sulsul.dto.kakao.ApprovedCancelAmount;
+import com.sulsulmarket.sulsul.dto.kakao.KakaoApproveResponse;
+import com.sulsulmarket.sulsul.dto.kakao.KakaoCancelResponse;
+import com.sulsulmarket.sulsul.dto.kakao.KakaoReadyResponse;
+import com.sulsulmarket.sulsul.dto.product.Product;
 import com.sulsulmarket.sulsul.orders.service.OrdersService;
 import com.sulsulmarket.sulsul.payment.dao.KakaoPayDao;
-import com.sulsulmarket.sulsul.orders.dto.Orders;
-import com.sulsulmarket.sulsul.payment.dto.*;
+import com.sulsulmarket.sulsul.dto.order.Orders;
+import com.sulsulmarket.sulsul.dto.order.OrderDetail;
 import com.sulsulmarket.sulsul.product.dao.ProductDao;
-import com.sulsulmarket.sulsul.product.dto.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +20,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
-import org.yaml.snakeyaml.parser.ParserImpl;
 
 import java.util.List;
 import java.util.Map;

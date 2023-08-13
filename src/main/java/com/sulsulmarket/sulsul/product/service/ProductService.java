@@ -1,6 +1,6 @@
 package com.sulsulmarket.sulsul.product.service;
 
-import com.sulsulmarket.sulsul.product.dto.Product;
+import com.sulsulmarket.sulsul.dto.product.Product;
 import com.sulsulmarket.sulsul.product.dao.ProductDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

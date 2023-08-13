@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sulsulmarket.sulsul.member.mapper.MemberMapper">
 
-    <select id="getMemberList" resultType="com.sulsulmarket.sulsul.member.dto.MemberDTO">
+    <select id="getMemberList" resultType="com.sulsulmarket.sulsul.dto.member.Member">
         SELECT * FROM MEMBER
     </select>
 
-    <select id="getMemberById" resultType="com.sulsulmarket.sulsul.member.dto.MemberDTO">
+    <select id="getMemberById" resultType="com.sulsulmarket.sulsul.dto.member.Member">
         SELECT * FROM MEMBER WHERE MEMBER_ID = #{MEMBER_ID}
     </select>
 
@@ -17,7 +17,6 @@
             ,MEMBER_NAME
             ,MEMBER_BIRTHDATE
             ,MEMBER_GENDER
-            ,MEMBER_ADDRESS
             ,MEMBER_PHONE
             ,MEMBER_EMAIL
             ,MEMBER_ENROLLDATE
@@ -29,7 +28,6 @@
             ,#{MEMBER_NAME}
             ,#{MEMBER_BIRTHDATE}
             ,#{MEMBER_GENDER}
-            ,#{MEMBER_ADDRESS}
             ,#{MEMBER_PHONE}
             ,#{MEMBER_EMAIL}
             ,now()
@@ -44,7 +42,7 @@
         AND MEMBER_PW = #{MEMBER_PW}
     </select>
 
-    <select id="getMemberByEmail" resultType="com.sulsulmarket.sulsul.member.dto.MemberDTO">
+    <select id="getMemberByEmail" resultType="com.sulsulmarket.sulsul.dto.member.Member">
         SELECT *
         FROM MEMBER
         WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
@@ -56,4 +54,9 @@
         WHERE MEMBER_ID = #{memberId}
     </update>
 
+    <select id="getAddressByMemberId" resultType="com.sulsulmarket.sulsul.dto.member.Address">
+        SELECT *
+          FROM ADDRESS
+        WHERE BY MEMBER_ID = #{MEMBER_ID}
+    </select>
 </mapper>

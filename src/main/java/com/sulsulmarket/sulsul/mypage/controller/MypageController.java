@@ -3,8 +3,13 @@ package com.sulsulmarket.sulsul.mypage.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sulsulmarket.sulsul.config.LocalDateTimeSerializer;
-import com.sulsulmarket.sulsul.mypage.dto.*;
+import com.sulsulmarket.sulsul.dto.member.Address;
+import com.sulsulmarket.sulsul.dto.member.Member;
+import com.sulsulmarket.sulsul.dto.mypage.ClaimInfo;
+import com.sulsulmarket.sulsul.dto.order.OrderDetail;
+import com.sulsulmarket.sulsul.dto.order.Orders;
 import com.sulsulmarket.sulsul.mypage.service.MypageService;
+import com.sulsulmarket.sulsul.dto.review.Review;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,7 +63,7 @@ public class MypageController {
 
                 resultMap.put("orderList", orderList);
 
-                log.info("orderList 결과 입니다. : {}", orderList );
+//                log.info("orderList Result : {}", orderList );
 
                     for(Orders order : orderList) { //요거는 향상된 for문 for(int i = 0; resultList.size() > 0; i++)  orders = resultList.get(i) // 구매 한 내역 수 만큼 반복문수행
                         //5개중에 첫번째 order의 경우
@@ -69,7 +74,7 @@ public class MypageController {
                         //얘가 조회해올 데이터는 우리가 키로 잡는 order_no를 where의 조건으로
                         //가져온 리스트를 담아야해
                         List<OrderDetail> detailList = mypageService.getOrderDetailList(parameter); //Order Detail Table에서
-                        log.info("detailList 결과 입니다. : {}", detailList );
+//                        log.info("detailList Result : {}", detailList );
 
                         //5번 다 다른 ORDER_NO의 LIST를 반환하지?
 
@@ -176,9 +181,9 @@ public class MypageController {
             Map<String, String> parameter = new HashMap<>();
             parameter.put("MEMBER_ID", requestBody.get("userId"));
             List<ClaimInfo> resultList = mypageService.getCancelRefundList(parameter);
-            log.info("[INFO] result List CLAIM NAME -> {}", resultList.get(0).getCLAIM_NAME());
 
             if (resultList.size() > 0) {
+                log.info("[INFO] result List CLAIM NAME -> {}", resultList.get(0).getCLAIM_NAME());
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
                 Gson gson = gsonBuilder.setPrettyPrinting().create();

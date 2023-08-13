@@ -1,12 +1,9 @@
 package com.sulsulmarket.sulsul.main.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sulsulmarket.sulsul.Util.SulSulUil;
-import com.sulsulmarket.sulsul.main.dto.Product;
+import com.sulsulmarket.sulsul.dto.product.Product;
 import com.sulsulmarket.sulsul.main.service.MainService;
-import jdk.jshell.spi.ExecutionControlProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,7 +52,7 @@ public class MainController {
             }
             json = gson.toJson(resultMap);
 
-            log.info("값 잘 받아오니?{}", resultMap);
+//            log.info("값 잘 받아오니?{}", resultMap);
 
         } catch (Exception e) {
             //Exception이 발생하는 경우는 DB의 연결이 끊어진 경우,
@@ -86,7 +83,7 @@ public class MainController {
                 parameter.put("REQUEST_STRING", requestString);
 
                 List<String> resultList = mainService.getProductNameList(parameter);
-                log.info("왜 아무것도 못가져와", resultList  );
+//                log.info("왜 아무것도 못가져와", resultList  );
                 json = gson.toJson(resultList);
 
 //                if (resultList != null) {
@@ -148,7 +145,7 @@ public class MainController {
 
             json = gson.toJson(resultList);
 
-            log.info("요기 도달하는 리퀘스트 이름은 뭐니 : {}", requestListString);
+//            log.info("요기 도달하는 리퀘스트 이름은 뭐니 : {}", requestListString);
         } catch (NullPointerException npe){
             log.error("Product Search List has been Null Point Exception ");
             return new ResponseEntity<>(null, HttpStatus.OK);

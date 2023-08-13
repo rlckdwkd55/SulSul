@@ -2,6 +2,7 @@ package com.sulsulmarket.sulsul.social.naver;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sulsulmarket.sulsul.dto.naver.NaverUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -26,6 +27,12 @@ public class NaverLoginService {
     @Value("${spring.security.oauth2.client.registration.naver.redirect-uri}")
     private String redirectUrl;
 
+    @Value("${spring.security.oauth2.client.provider.naver.token-uri}")
+    private String tokenUrl;
+
+    @Value("${spring.security.oauth2.client.provider.naver.user-info-uri}")
+    private String userInfoUrl;
+
     /**
      * naver login 인증 요청하는 메서드 return by client_id, redirect-url
      */
@@ -34,17 +41,16 @@ public class NaverLoginService {
     }
 
     /**
-     * 위에서 인증 후 받아온 code + 필수 파라미터를 넘기고 Create Token 가지고 userInfo Get
+     * 위에서 인증 후 받아온 code + 필수 파라미터를 넘기고 Create Token 가지고 회원 정보를 가져온다.
      */
-    public NaverUserDTO getUserInfoByAccessToken(String code) {
-        String tokenUrl = "https://nid.naver.com/oauth2.0/token";
+    public NaverUser getUserInfoByAccessToken(String code) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("client_id", clientId);
         params.add("client_secret", clientSecret);
         params.add("redirect_uri", redirectUrl);
         params.add("code", code);
         params.add("grant_type", "authorization_code");
-        log.info("[INFO] Create Token Param -> client_id {}, client_secret {}, redirect_uri {}, code", clientId, clientSecret, redirectUrl, code);
+        log.debug("Create Token Param -> client_id {}, client_secret {}, redirect_uri {}, code", clientId, clientSecret, redirectUrl, code);
 
         HttpHeaders tokenHeaders = new HttpHeaders();
         // Header 세팅 "application/x-www-form-urlencoded" type
@@ -60,38 +66,40 @@ public class NaverLoginService {
             ResponseEntity<String> response = restTemplate.postForEntity(tokenUrl, requestEntity, String.class);
             // response.getBody 메서드를 통해 token 정보를 가져옴
             String accessToken = response.getBody();
-            log.info("[INFO] accessToken -> {}", accessToken);
+            log.info("naver login success response : {}", response);
+            log.info("accessToken -> {}", accessToken);
 
             // Json parsing 을 위한 ObjetMapper
             ObjectMapper objectMapper = new ObjectMapper();
 
             try {
+                int number;
                 // Json 객체의 특정 필드 값을 가져옴
                 JsonNode jsonNode = objectMapper.readTree(accessToken);
                 // JsonNode access_token By String type return
                 String getToken = jsonNode.get("access_token").asText();
 
                 // 토큰을 사용하여 회원 정보를 가져오는 API Call
-                String getUserInfoUrl = "https://openapi.naver.com/v1/nid/me";
                 HttpHeaders userInfoHeader = new HttpHeaders();
                 userInfoHeader.set("Authorization", "Bearer " + getToken);
 
                 HttpEntity<String> userInfoEntity = new HttpEntity<>(userInfoHeader);
-                ResponseEntity<String> responseEntity = restTemplate.exchange(getUserInfoUrl, HttpMethod.GET, userInfoEntity, String.class);
+                ResponseEntity<String> responseEntity = restTemplate.exchange(userInfoUrl, HttpMethod.GET, userInfoEntity, String.class);
 
                 String userInfo = responseEntity.getBody();
-                log.info("[INFO] userInfo -> {}", userInfo);
+                log.info("user info get success response : {}", responseEntity);
+                log.info("userInfo -> {}", userInfo);
 
-                NaverUserDTO userDTO = objectMapper.readValue(userInfo, NaverUserDTO.class);
+                NaverUser userDTO = objectMapper.readValue(userInfo, NaverUser.class);
                 return userDTO;
 
-            } catch (IOException e) {
-                log.error("[ERROR] Failed to parse token response or user info", e);
-                throw new IllegalStateException("Failed to parse token response or user info");
+            } catch (Exception e) {
+                log.error("Failed to parse token", e);
+                throw new IllegalStateException("토큰으로 회원 정보 가져오기 실패.");
             }
         } catch (HttpClientErrorException e) {
-            log.error("[ERROR] Failed to get user info from Naver API", e);
-            throw new IllegalStateException("Failed to get user info from Naver API", e);
+            log.error("Failed to get token from  client", e);
+            throw new IllegalStateException("토큰 조회 실패");
         }
     }
 }

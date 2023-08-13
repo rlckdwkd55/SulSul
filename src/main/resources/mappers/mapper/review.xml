@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sulsulmarket.sulsul.review.mapper.ReviewMapper">
 
-    <insert id="writeReview" parameterType="com.sulsulmarket.sulsul.review.dto.ReviewDTO">
+    <insert id="writeReview" parameterType="com.sulsulmarket.sulsul.dto.review.Review">
         INSERT INTO REVIEW(
              REVIEW_NO
             ,MEMBER_ID
@@ -24,14 +24,14 @@
         )
     </insert>
     
-    <select id="getReviewListAllByOrderDetail" resultType="com.sulsulmarket.sulsul.review.dto.ReviewOrderDetailDTO">
+    <select id="getReviewListAllByOrderDetail" resultType="com.sulsulmarket.sulsul.dto.review.ReviewOrderDetail">
         SELECT *
           FROM REVIEW A JOIN ORDER_DETAIL B
         ON A.ORDER_NO = B.ORDER_NO
           ORDER BY REVIEW_DATE DESC
     </select>
 
-    <select id="getReviewListAllByMemberId" resultType="com.sulsulmarket.sulsul.review.dto.ReviewOrderByMemberId">
+    <select id="getReviewListAllByMemberId" resultType="com.sulsulmarket.sulsul.dto.review.ReviewOrderByMemberId">
         SELECT *
           FROM REVIEW A
          JOIN MEMBER B ON A.MEMBER_ID = B.MEMBER_ID
@@ -39,7 +39,7 @@
          WHERE B.MEMBER_ID = #{MEMBER_ID}
     </select>
 
-    <update id="updateReviewByMemberId" parameterType="com.sulsulmarket.sulsul.review.dto.ReviewDTO">
+    <update id="updateReviewByMemberId" parameterType="com.sulsulmarket.sulsul.dto.review.Review">
         UPDATE REVIEW
         <set>
             <if test="REVIEW_CONTENT != null">
@@ -63,13 +63,13 @@
         AND DETAIL_NO = #{DETAIL_NO}
     </delete>
     
-    <select id="getOrderDetailList" resultType="com.sulsulmarket.sulsul.mypage.dto.OrderDetail">
+    <select id="getOrderDetailList" resultType="com.sulsulmarket.sulsul.dto.order.OrderDetail">
         SELECT *
           FROM ORDER_DETAIL
         WHERE DETAIL_NO = #{DETAIL_NO}
     </select>
 
-    <select id="getReviewByReviewNo" resultType="com.sulsulmarket.sulsul.review.dto.ReviewDTO">
+    <select id="getReviewByReviewNo" resultType="com.sulsulmarket.sulsul.dto.review.Review">
         SELECT *
           FROM REVIEW
         WHERE REVIEW_NO = #{reviewNo}

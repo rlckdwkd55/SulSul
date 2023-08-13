@@ -1,13 +1,13 @@
 package com.sulsulmarket.sulsul.reviewReply.mapper;
 
-import com.sulsulmarket.sulsul.reviewReply.dto.ReviewReplyDTO;
+import com.sulsulmarket.sulsul.dto.reviewReply.ReviewReply;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface ReviewReplyMapper {
-    int reviewReplyAdd(ReviewReplyDTO reviewReplyDTO);
+    int reviewReplyAdd(ReviewReply reviewReply);
 
-    List<ReviewReplyDTO> getReviewReply(int reviewNo);
+    List<ReviewReply> getReviewReply(int reviewNo);
 }

@@ -1,11 +1,11 @@
 package com.sulsulmarket.sulsul.review.service;
 
+import com.sulsulmarket.sulsul.dto.member.Member;
+import com.sulsulmarket.sulsul.dto.order.OrderDetail;
+import com.sulsulmarket.sulsul.dto.review.Review;
 import com.sulsulmarket.sulsul.member.dao.MemberDao;
-import com.sulsulmarket.sulsul.member.dto.MemberDTO;
-import com.sulsulmarket.sulsul.mypage.dto.OrderDetail;
 import com.sulsulmarket.sulsul.review.dao.ReviewDao;
-import com.sulsulmarket.sulsul.review.dto.ReviewDTO;
-import com.sulsulmarket.sulsul.review.dto.ReviewOrderByMemberId;
+import com.sulsulmarket.sulsul.dto.review.ReviewOrderByMemberId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,40 +26,40 @@ public class ReviewService {
     private MemberDao memberDao;
 
     @Transactional
-    public void writeReview(ReviewDTO reviewDTO) {
+    public void writeReview(Review review) {
 
-        if(reviewDTO == null || Objects.isNull(reviewDTO)) {
+        if(review == null || Objects.isNull(review)) {
             log.error("REVIEW DTO IS NULL ! ! !");
             throw new NullPointerException("데이터가 없습니다.");
         }
 
-        MemberDTO member = memberDao.getMemberById(reviewDTO.getMEMBER_ID());
+        Member member = memberDao.getMemberById(review.getMEMBER_ID());
         if (member == null || Objects.isNull(member)) {
             log.error("Not Found Member Review Insert Fail ! ! !");
             throw new NullPointerException("회원 정보가 없습니다.");
         }
 
-        OrderDetail orderDetail = reviewDao.getOrderDetailList(reviewDTO.getDETAIL_NO());
+        OrderDetail orderDetail = reviewDao.getOrderDetailList(review.getDETAIL_NO());
         if(orderDetail == null || Objects.isNull(orderDetail)) {
             log.error("Not Found OrderDetail Select Fail ! ! !");
             throw new NullPointerException("주문 상세 번호가 없습니다.");
         }
 
-        if(reviewDTO.getREVIEW_CONTENT() == null || reviewDTO.getREVIEW_CONTENT().length() <= 0 || reviewDTO.getREVIEW_CONTENT() == "") {
+        if(review.getREVIEW_CONTENT() == null || review.getREVIEW_CONTENT().length() <= 0 || review.getREVIEW_CONTENT() == "") {
             log.error("Review Content Is Null Insert Fail ! ! !");
             throw new NullPointerException("리뷰 작성 내용이 없습니다.");
         }
 
-        log.info("Review Insert Success ! ! ! ===>>> [{}]", reviewDTO.toString());
-        reviewDao.writeReview(reviewDTO);
+        log.info("Review Insert Success ! ! ! ===>>> [{}]", review.toString());
+        reviewDao.writeReview(review);
     }
 
     /**
      * 모든 리뷰 리스트를 가져오는 메서드
      */
-    public List<ReviewDTO> getReviewListAll() {
+    public List<Review> getReviewListAll() {
 
-        List<ReviewDTO> reviewList = reviewDao.getReviewListAllByOrderDetail();
+        List<Review> reviewList = reviewDao.getReviewListAllByOrderDetail();
 
         if(reviewList == null || reviewList.isEmpty()) {
             throw new NullPointerException("가져올 리뷰 리스트가 없습니다.");
@@ -82,14 +82,14 @@ public class ReviewService {
     }
 
     @Transactional
-    public void updateReviewByMemberId(ReviewDTO reviewDTO) {
+    public void updateReviewByMemberId(Review review) {
 
-        if (reviewDTO == null || Objects.isNull(reviewDTO)) {
+        if (review == null || Objects.isNull(review)) {
             log.error("Review Data Is Null ! ! !");
             throw new NullPointerException("Not Found Review Data Is Null");
         }
 
-        int insertCount = reviewDao.updateReviewByMemberId(reviewDTO);
+        int insertCount = reviewDao.updateReviewByMemberId(review);
         if (insertCount <= 0) {
             log.error("Insert Fail Value Check ! ! !");
             throw new NullPointerException("Value Check Insert Fail ! ! !");
@@ -103,7 +103,7 @@ public class ReviewService {
             log.error("Member Id Is Null");
             throw new NullPointerException("Member Id Is Null ! ! !");
         }
-        MemberDTO member = memberDao.getMemberById(memberId);
+        Member member = memberDao.getMemberById(memberId);
         if (member == null || Objects.isNull(member)) {
             log.error("Not Found Member By Member Id ===>>> [{}]", memberId);
             throw new NullPointerException("Not Found Member By Member Id");

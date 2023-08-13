@@ -2,7 +2,7 @@ package com.sulsulmarket.sulsul.product.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sulsulmarket.sulsul.product.dto.Product;
+import com.sulsulmarket.sulsul.dto.product.Product;
 import com.sulsulmarket.sulsul.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +33,9 @@ public class ProductController {
 
         int productNo = productDetailMap.get("productNo");
 
-        log.info("도달값이 뭐니 : {}", productNo);
+//        log.info("도달값이 뭐니 : {}", productNo);
         if (productNo > 0){
-            log.info("요청하는 이름이 뭐니 :{}",productNo);
+//            log.info("요청하는 이름이 뭐니 :{}",productNo);
             Map<String, Integer> parameter = new HashMap<>();
             parameter.put("PRODUCT_NO", productNo);
             Product result = productService.getProductDetail(parameter);

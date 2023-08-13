@@ -1,6 +1,6 @@
 package com.sulsulmarket.sulsul.reviewReply.controller;
 
-import com.sulsulmarket.sulsul.reviewReply.dto.ReviewReplyDTO;
+import com.sulsulmarket.sulsul.dto.reviewReply.ReviewReply;
 import com.sulsulmarket.sulsul.reviewReply.service.ReviewReplyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,10 @@ public class ReviewReplyController {
     private ReviewReplyService reviewReplyService;
 
     @PostMapping("/reply/add")
-    public ResponseEntity<Object> reviewReplyAdd(@RequestBody ReviewReplyDTO reviewReplyDTO) {
+    public ResponseEntity<Object> reviewReplyAdd(@RequestBody ReviewReply reviewReply) {
 
         try {
-            reviewReplyService.reviewReplyInsert(reviewReplyDTO);
+            reviewReplyService.reviewReplyInsert(reviewReply);
             return ResponseEntity.status(HttpStatus.OK).body("리뷰 답글 달기에 성공했습니다.");
         } catch (Exception e) {
             log.error("Review Reply Controller Exception : {}", e);
@@ -34,7 +34,7 @@ public class ReviewReplyController {
     public ResponseEntity<Object> getReviewReplyList(@RequestParam int reviewNo) {
 
         try {
-            List<ReviewReplyDTO> reviewReplyList = reviewReplyService.getReviewReplyListByReviewNo(reviewNo);
+            List<ReviewReply> reviewReplyList = reviewReplyService.getReviewReplyListByReviewNo(reviewNo);
             log.info("Get Review Reply List Is Success");
             return ResponseEntity.status(HttpStatus.OK).body(reviewReplyList);
         } catch (Exception e) {

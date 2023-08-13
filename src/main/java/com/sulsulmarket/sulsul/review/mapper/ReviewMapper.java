@@ -1,8 +1,8 @@
 package com.sulsulmarket.sulsul.review.mapper;
 
-import com.sulsulmarket.sulsul.mypage.dto.OrderDetail;
-import com.sulsulmarket.sulsul.review.dto.ReviewDTO;
-import com.sulsulmarket.sulsul.review.dto.ReviewOrderByMemberId;
+import com.sulsulmarket.sulsul.dto.review.Review;
+import com.sulsulmarket.sulsul.dto.review.ReviewOrderByMemberId;
+import com.sulsulmarket.sulsul.dto.order.OrderDetail;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,17 +10,17 @@ import java.util.List;
 @Mapper
 public interface ReviewMapper {
 
-    int writeReview(ReviewDTO reviewDTO);
+    int writeReview(Review review);
 
-    List<ReviewDTO> getReviewListAllByOrderDetail();
+    List<Review> getReviewListAllByOrderDetail();
 
     List<ReviewOrderByMemberId> getReviewListAllByMemberId(String memberId);
 
     OrderDetail getOrderDetailList(int detailNo);
 
-    int updateReviewByMemberId(ReviewDTO reviewDTO);
+    int updateReviewByMemberId(Review review);
 
     int deleteReviewByMemberId(String memberId, int detailNo);
 
-    ReviewDTO getReviewByReviewNo(int reviewNo);
+    Review getReviewByReviewNo(int reviewNo);
 }

@@ -1,8 +1,8 @@
 package com.sulsulmarket.sulsul.cart.mapper;
 
-import com.sulsulmarket.sulsul.cart.dto.CartDTO;
-import com.sulsulmarket.sulsul.cart.dto.ProductImageDTO;
-import com.sulsulmarket.sulsul.cart.dto.ProductDTO;
+import com.sulsulmarket.sulsul.dto.cart.Cart;
+import com.sulsulmarket.sulsul.dto.product.Product;
+import com.sulsulmarket.sulsul.dto.product.ProductImage;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,15 +12,15 @@ public interface CartMapper {
 
     int addCartByMemberIdAndProduct(String memberId, int productNo, int cartAmount);
 
-    CartDTO getCartByMemberIdAndProductNo(String memberId, int productNo);
+    Cart getCartByMemberIdAndProductNo(String memberId, int productNo);
 
     int updateCartCount(String memberId, int productNo, int cartAmount);
 
     int deleteCartByMemberId(String memberId, int productNo);
 
-    ProductDTO productListByProductNo(int productNo);
+    Product productListByProductNo(int productNo);
 
-    ProductImageDTO productImageByProductNo(int productNo);
+    ProductImage productImageByProductNo(int productNo);
 
-    List<CartDTO> getCartListByMemberId(String memberId);
+    List<Cart> getCartListByMemberId(String memberId);
 }

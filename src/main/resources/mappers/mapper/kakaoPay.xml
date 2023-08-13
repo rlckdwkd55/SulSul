@@ -7,7 +7,7 @@
         WHERE ORDER_NO = Cast(#{orderNo} as Integer)
     </update>
 
-    <select id="getOrderDetailData" parameterType="Integer" resultType="com.sulsulmarket.sulsul.payment.dto.OrderDetail">
+    <select id="getOrderDetailData" parameterType="Integer" resultType="com.sulsulmarket.sulsul.dto.order.OrderDetail">
         SELECT * FROM ORDER_DETAIL
         WHERE ORDER_NO = #{orderNo}
     </select>

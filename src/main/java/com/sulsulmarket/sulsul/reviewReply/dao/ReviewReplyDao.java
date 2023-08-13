@@ -1,6 +1,6 @@
 package com.sulsulmarket.sulsul.reviewReply.dao;
 
-import com.sulsulmarket.sulsul.reviewReply.dto.ReviewReplyDTO;
+import com.sulsulmarket.sulsul.dto.reviewReply.ReviewReply;
 import com.sulsulmarket.sulsul.reviewReply.mapper.ReviewReplyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,12 +14,12 @@ public class ReviewReplyDao implements ReviewReplyMapper {
     private ReviewReplyMapper reviewReplyMapper;
 
     @Override
-    public int reviewReplyAdd(ReviewReplyDTO reviewReplyDTO) {
-        return reviewReplyMapper.reviewReplyAdd(reviewReplyDTO);
+    public int reviewReplyAdd(ReviewReply reviewReply) {
+        return reviewReplyMapper.reviewReplyAdd(reviewReply);
     }
 
     @Override
-    public List<ReviewReplyDTO> getReviewReply(int reviewNo) {
+    public List<ReviewReply> getReviewReply(int reviewNo) {
         return reviewReplyMapper.getReviewReply(reviewNo);
     }
 }

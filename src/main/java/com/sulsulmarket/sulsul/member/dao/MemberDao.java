@@ -1,6 +1,7 @@
 package com.sulsulmarket.sulsul.member.dao;
 
-import com.sulsulmarket.sulsul.member.dto.MemberDTO;
+import com.sulsulmarket.sulsul.dto.member.Address;
+import com.sulsulmarket.sulsul.dto.member.Member;
 import com.sulsulmarket.sulsul.member.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,32 +15,32 @@ public class MemberDao implements MemberMapper {
     private MemberMapper memberMapper;
 
     @Override
-    public List<MemberDTO> getMemberList() {
+    public List<Member> getMemberList() {
 
         return memberMapper.getMemberList();
     }
 
     @Override
-    public MemberDTO getMemberById(String id) {
+    public Member getMemberById(String id) {
 
         return memberMapper.getMemberById(id);
     }
 
     @Override
-    public MemberDTO memberLogin(String id, String password) {
+    public Member memberLogin(String id, String password) {
 
         return memberMapper.memberLogin(id, password);
 
     }
 
     @Override
-    public int memberSign(MemberDTO memberDTO) {
+    public int memberSign(Member Member) {
 
-        return memberMapper.memberSign(memberDTO);
+        return memberMapper.memberSign(Member);
     }
 
     @Override
-    public MemberDTO getMemberByEmail(String email) {
+    public Member getMemberByEmail(String email) {
 
         return memberMapper.getMemberByEmail(email);
     }
@@ -48,5 +49,10 @@ public class MemberDao implements MemberMapper {
     public int memberPasswordUpdate(String newPassword, String id) {
 
         return memberMapper.memberPasswordUpdate(newPassword, id);
+    }
+
+    @Override
+    public Address getAddressByMemberId(String memberId) {
+        return memberMapper.getAddressByMemberId(memberId);
     }
 }

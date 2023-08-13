@@ -1,7 +1,6 @@
 package com.sulsulmarket.sulsul.payment.dao;
 
-import com.sulsulmarket.sulsul.payment.dto.OrderDetail;
-import com.sulsulmarket.sulsul.orders.dto.Orders;
+import com.sulsulmarket.sulsul.dto.order.OrderDetail;
 import com.sulsulmarket.sulsul.payment.mapper.KakaoPayMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,9 @@
 package com.sulsulmarket.sulsul.qna.service;
 
 import com.sulsulmarket.sulsul.Util.SulSulUil;
+import com.sulsulmarket.sulsul.dto.member.Member;
 import com.sulsulmarket.sulsul.member.dao.MemberDao;
-import com.sulsulmarket.sulsul.member.dto.MemberDTO;
-import com.sulsulmarket.sulsul.qna.dto.QnaDTO;
+import com.sulsulmarket.sulsul.dto.qna.Qna;
 import com.sulsulmarket.sulsul.qna.dao.QnaDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +23,14 @@ public class QnaService {
     private MemberDao memberDao;
 
     @Transactional
-    public void qnaWrite(QnaDTO qnaDTO) {
+    public void qnaWrite(Qna qnaDTO) {
 
         if(qnaDTO == null || Objects.isNull(qnaDTO)) {
             log.error("Qna Data is Null");
             throw new NullPointerException("문의 데이터가 없습니다.");
         }
 
-        MemberDTO member = memberDao.getMemberById(qnaDTO.getMEMBER_ID());
+        Member member = memberDao.getMemberById(qnaDTO.getMEMBER_ID());
 
         if (member == null || Objects.isNull(member)) {
             log.error("Member Is Not Found");
@@ -49,13 +49,13 @@ public class QnaService {
         log.info("Qna Write Is Success ! ! !");
     }
 
-    public QnaDTO getQnaByQnaNo(int qnaNo) {
+    public Qna getQnaByQnaNo(int qnaNo) {
 
         if (qnaNo <= 0) {
             log.error("Qna No Is Error ! ! !");
             throw new IllegalArgumentException("문의 번호는 0보다 큰 값이여야 합니다.");
         }
-        QnaDTO qnaDTO = qnaDao.getQnaByQnaNo(qnaNo);
+        Qna qnaDTO = qnaDao.getQnaByQnaNo(qnaNo);
         if (qnaDTO == null || Objects.isNull(qnaDTO)) {
             log.error("Qna Data Is Null By Qna No");
             throw new NullPointerException("문의 번호로 해당 글을 찾을 수가 없습니다.");
@@ -64,7 +64,7 @@ public class QnaService {
     }
 
     @Transactional
-    public void qnaUpdate(QnaDTO qnaDTO) {
+    public void qnaUpdate(Qna qnaDTO) {
 
         if (qnaDTO == null || Objects.isNull(qnaDTO)) {
             log.error("Qna Update Data Is Null");
@@ -73,7 +73,7 @@ public class QnaService {
 
         try {
             log.info("Qna Data Check ==>> [{}]", qnaDTO.toString());
-            QnaDTO qnaData = getQnaByQnaNo(qnaDTO.getQNA_NO());
+            Qna qnaData = getQnaByQnaNo(qnaDTO.getQNA_NO());
             log.info("Find Qna Data By QnaNo {}", qnaData.toString());
         } catch (Exception e) {
             log.error("Qna No Check Exception : {}", e);

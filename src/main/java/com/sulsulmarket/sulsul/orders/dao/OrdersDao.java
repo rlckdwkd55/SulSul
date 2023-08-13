@@ -1,12 +1,10 @@
 package com.sulsulmarket.sulsul.orders.dao;
 
-import com.sulsulmarket.sulsul.orders.dto.Orders;
+import com.sulsulmarket.sulsul.dto.order.Orders;
 import com.sulsulmarket.sulsul.orders.mapper.OrdersMapper;
-import com.sulsulmarket.sulsul.product.dto.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 

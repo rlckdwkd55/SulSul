@@ -1,15 +1,15 @@
 package com.sulsulmarket.sulsul.qna.mapper;
 
-import com.sulsulmarket.sulsul.qna.dto.QnaDTO;
+import com.sulsulmarket.sulsul.dto.qna.Qna;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface QnaMapper {
-    int qnaWrite(QnaDTO qnaDTO);
+    int qnaWrite(Qna qnaDTO);
 
-    QnaDTO getQnaByQnaNo(int qnaNo);
+    Qna getQnaByQnaNo(int qnaNo);
 
-    int qnaUpdate(QnaDTO qnaDTO);
+    int qnaUpdate(Qna qnaDTO);
 
     int qnaUpdateStatus(int qnaNo);
 }
