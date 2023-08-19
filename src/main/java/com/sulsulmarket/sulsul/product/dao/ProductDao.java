@@ -15,8 +15,8 @@ public class ProductDao implements ProductMapper {
     private ProductMapper productMapper;
 
     @Override
-    public Product getProductDetail(Map<String, Integer> parameter) {
-        return productMapper.getProductDetail(parameter);
+    public Product getProductDetail(Integer productNo) {
+        return productMapper.getProductDetail(productNo);
     }
 
     @Override

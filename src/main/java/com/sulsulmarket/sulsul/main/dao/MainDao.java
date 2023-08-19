@@ -27,10 +27,9 @@ public class MainDao implements MainMapper {
     }
 
     @Override
-    public List<String> getProductNameList(Map<String, String> parameter){
+    public List<String> getProductNameList(String requestString){
 
-//        log.info("줫같은 에러 씨발 : {}", parameter.get("REQUEST_STRING"));
-        return mainMapper.getProductNameList(parameter);
+        return mainMapper.getProductNameList(requestString);
     }
 
     @Override
@@ -39,7 +38,7 @@ public class MainDao implements MainMapper {
     }
 
     @Override
-    public String getLikeSearchListCount(Map<String, String> parameter){
+    public String getLikeSearchListCount(String parameter){
         return mainMapper.getLikeSearchListCount(parameter);
     }
 

@@ -9,19 +9,18 @@ import com.sulsulmarket.sulsul.dto.review.Review;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface MypageMapper {
-    List<Orders> getOrderList(Map<String, Object> parameter);
+    List<Orders> getOrderList(String memberId);
 
-    List<OrderDetail> getOrderDetailList(Map<String, Object> parameter);
+    List<OrderDetail> getOrderDetailList(int orderNo);
 
-    List<Review> getReviewList(Map<String, String> parameter);
+    List<Review> getReviewList(String memberId);
 
-    List<Member> getUserInfo(Map<String, String> parameter);
+    List<Member> getUserInfo(String memberId);
 
-    List<Address> getAddressList(Map<String, String> parameter);
+    List<Address> getAddressList(String memberId);
 
-    List<ClaimInfo> getCancelRefundList(Map<String, String> parameter);
+    List<ClaimInfo> getCancelRefundList(String memberId);
 }

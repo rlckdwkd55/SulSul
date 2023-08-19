@@ -9,7 +9,7 @@ import java.util.Map;
 @Mapper
 public interface ProductMapper {
 
-    Product getProductDetail(Map<String, Integer> parameter);
+    Product getProductDetail(Integer productNo);
 
     Product getProductByProductNo(int productNo);
 

@@ -24,94 +24,52 @@ public class MainController {
     @Autowired
     private MainService mainService;
 
-
     @GetMapping("/main")
-    public ResponseEntity<Object> main(){
+    public ResponseEntity<Object> main() {
         Gson gson = new GsonBuilder().create();
-        String json = null;
         HashMap<String, List<Product>> resultMap = new HashMap<>();
-
-        try{
-            //TODO 18개의 상품 중 10개는 best, 8개는 새로운 상품을 찾아 json으로 리턴
-
+        try {
             List<Product> bestItemList = mainService.getBestRankingProd();
             List<Product> newProductList = mainService.getNewProduct();
-            log.debug("bestItemList : {}", bestItemList);
-            log.debug("newProductList : {}", newProductList);
-
-            if (bestItemList != null) {
-                resultMap.put("bestItems", bestItemList);
-            } if(newProductList != null) {
+            if(bestItemList.size()> 0){
+                resultMap.put("bestItems",bestItemList  );
+            }else if (newProductList.size()> 0){
                 resultMap.put("newItems", newProductList);
             }
-            if (bestItemList == null || newProductList == null) {
-                //초기 아무값도 없는 main에 접속 하였는데, 결과가 없을 순 없다.
-                // 이는 명백한 서버측의 오류로 500을 리턴한다.
-                log.error("bestItem List Or newProductList is null, bestItemList Size : {}, new ProductList Size : {}",bestItemList.size(), newProductList.size());
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-            json = gson.toJson(resultMap);
 
-//            log.info("값 잘 받아오니?{}", resultMap);
+            String json = gson.toJson(resultMap);
+            return new ResponseEntity<>(json, HttpStatus.OK);
 
         } catch (Exception e) {
-            //Exception이 발생하는 경우는 DB의 연결이 끊어진 경우,
-            //SQL Exception을 비롯한, 여러 Exception이 발생 한경우,
-            //내려줄 json이 없어, 500으로 에러를 던져준다.
             log.error("Main Service has been Exception : ", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(json, HttpStatus.OK);
     }
+
     /**
      * 검색창에 특정 키워드를 입력하면
      * 그 키워드와 연관된 product_List(상품명)을 뿌려준다
      */
     @PostMapping("/product/productNameList")
-    public ResponseEntity<Object> productNameList(@RequestBody Map<String, String> searchMap) {
+    public ResponseEntity<Object> productNameList(@RequestBody Map<String, String> requestMap) {
+
         String json = null;
         Gson gson = new GsonBuilder().create();
-
-        String requestString = null;
         try {
-            requestString = searchMap.get("requestString");
-            if (requestString != null) {
-                // SearchString이 null이 아니라면, 검색을 진행한다.
-                // DB에서 가지고 오는 결과를 List로 담고, json으로 파싱하여 돌려준다.
-                // sql과 연동할 때 Map을 많이쓴다.
-                Map<String, String> parameter = new HashMap<>();
-                parameter.put("REQUEST_STRING", requestString);
-
-                List<String> resultList = mainService.getProductNameList(parameter);
-//                log.info("왜 아무것도 못가져와", resultList  );
-                json = gson.toJson(resultList);
-
-//                if (resultList != null) {
-//                    // resultList의 결과값이 있어야만 json data를 파싱한다.
-//                    Gson gson = new GsonBuilder().create();
-//
-//                    json = gson.toJson(resultList);
-//
-//                } else{
-//                    log.error("productNameList Controller result List is NULL: {}", resultList);
-//                    //서버 입장에서 request body값을 갖고 리스트를 조회하였는데, 데이터가 없는 경우는
-//                    //사용자가 검색요청한 결과값이 정말 없을 경우 이기 때문에, JSON은 NULL 서버는 OK의 응답을 준다.
-//                    return new ResponseEntity<>(null, HttpStatus.OK);
-//                }
-
-            } else {
-                log.error("productNameList RequestString is NULL");
+            if(requestMap.isEmpty()){
+                log.warn("ProductNameList, Request Param is Empty");
                 return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
             }
+            List<String> resultList = mainService.getProductNameList(requestMap);
+            if(resultList.size() > 0){
+                json = gson.toJson(resultList);
+            }
+            return new ResponseEntity<>(json, HttpStatus.OK);
         } catch (Exception e) {
             log.error("ProductNameList has been Exception :", e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(json, HttpStatus.OK);
     }
-
-
-
 
     /**
      * 상품검색(비동기)에서 키워드 입력 후 검색을 누르면
@@ -121,33 +79,19 @@ public class MainController {
     public ResponseEntity<Object> productList(@RequestBody Map<String, String> productListMap) {
         String json = null;
         Gson gson = new GsonBuilder().create();
-        String requestListString = null;
-        int pageNum = 0;
-        Map<String, String> parameter = new HashMap<>();
         try{
-            if(productListMap != null){
-                requestListString = productListMap.get("requestString").toString(); //제
-                pageNum = Integer.parseInt(productListMap.get("page")); // 2
-                parameter.put("REQUESTLIST_STRING", requestListString);
-            }
-            String trimString = requestListString.trim();
-            if(trimString.length() == 0){
-                //공백의 경우 쿼리가 LIKE 이기 때문에, 모두 나오게 됨으로, 결과 값이 없이 성공을 준다.
+            if(productListMap.isEmpty()){
                 return new ResponseEntity<>(null, HttpStatus.OK);
             }
 
-            if(pageNum == 0){
-                //반드시 첫 페이지는 1로 요청을 하기 때문에, 0이란 이야기는 400 에러다.
-                log.error("PageNum is 0 , PageNum : {}", pageNum);
-                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            List<Product> resultList = mainService.getPagingList(productListMap);
+            log.warn("result List Size : {}", resultList.size());
+            if(resultList.size() > 0){
+                json = gson.toJson(resultList);
             }
-            List<Product> resultList = mainService.getPagingList(parameter, pageNum);
 
-            json = gson.toJson(resultList);
-
-//            log.info("요기 도달하는 리퀘스트 이름은 뭐니 : {}", requestListString);
         } catch (NullPointerException npe){
-            log.error("Product Search List has been Null Point Exception ");
+            log.error("Product Search List has been Null Point Exception, resultList");
             return new ResponseEntity<>(null, HttpStatus.OK);
 
         } catch (Exception e){
@@ -156,7 +100,6 @@ public class MainController {
         }
         return new ResponseEntity<>(json, HttpStatus.OK);
     }
-
 
 
     //    @GetMapping("/main")
@@ -238,4 +181,54 @@ public class MainController {
 //        }else {
 //            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 //        }
+
+
+//    @PostMapping("/product/productNameList")
+//    public ResponseEntity<Object> productNameList(@RequestBody Map<String, String> searchMap) {
+//
+//        String json = null;
+//        Gson gson = new GsonBuilder().create();
+//
+//        String requestString = null;
+//        try {
+//            if(searchMap.isEmpty()){
+//                log.warn("ProductNameList, Request Param is Empty");
+//                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+//            }
+//        List<String> resultList = mainService.getProductNameList(searchMap);
+//            requestString = searchMap.get("requestString");
+//            if (requestString != null) {
+//                // SearchString이 null이 아니라면, 검색을 진행한다.
+//                // DB에서 가지고 오는 결과를 List로 담고, json으로 파싱하여 돌려준다.
+//                // sql과 연동할 때 Map을 많이쓴다.
+//                Map<String, String> parameter = new HashMap<>();
+//                parameter.put("REQUEST_STRING", requestString);
+//
+////                log.info("왜 아무것도 못가져와", resultList  );
+//                json = gson.toJson(resultList);
+//
+////                if (resultList != null) {
+////                    // resultList의 결과값이 있어야만 json data를 파싱한다.
+////                    Gson gson = new GsonBuilder().create();
+////
+////                    json = gson.toJson(resultList);
+////
+////                } else{
+////                    log.error("productNameList Controller result List is NULL: {}", resultList);
+////                    //서버 입장에서 request body값을 갖고 리스트를 조회하였는데, 데이터가 없는 경우는
+////                    //사용자가 검색요청한 결과값이 정말 없을 경우 이기 때문에, JSON은 NULL 서버는 OK의 응답을 준다.
+////                    return new ResponseEntity<>(null, HttpStatus.OK);
+////                }
+//
+//            } else {
+//                log.error("productNameList RequestString is NULL");
+//                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+//            }
+//        } catch (Exception e) {
+//            log.error("ProductNameList has been Exception :", e);
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//        return new ResponseEntity<>(json, HttpStatus.OK);
+//    }
+
 }

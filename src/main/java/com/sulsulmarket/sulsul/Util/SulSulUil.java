@@ -20,7 +20,7 @@ public class SulSulUil {
         
     }
 
-    public static Map<String, Integer> getPage(int pageNum, int totalCount) {
+    public static Map<String, Integer> getPage(double pageNum, double totalCount) {
 //        log.info("요청이 들어오는 값을 찍어보자 : {}, {}", pageNum, totalCount);
         if (pageNum != 0 && totalCount != 0) {
 //            log.info("여긴 들어오니? : {}, {}", pageNum, totalCount);

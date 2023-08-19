@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class MypageDao implements MypageMapper{
@@ -20,33 +19,34 @@ public class MypageDao implements MypageMapper{
     private MypageMapper mypageMapper;
 
     @Override
-    public List<Orders> getOrderList(Map<String, Object> parameter) {
-        return mypageMapper.getOrderList(parameter);
+    public List<Orders> getOrderList(String memberId) {
+        return mypageMapper.getOrderList(memberId);
     }
 
     @Override
-    public List<OrderDetail> getOrderDetailList(Map<String, Object> parameter) {
-        return mypageMapper.getOrderDetailList(parameter);
+    public List<OrderDetail> getOrderDetailList(int orderNo) {
+        return mypageMapper.getOrderDetailList(orderNo);
     }
 
     @Override
-    public List<Review> getReviewList(Map<String, String> parameter) {
-        return mypageMapper.getReviewList(parameter);
+    public List<Review> getReviewList(String memberId) {
+
+        return mypageMapper.getReviewList(memberId);
     }
 
     @Override
-    public List<Member> getUserInfo(Map<String, String> parameter) {
-        return mypageMapper.getUserInfo(parameter);
+    public List<Member> getUserInfo(String memberId) {
+        return mypageMapper.getUserInfo(memberId);
     }
 
     @Override
-    public List<Address> getAddressList(Map<String, String> parameter) {
-        return mypageMapper.getAddressList(parameter);
+    public List<Address> getAddressList(String memberId) {
+        return mypageMapper.getAddressList(memberId);
     }
 
     @Override
-    public List<ClaimInfo> getCancelRefundList(Map<String, String> parameter) {
-        return mypageMapper.getCancelRefundList(parameter);
+    public List<ClaimInfo> getCancelRefundList(String memberId) {
+        return mypageMapper.getCancelRefundList(memberId);
     }
 
 

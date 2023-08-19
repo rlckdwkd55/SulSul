@@ -14,11 +14,11 @@ public interface MainMapper {
 
     List<Product> getNewProduct();
 
-    List<String> getProductNameList(Map<String, String> parameter);
+    List<String> getProductNameList(String requestString);
 
     List<Product> getLikeSearchList(Map<String, String> parameter);
 
-    String getLikeSearchListCount(Map<String, String> parameter);
+    String getLikeSearchListCount(String parameter);
 
     List<Product> getPagingList(Map<String, String> parameter);
 }

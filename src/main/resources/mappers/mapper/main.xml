@@ -10,9 +10,9 @@
         SELECT * FROM PRODUCT ORDER BY UPLOAD_DATE DESC LIMIT 8;
     </select>
 
-    <select id="getProductNameList" parameterType="java.util.Map" resultType="String">
+    <select id="getProductNameList" parameterType="String" resultType="String">
        <![CDATA[
-        SELECT PRODUCT_NAME FROM PRODUCT WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUEST_STRING}, '%') LIMIT 5;
+        SELECT PRODUCT_NAME FROM PRODUCT WHERE PRODUCT_NAME LIKE CONCAT('%', #{requestString}, '%') LIMIT 5;
         ]]>
     </select>
 
@@ -23,7 +23,7 @@
             LIMIT 10;
     </select>
 
-    <select id="getLikeSearchListCount" parameterType="java.util.Map" resultType="String">
+    <select id="getLikeSearchListCount" parameterType="String" resultType="String">
         SELECT COUNT(*) FROM PRODUCT WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUESTLIST_STRING}, '%');
     </select>
 
