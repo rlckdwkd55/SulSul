@@ -70,7 +70,14 @@ const DetailHead = (props) => {
       alert('수량을 선택해주세요.');
       return;
     }
-    navigate("/order", { state: { prdNo: [prdInfo.prdNo], total: total + 3000, price: total } });
+
+    prdInfo.totalPrice = total;
+    prdInfo.amount = props.amount;
+    const orderInfo = {
+      prdList: [prdInfo],
+      total: total
+    }
+    navigate("/order", { state: { orderInfo } });
   }
 
   async function addCart() {
@@ -87,13 +94,10 @@ const DetailHead = (props) => {
       "cartAmount": props.amount
     }
 
-     const response = await CartService.postAddCartItem(jsonData);
-  
-      if (response.status === "success") {
-        alert(response.message);
-      }
-
-
+    const response = await CartService.postAddCartItem(jsonData);
+    if (response.status === "success") {
+      alert(response.message);
+    }
   }
 
   return (

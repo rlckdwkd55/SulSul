@@ -23,6 +23,8 @@ const ReqSelect = styled.select``;
 
 const OrderAddr = (props) => {
   const userAddr = props.userAddr;
+  const addrContents = '';
+  
 
   return(
     <Wrap>
@@ -31,8 +33,11 @@ const OrderAddr = (props) => {
         <tr>
           <td>배송지</td>
           <td>
-            <div>기본 배송지</div>
-            <div>{}</div>
+            <div>
+              <label><input type='radio' name='address' value='A' checked/>기본 배송지</label>
+              <label><input type='radio' name='address' value='B'/>새 배송지</label>
+            </div>
+            {addrContents}
           </td>
         </tr>
         <tr>

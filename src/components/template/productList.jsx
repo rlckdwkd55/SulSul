@@ -14,29 +14,47 @@ const ProductList = (props) => {
   const [productList, setProductList] = useState([]);
 
   useEffect(()=>{
-    async function getProduct(itemKey) {
-      if (/^newItems$|^bestItems$/.test(itemKey)) {
-        const response = await ProductService.getMainItemList();
+    async function getProduct(param, isSearch) {
+      if (!isSearch) {
+        if (/^newItems$|^bestItems$/.test(param)) {
+          const response = await ProductService.getMainItemList();
+    
+          if (response.status === "success") {
+            setProductList(response.data["newItems"]);
+            console.log(response.data);
+          }
+        } else {
+          const data = {
+            'categoryNo': param
+          }
   
-        if (response.status === "success") {
-          setProductList(response.data["newItems"]);
-          console.log(response.data);
+          const response = await ProductService.postCategoryList(data);
+    
+          if (response.status === "success") {
+            setProductList(response.data[param]);
+            console.log(response.data);
+          }
         }
       } else {
         const data = {
-          'cate': itemKey
+          'requestString': param,
+          'page': "1"
         }
 
-        const response = await ProductService.postCategoryList(data);
+        const response = await ProductService.postProductList(data);
   
         if (response.status === "success") {
-          setProductList(response.data[itemKey]);
+          setProductList(response.data[param]);
           console.log(response.data);
         }
       }
     }
 
-    getProduct(props.itemKey);
+    if (props.itemKey) {
+      getProduct(props.itemKey);
+    } else if (props.searchWord) {
+      getProduct(props.searchWord, true);
+    }
   }, []);
 
   return(

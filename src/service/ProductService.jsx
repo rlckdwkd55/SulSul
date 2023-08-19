@@ -35,7 +35,7 @@ const ProductService = {
   },
   postProductList: async (data) => {
     try {
-      const response = await request.post('/product/proList', data);
+      const response = await request.post('/product/productList', data);
       if (request.isSuccess(response)) {
         return {
           ...response,

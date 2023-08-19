@@ -3,7 +3,7 @@ import request, { FAIL, SUCCESS, ACCESS_TOKEN } from "../Util/Request";
 const OrderService = {
   postOrderItemList: async (data) => {
     try {
-      const response = await request.post('', data);
+      const response = await request.post('/order', data);
       if (request.isSuccess(response)) {
         return {
           ...response,

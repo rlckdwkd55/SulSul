@@ -43,8 +43,8 @@ const ItemList = (props) => {
       <div><img src={item.imgPath} alt='' width='100' height='150'/></div>
       <div>
         <div>{item.prdName}</div>
-        <div>{item.prdAmount} 개</div>
-        <div>{item.prdPrice} 원</div>
+        <div>{item.amount} 개</div>
+        <div>{item.totalPrice} 원</div>
       </div>
     </ItemWrap>
   )

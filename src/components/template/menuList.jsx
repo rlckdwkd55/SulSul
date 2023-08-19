@@ -35,19 +35,19 @@ const MenuList = () => {
   const [menuList, setMenuList] = useState([
     {
       title: "소주 · 증류주",
-      cate: "1"
+      cate: 1
     },
     {
       title: "막걸리",
-      cate: "2"
+      cate: 2
     },
     {
       title: "약주 · 청주",
-      cate: "3"
+      cate: 3
     },
     {
       title: "과실주",
-      cate: "4"
+      cate: 4
     }
   ]);
   const navigate = useNavigate();

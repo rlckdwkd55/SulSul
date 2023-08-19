@@ -21,28 +21,26 @@ const Order = () => {
   const [ userAddr, setUserAddr ] = useState({});
   const [ isAgree, setIsAgree ] = useState(false);
   const [ payment, setPayment ] = useState('');
+  const [ jsonData, setJsonData ] = useState({
+    "memberId": sessionStorage.getItem('userId'),
+    "orderAddress": '',
+    "orderReceiver": '',
+    "orderRequest": '',
+    "orderPhone": '',
+    "payMethod": '',
+    "orderDetailList": []
+  })
   const { state } = useLocation();
-  const prdNoList = state.prdNo;
-  const price = state.price;
-  const total = state.total;
+  const prdList = state.orderInfo.prdList;
+  const total = state.orderInfo.total;
+  const prdNoList = [];
+
+  prdList.forEach(function(data) {
+    prdNoList.push(data.prdNo);
+  })
 
   useEffect(()=>{
-    setOrderList([
-      {
-        "prdNo": 1,
-        "prdName": '안동소주',
-        "prdPrice": 10000,
-        "prdAmount": 1,
-        "imgPath": '/images/product/product01.jpg'
-      },
-      {
-        "prdNo": 2,
-        "prdName": '가평잣막걸리',
-        "prdPrice": 20000,
-        "prdAmount": 1,
-        "imgPath": '/images/product/product01.jpg'
-      }
-    ]);
+    setOrderList(prdList);
 
     setUserInfo({
       "userName": '김용주',
@@ -60,7 +58,7 @@ const Order = () => {
       <OrderItemList orderList={orderList}/>
       <OrderUserInfo userInfo={userInfo}/>
       <OrderAddr userAddr={userAddr}/>
-      <OrderPayment price={price} total={total} setPayment={setPayment}/>
+      <OrderPayment price={total} total={total+3000} setPayment={setPayment}/>
       <OrderAgreement setIsAgree={setIsAgree} />
       <OrderButton payment={payment} isAgree={isAgree} total={total} prdNoList={prdNoList} />
     </Wrap>

@@ -49,7 +49,7 @@ function SearchBar() {
 
   async function doSearch(e) {
     if (search.length === 0) e.preventDefault();
-    navigate("/search", { state: { word: search } });
+    navigate("/list", { state: { word: search } });
   }
 
   let contents;

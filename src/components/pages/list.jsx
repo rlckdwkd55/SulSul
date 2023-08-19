@@ -16,7 +16,8 @@ const FilterWrap = styled.div`
 const List = () => {
   const [ contents, setContents] = useState({});
   const { state } = useLocation();
-  const { cate } = state;
+  const cate = state.cate;
+  const word = state.word;
 
   useEffect(() => {
     switch(cate) {
@@ -76,7 +77,7 @@ const List = () => {
             <option>높은 가격순</option>
           </select>
         </FilterWrap>
-        <ProductList itemKey={cate}/>
+        <ProductList itemKey={cate} searchWord={word}/>
       </div>
     </ListWrap>
   )
