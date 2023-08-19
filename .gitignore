@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+private IamportClient client = new IamportClient(1502821208458054, Hz6rEcgApe0n81dTesCUjuMKEKKGxKZgod3MS4q9TC7Inmawobb9TpRw9JorKvbk2INqcCC41qLyCL5v);
 
 ### STS ###
 .apt_generated
@@ -32,4 +33,4 @@ build/
 ### VS Code ###
 .vscode/
 
-**/application.properties
+**/application.yml

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sulsulmarket.sulsul.main.mapper.MainMapper">
+
+    <select id="getBestRankingProd" resultType="com.sulsulmarket.sulsul.dto.product.Product">
+        SELECT * FROM PRODUCT ORDER BY PAYMENT_COUNT DESC LIMIT 10;
+    </select>
+
+    <select id="getNewProduct" resultType="com.sulsulmarket.sulsul.dto.product.Product">
+        SELECT * FROM PRODUCT ORDER BY UPLOAD_DATE DESC LIMIT 8;
+    </select>
+
+    <select id="getProductNameList" parameterType="String" resultType="String">
+       <![CDATA[
+        SELECT PRODUCT_NAME FROM PRODUCT WHERE PRODUCT_NAME LIKE CONCAT('%', #{requestString}, '%') LIMIT 5;
+        ]]>
+    </select>
+
+    <select id="getLikeSearchList" parameterType="java.util.Map" resultType="com.sulsulmarket.sulsul.dto.product.Product">
+        SELECT * FROM PRODUCT
+        WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUESTLIST_STRING}, '%')
+        ORDER BY PRODUCT_NO ASC
+            LIMIT 10;
+    </select>
+
+    <select id="getLikeSearchListCount" parameterType="String" resultType="String">
+        SELECT COUNT(*) FROM PRODUCT WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUESTLIST_STRING}, '%');
+    </select>
+
+    <select id="getPagingList"  parameterType="java.util.Map" resultType="com.sulsulmarket.sulsul.dto.product.Product">
+    <![CDATA[
+        SELECT * FROM PRODUCT
+        WHERE PRODUCT_NAME LIKE CONCAT('%', #{REQUESTLIST_STRING}, '%')
+        AND PRODUCT_NO >= CAST(#{START_PAGE} AS Integer)
+        AND PRODUCT_NO <= CAST(#{END_PAGE} AS Integer)
+        ORDER BY PRODUCT_NO ASC
+        ]]>
+    </select>
+
+</mapper>

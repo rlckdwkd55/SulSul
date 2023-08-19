@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sulsulmarket.sulsul.orders.mapper.OrdersMapper">
+
+    <insert id="getInsertOrders" parameterType="java.util.Map">
+        INSERT INTO ORDERS (ORDER_NO, MEMBER_ID, ORDER_DATE, ORDER_ADDRESS, ORDER_RECEIVER, ORDER_REQUEST, ORDER_PHONE, PAY_METHOD)
+        VALUES (#{ORDER_NO}, #{MEMBER_ID}, #{ORDER_DATE}, #{ORDER_ADDRESS}, #{ORDER_RECEIVER}, #{ORDER_REQUEST},
+                #{ORDER_PHONE}, #{PAY_METHOD})
+    </insert>
+
+    <insert id="getInsertOrderDetail" parameterType="java.util.Map">
+        INSERT INTO ORDER_DETAIL (DETAIL_NO, ORDER_NO, PRODUCT_NO, PROCESS_CODE, DETAIL_AMOUNT, DETAIL_PRICE, PAY_DATE)
+        VALUES (#{DETAIL_NO}, #{ORDER_NO}, #{PRODUCT_NO}, 1 , #{DETAIL_AMOUNT}, #{DETAIL_PRICE}, #{PAY_DATE})
+    </insert>
+
+    <select id="getOrderData" parameterType="Integer" resultType="com.sulsulmarket.sulsul.dto.order.Orders">
+        SELECT * FROM ORDERS
+        WHERE ORDER_NO = #{orderNo}
+    </select>
+
+
+</mapper>
