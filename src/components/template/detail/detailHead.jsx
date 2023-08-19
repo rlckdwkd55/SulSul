@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import CountBtn from "../../atoms/countBtn";
 import BtnRed from "../../atoms/btnRed";
+import CartService from "../../../service/CartService";
 
 const Wrap = styled.div`
   > div {
@@ -72,13 +73,27 @@ const DetailHead = (props) => {
     navigate("/order", { state: { prdNo: [prdInfo.prdNo], total: total + 3000, price: total } });
   }
 
-  const addCart = () => {
-    if (total === 0) {
+  async function addCart() {
+    if (props.amount === 0) {
       alert('수량을 선택해주세요.');
       return;
     }
 
     // 장바구니 저장 로직
+
+    const jsonData = {
+      "memberId": sessionStorage.getItem('userId'),
+      "productNo": prdInfo.prdNo,
+      "cartAmount": props.amount
+    }
+
+     const response = await CartService.postAddCartItem(jsonData);
+  
+      if (response.status === "success") {
+        alert(response.message);
+      }
+
+
   }
 
   return (
@@ -122,7 +137,7 @@ const DetailHead = (props) => {
                   <td>
                     <div>
                       <span>{prdInfo.prdName}</span>
-                      <CountBtn className="cntBtn" cnt={0} setTotal={setTotal} price={prdInfo.prdPrice}/>
+                      <CountBtn className="cntBtn" cnt={0} setAmount={props.setAmount} setTotal={setTotal} price={prdInfo.prdPrice}/>
                     </div>
                   </td>
                 </tr>

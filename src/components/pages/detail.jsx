@@ -26,6 +26,7 @@ const DetailNavBtn = (props) => {
 
 const Detail = () => {
   const [ prdInfo, setPrdInfo ] = useState({});
+  const [ amount, setAmount ] = useState(0);
   const { state } = useLocation();
   const { prdNo } = state;
 
@@ -49,7 +50,7 @@ const Detail = () => {
 
   return (
     <Wrap>
-      <DetailHead prdInfo={prdInfo}/>
+      <DetailHead prdInfo={prdInfo} amount={amount} setAmount={setAmount}/>
       <DetailNav>
         <DetailNavBtn btnName={'상품정보'} url={''}/>
         <DetailNavBtn btnName={'후기'} url={''}/>

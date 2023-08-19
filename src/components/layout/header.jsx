@@ -5,15 +5,15 @@ import MenuList from "../template/menuList";
 
 function LoginOut() {
   sessionStorage.setItem('isLogin', true);
+  sessionStorage.setItem('userId', 'user01');
   const isLogin = sessionStorage.getItem("isLogin");
   let contents;
 
   if (isLogin !== "true") {
     contents = (
       <Link to="/login">
-        <span className="btn" id="move-login-btn">
-          로그인
-        </span>
+          {/* <img src='/images/login_btnG.png' alt='네이버로그인'/> */}
+          <span>로그인</span>
       </Link>
     );
   } else {

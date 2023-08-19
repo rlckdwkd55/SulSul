@@ -42,6 +42,9 @@ const CountBtn = (props) => {
     let totalPrice = originPrice * count;
 
     props.setTotal(totalPrice);
+    if (props.setAmount) {
+      props.setAmount(count);
+    }
   }
 
   return (

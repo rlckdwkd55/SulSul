@@ -19,7 +19,23 @@ const CartService = {
   },
   postDeleteCartItem: async (data) => {
     try {
-      const response = await request.post('', data);
+      const response = await request.post('/api/cart/remove', data);
+      if (request.isSuccess(response)) {
+        return {
+          ...response,
+          status: SUCCESS
+        };
+      }
+      return { status: FAIL };
+    } catch (error) {
+      return {
+        status: FAIL
+      };
+    }
+  },
+  postAddCartItem: async (data) => {
+    try {
+      const response = await request.post('/api/cart/add', data);
       if (request.isSuccess(response)) {
         return {
           ...response,
