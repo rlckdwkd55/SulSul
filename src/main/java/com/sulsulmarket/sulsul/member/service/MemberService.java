@@ -131,6 +131,7 @@ public class MemberService {
     /**
      * 회원가입 메서드
      */
+    //TODO 회원가입 경우 주소 테이블을 따로 구분해서 헀기 때문에 그 테이블에도 주소를 넣어줘야 함.
     @Transactional
     public void memberSign(Member member) {
 
@@ -181,6 +182,6 @@ public class MemberService {
             log.info("new password Update Fail By memberId");
             throw new NullPointerException("패스워드 변경에 실패했습니다");
         }
-        log.info("UPDATE NEW PASSWORD SUCCESS {}", newPassword);
+        log.debug("new password update is success : {}", newPassword);
     }
 }
