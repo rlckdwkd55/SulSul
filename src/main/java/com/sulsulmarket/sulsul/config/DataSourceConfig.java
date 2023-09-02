@@ -28,7 +28,7 @@ public class DataSourceConfig {
      */
     @Bean
     public DataSource dataSource() {
-        log.info("jdbc : {}, username : {}, password : {} , driverClassName : {} , maximumPoolSize : {}, minimumIdle : {}", jdbcUrl,username,password,driverClassName,maximumPoolSize,minimumIdle);
+        log.debug("jdbc : {}, username : {}, password : {} , driverClassName : {} , maximumPoolSize : {}, minimumIdle : {}", jdbcUrl,username,password,driverClassName,maximumPoolSize,minimumIdle);
 
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(jdbcUrl);

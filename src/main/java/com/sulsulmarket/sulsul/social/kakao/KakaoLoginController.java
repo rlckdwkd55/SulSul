@@ -1,6 +1,5 @@
 package com.sulsulmarket.sulsul.social.kakao;
 
-import com.sulsulmarket.sulsul.dto.kakaologin.KakaoAuth;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,7 @@ public class KakaoLoginController {
     @Autowired
     private KakaoLoginService kakaoLoginService;
 
-    @GetMapping("/redirect/get")
+    @GetMapping("/url")
     public ResponseEntity<Object> redirectUrlRequest() {
 
         try {
@@ -30,8 +29,8 @@ public class KakaoLoginController {
         }
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<Object> test(@RequestParam String code) {
+    @GetMapping("/toekn/request")
+    public ResponseEntity<Object> kakaoToeknRequest(@RequestParam String code) {
         try {
             kakaoLoginService.tokenRequest(code);
             return new ResponseEntity<>(HttpStatus.OK);

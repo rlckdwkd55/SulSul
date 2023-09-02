@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/naver")
+@RequestMapping("/naver/login")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Slf4j
 public class NaverLoginController {
 
@@ -20,7 +21,7 @@ public class NaverLoginController {
      *
      * @return redirect url
      */
-    @GetMapping("/naver/login")
+    @GetMapping("/url")
     public ResponseEntity<String> naverLogin() {
         try {
             String authorizationUrl = naverLoginService.getAuthorizationUrl();
@@ -35,7 +36,7 @@ public class NaverLoginController {
     /**
      * 위에서 받아온 authorization_code parameter 받아 createToken 발급 바독 해당 Token 가지고 User Info Get
      */
-    @PostMapping("/naver/callback")
+    @PostMapping("/toekn/request")
     public ResponseEntity<Object> naverLoginCallback(@RequestParam String code) {
 
         try {
