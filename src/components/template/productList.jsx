@@ -21,7 +21,6 @@ const ProductList = (props) => {
     
           if (response.status === "success") {
             setProductList(response.data["newItems"]);
-            console.log(response.data);
           }
         } else {
           const data = {
@@ -31,8 +30,7 @@ const ProductList = (props) => {
           const response = await ProductService.postCategoryList(data);
     
           if (response.status === "success") {
-            setProductList(response.data[param]);
-            console.log(response.data);
+            setProductList(response.data);
           }
         }
       } else {
@@ -44,8 +42,7 @@ const ProductList = (props) => {
         const response = await ProductService.postProductList(data);
   
         if (response.status === "success") {
-          setProductList(response.data[param]);
-          console.log(response.data);
+          setProductList(response.data);
         }
       }
     }
@@ -60,7 +57,7 @@ const ProductList = (props) => {
   return(
     <ListWrap>
       {productList.map((item) => {
-        return <Product key={item.PRODUCT_NO} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/product01.jpg"}/>
+        return <Product key={item.PRODUCT_NO} prdNo={item.PRODUCT_NO} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/product01.jpg"}/>
       })}
     </ListWrap>
   )

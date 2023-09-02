@@ -24,7 +24,7 @@ const Product = (props) => {
   };
 
   return(
-    <ProductWrap onClick={() => navigateByPrdNo(props.key)}>
+    <ProductWrap onClick={() => navigateByPrdNo(props.prdNo)}>
       <div>
         <img src={props.imgPath} alt={props.prdName} width='250' height='300'/>
       </div>

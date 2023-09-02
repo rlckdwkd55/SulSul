@@ -5,21 +5,21 @@ import ProductService from "../../service/ProductService";
 function SearchList(props) {
   const lis = [];
 
-  props.nameList.forEach((item, index) => {
-    lis.push(
-      <li
-        key={index}
-        onClick={(e) => {
-          e.preventDefault();
-          props.setSearch(item);
-        }}
-      >
-        {item}
-      </li>
-    );
-  });
-
-  console.log(lis);
+  if (props.nameList) {
+    props.nameList.forEach((item, index) => {
+      lis.push(
+        <li
+          key={index}
+          onClick={(e) => {
+            e.preventDefault();
+            props.setSearch(item);
+          }}
+        >
+          {item}
+        </li>
+      );
+    });
+  }
 
   return (
     <div className="reqList" style={{ display: "block" }}>

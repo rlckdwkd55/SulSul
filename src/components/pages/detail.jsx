@@ -4,6 +4,7 @@ import styled from "styled-components";
 import DetailHead from "../template/detail/detailHead";
 import DetailReview from "../template/detail/DetailReview";
 import DetailQnA from "../template/detail/DetailQnA";
+import ProductService from "../../service/ProductService";
 
 const Wrap = styled.div`
   margin: 50px 150px;
@@ -31,21 +32,19 @@ const Detail = () => {
   const { prdNo } = state;
 
   useEffect(() => {
-    async function getPrdInfo() {
-      // const response = await ProductService.postCartList();
+    async function getPrdInfo(data) {
+      const response = await ProductService.postProductDetail(data);
   
-      // if (response.status === "success") {
-      //   setCartList(response.data);
-      // }
+      if (response.status === "success") {
+        setPrdInfo(response.data);
+      }
     }
 
-    setPrdInfo({
-      "prdNo": 1,
-      "prdName": '안동소주',
-      "prdPrice": 10000,
-      "prdAmount": 1,
-      "imgPath": '/images/product/product01.jpg'
-    })
+    const data = {
+      'productNo': prdNo
+    }
+
+    getPrdInfo(data);
   }, [])
 
   return (

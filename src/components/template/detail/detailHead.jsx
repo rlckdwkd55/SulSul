@@ -103,15 +103,15 @@ const DetailHead = (props) => {
   return (
     <Wrap>
       <div>
-        <img src={prdInfo.imgPath} alt={prdInfo.prdName} width='250' height='300'/>
+        <img src={prdInfo.imgPath} alt={prdInfo.productName} width='250' height='300'/>
         <HeadInfo>
           <div>
-            <h2>{prdInfo.prdName}</h2> 
-            <h3>{prdInfo.prdText}</h3>
+            <h2>{prdInfo.productName}</h2> 
+            <h3>{prdInfo.productInfo}</h3>
             <span>별 {prdInfo.rank}</span>
             <span>리뷰 {prdInfo.review}</span>
             <div>
-              <h2>{prdInfo.prdPrice} 원</h2>
+              <h2>{prdInfo.productPrice} 원</h2>
             </div>
           </div>
           <div>

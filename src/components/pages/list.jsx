@@ -33,25 +33,25 @@ const List = () => {
           content: "술술의 새로운 상품들을 만나보세요!"
         });
         break;
-      case "1":
+      case 1:
         setContents({
           title: "소주 · 증류주",
           content: "소주"
         });
         break;
-      case "2":
+      case 2:
         setContents({
           title: "막걸리",
           content: "막걸리"
         });
         break;
-      case "3":
+      case 3:
         setContents({
           title: "약주 · 청주",
           content: "약주"
         });
         break;
-      case "4":
+      case 4:
         setContents({
           title: "과실주",
           content: "과실주"

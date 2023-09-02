@@ -65,6 +65,22 @@ const ProductService = {
       };
     }
   },
+  postProductDetail: async (data) => {
+    try {
+      const response = await request.post('/product/productDetail', data);
+      if (request.isSuccess(response)) {
+        return {
+          ...response,
+          status: SUCCESS
+        };
+      }
+      return { status: FAIL };
+    } catch (error) {
+      return {
+        status: FAIL
+      };
+    }
+  },
 };
 
 export default ProductService;
