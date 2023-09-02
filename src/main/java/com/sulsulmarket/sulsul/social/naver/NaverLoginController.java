@@ -28,7 +28,7 @@ public class NaverLoginController {
             log.info("authorizationUrl -> {}", authorizationUrl);
             return new ResponseEntity<>(authorizationUrl, HttpStatus.OK);
         } catch (Exception e) {
-            log.error("Exception : {}", e);
+            log.error("Exception.", e);
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -36,14 +36,14 @@ public class NaverLoginController {
     /**
      * 위에서 받아온 authorization_code parameter 받아 createToken 발급 바독 해당 Token 가지고 User Info Get
      */
-    @PostMapping("/toekn/request")
+    @GetMapping("/toekn/request")
     public ResponseEntity<Object> naverLoginCallback(@RequestParam String code) {
 
         try {
             NaverUser userInfo = naverLoginService.getUserInfoByAccessToken(code);
             return new ResponseEntity<>(userInfo, HttpStatus.OK);
         } catch (Exception e) {
-            log.error("Exception : {}", e);
+            log.error("Exception.", e);
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

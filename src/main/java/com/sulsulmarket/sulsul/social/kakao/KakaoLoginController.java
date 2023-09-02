@@ -29,7 +29,7 @@ public class KakaoLoginController {
         }
     }
 
-    @GetMapping("/toekn/request")
+    @GetMapping("/token/request")
     public ResponseEntity<Object> kakaoToeknRequest(@RequestParam String code) {
         try {
             kakaoLoginService.tokenRequest(code);

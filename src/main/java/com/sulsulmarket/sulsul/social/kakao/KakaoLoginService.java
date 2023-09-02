@@ -41,11 +41,16 @@ public class KakaoLoginService {
     }
 
     public void tokenRequest(String code) {
-        String tokenRequestUrl = kakaoAuth.getTokenUri() + "?grant_type=authorization_code" + "&client_id=" + kakaoAuth.getClientId() +
-                "&client_secret=" + kakaoAuth.getClientSecret() + "&redirect_uri=" + kakaoAuth.getRedirectUri() + "&code=" + code;
+        log.info("kakao Token : [{}], Code : [{}]", kakaoAuth.getTokenUri(), code);
+        try {
+            String tokenRequestUrl = kakaoAuth.getTokenUri() + "?grant_type=authorization_code" + "&client_id=" + kakaoAuth.getClientId() +
+                    "&client_secret=" + kakaoAuth.getClientSecret() + "&redirect_uri=" + kakaoAuth.getRedirectUri() + "&code=" + code;
 
-        ResponseEntity response = restTemplate.getForEntity(tokenRequestUrl, Object.class);
-        log.info("response Check {}, {}", response.getBody(), response);
+            ResponseEntity response = restTemplate.getForEntity(tokenRequestUrl, Object.class);
+            log.info("response Check {}, {}", response.getBody(), response);
+        } catch (Exception e) {
+            log.error("Token Request Exception.", e);
+        }
     }
 
     public void getUserInfo(String token) {

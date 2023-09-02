@@ -73,7 +73,6 @@ public class NaverLoginService {
             ObjectMapper objectMapper = new ObjectMapper();
 
             try {
-                int number;
                 // Json 객체의 특정 필드 값을 가져옴
                 JsonNode jsonNode = objectMapper.readTree(accessToken);
                 // JsonNode access_token By String type return
