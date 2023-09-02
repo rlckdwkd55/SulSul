@@ -19,7 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // .antMatchers("*").authenticated()
                 .anyRequest().permitAll() // 다른 모든 요청은 누구나 접근 가능하도록 허용
                 .and()
-                .csrf().disable();
+                .csrf()
+                .disable();
     }
 
     @Bean
