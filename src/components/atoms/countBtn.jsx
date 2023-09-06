@@ -9,10 +9,16 @@ const CountWrap = styled.div`
   padding: 3px;
   width: 109px;
 
+  // chrome, safari, edge, ...
   > input[type="number"]::-webkit-outer-spin-button,
     input[type="number"]::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
+  }
+
+  // firefox
+  > input[type="number"] {
+    -moz-appearance: textfield;
   }
 
   > input {

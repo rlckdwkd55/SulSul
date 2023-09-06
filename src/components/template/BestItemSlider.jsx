@@ -44,7 +44,7 @@ const BestItemSlider = () => {
     <div>
       <StyledSlider {...settings}>
         {productList.map((item, i) => {
-          return <Product key={item.PRODUCT_NO} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/product01.jpg"}/>
+          return <Product key={item.PRODUCT_NO} prdNo={item.PRODUCT_NO} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/product01.jpg"}/>
         })}
       </StyledSlider>
     </div>

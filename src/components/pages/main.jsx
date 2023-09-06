@@ -1,7 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 import styled from 'styled-components';
 import ProductList from '../template/productList';
 import BestItemSlider from '../template/BestItemSlider';
+import LoginService from '../../service/LoginService';
 
 const MainWrap = styled.div`
     // padding: 0 70px;
@@ -29,6 +30,7 @@ const ContentHead = (props) => {
 }
 
 const Main = () => {
+
     return(
         <MainWrap>
             <div id="banner">

@@ -90,7 +90,7 @@ const DetailHead = (props) => {
 
     const jsonData = {
       "memberId": sessionStorage.getItem('userId'),
-      "productNo": prdInfo.prdNo,
+      "productNo": prdInfo.product_NO,
       "cartAmount": props.amount
     }
 
@@ -103,15 +103,15 @@ const DetailHead = (props) => {
   return (
     <Wrap>
       <div>
-        <img src={prdInfo.imgPath} alt={prdInfo.productName} width='250' height='300'/>
+        <img src={prdInfo.imgPath} alt={prdInfo.product_NAME} width='250' height='300'/>
         <HeadInfo>
           <div>
-            <h2>{prdInfo.productName}</h2> 
-            <h3>{prdInfo.productInfo}</h3>
+            <h2>{prdInfo.product_NAME}</h2> 
+            <h3>{prdInfo.product_INFO}</h3>
             <span>별 {prdInfo.rank}</span>
             <span>리뷰 {prdInfo.review}</span>
             <div>
-              <h2>{prdInfo.productPrice} 원</h2>
+              <h2>{prdInfo.product_PRICE} 원</h2>
             </div>
           </div>
           <div>
@@ -140,8 +140,8 @@ const DetailHead = (props) => {
                   <td>상품 선택</td>
                   <td>
                     <div>
-                      <span>{prdInfo.prdName}</span>
-                      <CountBtn className="cntBtn" cnt={0} setAmount={props.setAmount} setTotal={setTotal} price={prdInfo.prdPrice}/>
+                      <span>{prdInfo.product_NAME}</span>
+                      <CountBtn className="cntBtn" cnt={0} setAmount={props.setAmount} setTotal={setTotal} price={prdInfo.product_PRICE}/>
                     </div>
                   </td>
                 </tr>

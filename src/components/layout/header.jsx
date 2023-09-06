@@ -4,8 +4,8 @@ import axios from "axios";
 import MenuList from "../template/menuList";
 
 function LoginOut() {
-  sessionStorage.setItem('isLogin', true);
-  sessionStorage.setItem('userId', 'user01');
+  // sessionStorage.setItem('isLogin', true);
+  // sessionStorage.setItem('userId', 'user01');
   const isLogin = sessionStorage.getItem("isLogin");
   let contents;
 
@@ -23,6 +23,8 @@ function LoginOut() {
           className="btn"
           id="logout-btn"
           onClick={() => {
+            sessionStorage.setItem('isLogin', false);
+            sessionStorage.setItem('userId', '');
             axios.post("/logout");
           }}
         >
