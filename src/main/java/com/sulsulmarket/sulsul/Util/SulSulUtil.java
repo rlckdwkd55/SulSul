@@ -12,7 +12,6 @@ public class SulSulUtil {
 
     private static AtomicLong sequence = new AtomicLong(1);
 
-
     public static Date getCurrentTime(){
 
         Date now = new Date(System.currentTimeMillis());
@@ -24,7 +23,6 @@ public class SulSulUtil {
 //        log.info("요청이 들어오는 값을 찍어보자 : {}, {}", pageNum, totalCount);
         if (pageNum != 0 && totalCount != 0) {
 //            log.info("여긴 들어오니? : {}, {}", pageNum, totalCount);
-
             Map<String, Integer> resultMap = new HashMap<>();
             int start = 1;
             double end = totalCount / 10;

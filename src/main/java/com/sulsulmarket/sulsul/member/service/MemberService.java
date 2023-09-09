@@ -1,7 +1,10 @@
 package com.sulsulmarket.sulsul.member.service;
 
+import com.sulsulmarket.sulsul.Util.SulSulUtil;
 import com.sulsulmarket.sulsul.dto.member.Address;
 import com.sulsulmarket.sulsul.dto.member.Member;
+import com.sulsulmarket.sulsul.dto.member.MemberOne;
+import com.sulsulmarket.sulsul.dto.member.SignRequestMember;
 import com.sulsulmarket.sulsul.member.dao.MemberDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -37,66 +41,47 @@ public class MemberService {
     }
 
     /**
-     * 회원 아이디를 받아 정볼르 조회하는 메서드
+     * 회원 아이디를 받아 정보를 조회하는 메서드
      */
-    public Member getMemberById(String memberId) {
+    public MemberOne getMemberById(String memberId) {
 
-        if (memberId == null) {
+        if (!SulSulUtil.strNullCheck(memberId)) {
             log.error("member id is null not found member.");
-            throw new NullPointerException("회원 아이디 값이 없습니다.");
+            throw new NullPointerException("파라미터 회원 아이디 값이 없습니다.");
         }
 
         Member member = memberDao.getMemberById(memberId);
-        if(member == null) {
+        if(member == null || Objects.isNull(member)) {
             log.error("not found member by memberId : [{}]", memberId);
-            throw new NullPointerException("회원 아이디가 존재하지 않습니다.");
+            throw new NullPointerException("회원 아이디로 조회 결과가 존재하지 않습니다.");
         } else {
             Address address = memberDao.getAddressByMemberId(memberId);
-            if (address == null) {
+            if (address == null || Objects.isNull(address)) {
                 log.error("member Address is null by memberId : [{}]", memberId);
-                throw new IllegalArgumentException("회원 아이디로 주소를 찾을 수가 없습니다.");
+                throw new NullPointerException("회원 아이디로 주소를 찾을 수가 없습니다.");
             }
+
+            MemberOne finalMember = new MemberOne().toDTO(memberDao.getMemberById(memberId), address);
             log.debug("find member info : [{}]", member);
-            return member;
-        }
-    }
-
-    /**
-     * 아이디 중복 체크 메서드
-     */
-    public boolean duplicateCheckId(String memberId) {
-
-        if(memberId == null) {
-            log.error("memberId is null");
-            throw new NullPointerException("아이디 값이 없습니다.");
-        } else {
-            Member duplicateMember = memberDao.getMemberById(memberId);
-            // 있으면 중복
-            if(duplicateMember != null) {
-                log.info("Is exist member duplicate memberId : [{}]", memberId);
-                throw new DuplicateKeyException("이미 존재하는 아이디 입니다.");
-            } else {
-                log.info("member id is not using : [{}]", memberId);
-                return true;
-            }
+            return finalMember;
         }
     }
 
     /**
      * 이메일 중복 체크 메서드
      */
-    public void duplicateCheckEmail(String email) {
+    public boolean duplicateCheckEmail(String email) {
 
-        if(email == null) {
-            log.error("MEMBER EMAIL IS NULL ! ! !");
-            throw new NullPointerException("이메일 값이 없습니다.");
+        if(SulSulUtil.strNullCheck(email)) {
+            log.error("member email is null ! ! !");
+            throw new NullPointerException("파라미터 이메일 값이 없습니다.");
         } else {
-            Member duplicateEmail = memberDao.getMemberByEmail(email);
-            if(duplicateEmail != null) {
-                log.info("IS EXIST DUPLICATE EMAIL -> {}", email);
+            if(memberDao.getMemberByEmail(email) != null) {
+                log.info("is exist duplicate email :: [{}]", email);
                 throw new DuplicateKeyException("이미 존재하는 이메일입니다.");
             }
-            log.info("USED EMAIL OK ! ! ! -> {}", email);
+            log.info("used email ok. [{}] ", email);
+            return true;
         }
     }
 
@@ -132,20 +117,8 @@ public class MemberService {
      * 회원가입 메서드
      */
     @Transactional
-    public void memberSign(Member member) {
+    public void memberSign(SignRequestMember member) {
 
-        if(!duplicateCheckId(member.getMEMBER_ID())){
-            return;
-        }
-
-        // 이메일 중복 체크
-        duplicateCheckEmail(member.getMEMBER_EMAIL());
-
-        // 중복 검증 끝나고 패스워드 암호화
-        String password = passwordEncoder.encode(member.getMEMBER_PW());
-        log.info("PASSWORD ENCODER -> {}", password);
-        // 암호화 한 값을 대입
-        member.setMEMBER_PW(password);
         // 위에서 암호화 한 Member 넘겨주면서 회원가입
         Integer insertMember = memberDao.memberSign(member);
 

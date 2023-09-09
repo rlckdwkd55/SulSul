@@ -12,9 +12,7 @@
 
     <insert id="memberSign">
         INSERT INTO MEMBER(
-             MEMBER_ID
-            ,MEMBER_PW
-            ,MEMBER_NAME
+             MEMBER_NAME
             ,MEMBER_BIRTHDATE
             ,MEMBER_GENDER
             ,MEMBER_PHONE
@@ -57,6 +55,6 @@
     <select id="getAddressByMemberId" resultType="com.sulsulmarket.sulsul.dto.member.Address">
         SELECT *
           FROM ADDRESS
-        WHERE BY MEMBER_ID = #{MEMBER_ID}
+        WHERE MEMBER_ID = #{MEMBER_ID}
     </select>
 </mapper>

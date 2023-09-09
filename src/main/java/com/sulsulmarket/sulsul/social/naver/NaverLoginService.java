@@ -18,6 +18,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Service
@@ -129,7 +130,13 @@ public class NaverLoginService {
                 // 이미 가입된 회원인 경우에
                 if (memberDao.getMemberByEmail(userInfo.getResponse().getEmail()) != null) {
                     log.warn("Is Exist Naver Member.");
-                    throw new DuplicateMemberException("이미 가입된 회원입니다.");
+                    userInfo.setResultcode("01");
+                }
+
+                // 미성년자인 경우
+                if (LocalDateTime.now().getYear() >= Integer.parseInt(userInfo.getResponse().getBirthyear()) + 19) {
+                    log.warn("is no adult member sign fail.");
+                    userInfo.setResultcode("02");
                 }
 
                 log.info("naver get userInfo Success : [{}]", userInfo);

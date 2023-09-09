@@ -49,9 +49,6 @@ public class NaverLoginController {
             if (e instanceof NullPointerException) {
                 log.error("naver get user info is NullPointerException.", e);
                 return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-            } else if (e instanceof DuplicateMemberException) {
-                log.error("naver get user info is DuplicateMemberException.", e);
-                return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
             } else if (e instanceof HttpClientErrorException) {
                 log .error("naver user info HttpClientErrorException.", e);
                 return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

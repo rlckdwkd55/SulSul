@@ -43,4 +43,5 @@ public class Member {
     private LocalDateTime REG_TIME;
 
     private String MEMBER_ROLE;
+
 }
