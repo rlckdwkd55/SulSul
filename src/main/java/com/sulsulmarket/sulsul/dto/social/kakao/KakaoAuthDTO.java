@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ToString
 //@ConfigurationProperties(prefix = "spring.security.oauth2.client.registration.")
-public class KakaoAuth {
+public class KakaoAuthDTO {
 
     @Value("${spring.security.oauth2.client.registration.kakao.client-id}")
     private String clientId;
