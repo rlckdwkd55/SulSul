@@ -24,7 +24,7 @@ function LoginOut() {
           id="logout-btn"
           onClick={() => {
             sessionStorage.setItem('isLogin', false);
-            sessionStorage.setItem('userId', '');
+            sessionStorage.setItem('userEmail', '');
             axios.post("/logout");
           }}
         >

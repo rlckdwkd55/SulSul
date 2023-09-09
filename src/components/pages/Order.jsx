@@ -10,6 +10,7 @@ import OrderPayment from "../template/order/orderPayment";
 import OrderAgreement from "../template/order/orderAgreement";
 import OrderButton from "../template/order/orderButton";
 import styled from "styled-components";
+import { dateFormat } from "../../js/common";
 
 const Wrap = styled.div`
   margin: 50px 150px;
@@ -21,22 +22,30 @@ const Order = () => {
   const [ userAddr, setUserAddr ] = useState({});
   const [ isAgree, setIsAgree ] = useState(false);
   const [ payment, setPayment ] = useState('');
+  const [ orderDetailList, setOrderDetailList ] = useState([])
   const [ jsonData, setJsonData ] = useState({
-    "memberId": sessionStorage.getItem('userId'),
+    "memberEmail": sessionStorage.getItem('userEmail'), // email로 변경되어야 할 듯?
     "orderAddress": '',
     "orderReceiver": '',
     "orderRequest": '',
     "orderPhone": '',
     "payMethod": '',
-    "orderDetailList": []
+    "orderDetailList": orderDetailList
   })
   const { state } = useLocation();
   const prdList = state.orderInfo.prdList;
   const total = state.orderInfo.total;
-  const prdNoList = [];
 
+  let list = [];
   prdList.forEach(function(data) {
-    prdNoList.push(data.prdNo);
+    let orderDetail = {
+      "productNo": data.PRODUCT_NO,
+      "detailAmount": data.amount,
+      "detailPrice": data.totalPrice,
+      "payDate": dateFormat(new Date())
+    };
+
+    list.push(orderDetail);
   })
 
   useEffect(()=>{
@@ -51,6 +60,9 @@ const Order = () => {
     setUserAddr({
 
     })
+
+    
+    setOrderDetailList(list);
   },[])
 
   return(
@@ -60,7 +72,7 @@ const Order = () => {
       <OrderAddr userAddr={userAddr}/>
       <OrderPayment price={total} total={total+3000} setPayment={setPayment}/>
       <OrderAgreement setIsAgree={setIsAgree} />
-      <OrderButton payment={payment} isAgree={isAgree} total={total} prdNoList={prdNoList} />
+      <OrderButton payment={payment} isAgree={isAgree} total={total} jsonData={jsonData} />
     </Wrap>
   )
 }

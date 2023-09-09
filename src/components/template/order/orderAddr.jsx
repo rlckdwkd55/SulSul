@@ -1,3 +1,5 @@
+import { useState } from "react";
+import DaumPostPopup from "../../module/daumPost";
 import styled from "styled-components";
 
 const Wrap = styled.div`
@@ -19,11 +21,20 @@ const Table = styled.table`
     }
   }
 `;
+const AddrWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+
+`;
 const ReqSelect = styled.select``;
 
 const OrderAddr = (props) => {
+  const [ checkVal, setCheckVal ] = useState();
   const userAddr = props.userAddr;
-  const addrContents = '';
+  const handleRadioCheck = (e) => {
+    const value = e.target.value();
+    setCheckVal(value)
+  }
   
 
   return(
@@ -37,7 +48,14 @@ const OrderAddr = (props) => {
               <label><input type='radio' name='address' value='A' checked/>기본 배송지</label>
               <label><input type='radio' name='address' value='B'/>새 배송지</label>
             </div>
-            {addrContents}
+            <AddrWrap>
+              <div>
+                <input type="text" name="postNo" check-result="false"  value=''/>
+                <DaumPostPopup setInput={function(){}}/>
+              </div>
+              <input type="text" name="address" check-result="false" value=''/>
+              <input type="text" name="detailAddress" placeholder="상세 주소를 입력해 주세요." check-result="false" value=''/>
+            </AddrWrap>
           </td>
         </tr>
         <tr>

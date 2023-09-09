@@ -1,9 +1,10 @@
-import {Link} from 'react-router-dom';
-import {useState} from 'react';
+import { Link,useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import LoginService from '../../service/LoginService';
 import '../../css/login.css';
 
 function Login() {
+    const navigate = useNavigate();
     const [id, setId] = useState('');
     const [pwd, setPwd] = useState('');
 
@@ -59,15 +60,30 @@ function Login() {
     const tokenRequest = async(code) => {
         const response = await LoginService.getTokenRequest('naver', code);
             if (response.status === 'success') {
-                const userInfo = response.data.response;
-                
+                const reslutCode = response.data.reslutCode;
+                if (reslutCode === '01') { // 회원 가입 되어있음 로그인 처리
+
+                } else {
+                    if (reslutCode === '02') {  // 미성년자 회원가입 불가
+                        alert('성인만 회원가입이 가능합니다.');
+                        return;
+                    }
+
+                    // 회원가입 처리
+                    // 회원가입 화면으로 이동
+                    // birthday, birthyear, email, gender, mobile, name
+                    const userInfo = response.data.response;
+                    navigate('/SNSJoin', { state: {userInfo: userInfo}});
+                }
+
             }
     }
 
-    if (code) {
-        tokenRequest(code);
-    }
-        
+    useEffect(() => {
+        if (code) {
+            tokenRequest(code);
+        }
+    }, [])
 
     return(
         <section>

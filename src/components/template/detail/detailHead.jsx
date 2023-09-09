@@ -89,7 +89,7 @@ const DetailHead = (props) => {
     // 장바구니 저장 로직
 
     const jsonData = {
-      "memberId": sessionStorage.getItem('userId'),
+      "memberEmail": sessionStorage.getItem('userEmail'),
       "productNo": prdInfo.product_NO,
       "cartAmount": props.amount
     }

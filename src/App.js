@@ -13,6 +13,7 @@ import Detail from "./components/pages/detail";
 import Cart from "./components/pages/cart";
 import Order from "./components/pages/Order";
 import GlobalStyle from "./Util/GlobalStyle";
+import SNSJoin from "./components/pages/SNSJoin";
 import styled from "styled-components";
 
 const AppWrapper = styled.div`
@@ -45,6 +46,7 @@ function App() {
               <Route path="/detail" element={<Detail />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/order" element={<Order />} />
+              <Route path="/SNSJoin" element={<SNSJoin />} />
             </Routes>
           </PagesWrapper>
           {/* <Footer/> */}
