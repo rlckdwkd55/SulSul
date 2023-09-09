@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
-public class SulSulUil {
+public class SulSulUtil {
 
     private static AtomicLong sequence = new AtomicLong(1);
 
@@ -51,5 +51,14 @@ public class SulSulUil {
         return sequence.getAndIncrement();
     }
 
+    /**
+     * String null || space check method
+     */
+    public static boolean strNullCheck(String str) {
+        if (str.equals("") || str == null || str.length() == 0) {
+            return false;
+        }
+        return true;
+    } 
 
 }

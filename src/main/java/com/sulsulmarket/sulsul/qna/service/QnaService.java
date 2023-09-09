@@ -1,6 +1,6 @@
 package com.sulsulmarket.sulsul.qna.service;
 
-import com.sulsulmarket.sulsul.Util.SulSulUil;
+import com.sulsulmarket.sulsul.Util.SulSulUtil;
 import com.sulsulmarket.sulsul.dto.member.Member;
 import com.sulsulmarket.sulsul.member.dao.MemberDao;
 import com.sulsulmarket.sulsul.dto.qna.Qna;
@@ -36,7 +36,7 @@ public class QnaService {
             log.error("Member Is Not Found");
             throw new NullPointerException("회원 정보를 찾을 수 없습니다.");
         }
-        qnaDTO.setQNA_NO(SulSulUil.getNextSequence().intValue());
+        qnaDTO.setQNA_NO(SulSulUtil.getNextSequence().intValue());
 //        qnaDTO.setDEL_STATUS("N");
         log.info("Qna Data Check ==>> [{}]", qnaDTO.toString());
 //        log.info("QNaNO ==> CHeck {}", qnaDTO.getDEL_STATUS());

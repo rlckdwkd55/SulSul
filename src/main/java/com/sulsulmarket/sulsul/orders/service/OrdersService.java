@@ -1,6 +1,6 @@
 package com.sulsulmarket.sulsul.orders.service;
 
-import com.sulsulmarket.sulsul.Util.SulSulUil;
+import com.sulsulmarket.sulsul.Util.SulSulUtil;
 import com.sulsulmarket.sulsul.orders.dao.OrdersDao;
 import com.sulsulmarket.sulsul.dto.order.Orders;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class OrdersService {
         int result = 0;
 
         String memberId = (String)requestOrder.get("memberId");
-        Date orderDate = SulSulUil.getCurrentTime();
+        Date orderDate = SulSulUtil.getCurrentTime();
         String orderAddress = (String)requestOrder.get("orderAddress");
         String orderReceiver =(String) requestOrder.get("orderReceiver");
         String orderRequest = (String)requestOrder.get("orderRequest");
@@ -40,7 +40,7 @@ public class OrdersService {
 
         Map<String, Object> orderParameter = new HashMap<>();
 
-        int orderNo = Math.toIntExact(SulSulUil.getNextSequence());
+        int orderNo = Math.toIntExact(SulSulUtil.getNextSequence());
         // TODO 생성된 orderNo 값을 가지고 orders table에서 조회
 
 

@@ -1,4 +1,4 @@
-package com.sulsulmarket.sulsul.dto.kakaologin;
+package com.sulsulmarket.sulsul.dto.social.kakao;
 
 import lombok.Getter;
 import lombok.Setter;

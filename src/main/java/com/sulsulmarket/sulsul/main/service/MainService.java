@@ -1,6 +1,6 @@
 package com.sulsulmarket.sulsul.main.service;
 
-import com.sulsulmarket.sulsul.Util.SulSulUil;
+import com.sulsulmarket.sulsul.Util.SulSulUtil;
 import com.sulsulmarket.sulsul.dto.product.Product;
 import com.sulsulmarket.sulsul.main.dao.MainDao;
 import lombok.extern.slf4j.Slf4j;
@@ -67,7 +67,7 @@ public class MainService {
         }
         int pageNum = Integer.parseInt(productListMap.get("page"));
         if(resultTotalCount > 0 && pageNum > 0){
-            Map<String, Integer> page = SulSulUil.getPage(pageNum, resultTotalCount);
+            Map<String, Integer> page = SulSulUtil.getPage(pageNum, resultTotalCount);
             parameter.put("START_PAGE", String.valueOf(page.get("startNum")));
             parameter.put("END_PAGE", String.valueOf(page.get("endNum")));
             resultList = mainDao.getPagingList(parameter);

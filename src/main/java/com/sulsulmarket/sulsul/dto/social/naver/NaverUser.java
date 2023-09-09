@@ -1,6 +1,5 @@
-package com.sulsulmarket.sulsul.dto.naver;
+package com.sulsulmarket.sulsul.dto.social.naver;
 
-import com.sulsulmarket.sulsul.social.naver.NaverUserResponse;
 import lombok.Getter;
 import lombok.ToString;
 

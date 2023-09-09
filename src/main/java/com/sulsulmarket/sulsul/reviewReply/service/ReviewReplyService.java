@@ -1,6 +1,6 @@
 package com.sulsulmarket.sulsul.reviewReply.service;
 
-import com.sulsulmarket.sulsul.Util.SulSulUil;
+import com.sulsulmarket.sulsul.Util.SulSulUtil;
 import com.sulsulmarket.sulsul.dto.reviewReply.ReviewReply;
 import com.sulsulmarket.sulsul.dto.review.Review;
 import com.sulsulmarket.sulsul.member.dao.MemberDao;
@@ -57,7 +57,7 @@ public class ReviewReplyService {
         }
 
         try {
-            reviewReply.setREPLY_ID(SulSulUil.getNextSequence().intValue());
+            reviewReply.setREPLY_ID(SulSulUtil.getNextSequence().intValue());
             log.info("ReviewReplyDTO ===>>> [{}]", reviewReply.toString());
             reviewReplyDao.reviewReplyAdd(reviewReply);
             log.info("Review Reply Insert Is Success ! ! !");
