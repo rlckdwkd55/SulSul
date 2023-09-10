@@ -125,7 +125,7 @@ public class CartService {
             cartDao.deleteCartByMemberId(email, productNo);
             log.info("CART DELETE IS SUCCESS");
         } catch (Exception e) {
-            log.error("DB CART DELETE IS FAIL ! ! !");
+            log.error("cart remove is fail..", e);
         }
     }
 
