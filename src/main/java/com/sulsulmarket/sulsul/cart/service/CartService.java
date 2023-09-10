@@ -28,7 +28,7 @@ public class CartService {
 
     public List<Cart> getCartListByMemberId(String email) {
 
-        if (SulSulUtil.strNullCheck(email)) {
+        if (!SulSulUtil.strNullCheck(email)) {
             log.error("member email parameter is null.");
             throw new NullPointerException("이메일 파라미터 값이 없습니다.");
         }

@@ -22,5 +22,5 @@ public interface MypageMapper {
 
     List<Address> getAddressList(String memberEmail);
 
-    List<ClaimInfo> getCancelRefundList(String memberEmail);
+    List<ClaimInfo> getCancelRefundList(String email);
 }

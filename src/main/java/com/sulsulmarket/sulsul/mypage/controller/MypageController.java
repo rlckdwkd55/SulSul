@@ -64,7 +64,7 @@ public class MypageController {
     public ResponseEntity<Object> reviewList(@RequestBody Map<String, String> requestBody){
 
         try{
-            List<Review> resultList = mypageService.getReviewList(requestBody.get("memberEmail"));
+            List<Review> resultList = mypageService.getReviewList(requestBody.get("email"));
             return ResponseEntity.status(HttpStatus.OK).body(resultList);
         } catch (Exception e){
             log.error("ERROR");
@@ -80,7 +80,7 @@ public class MypageController {
     public ResponseEntity<Object> userInfo(@RequestBody Map<String, String> requestBody){
 
         try{
-            List<Member> resultList = mypageService.getUserInfo(requestBody.get("memberEmail"));
+            List<Member> resultList = mypageService.getUserInfo(requestBody.get("email"));
             return ResponseEntity.status(HttpStatus.OK).body(resultList);
         } catch (Exception e){
             log.error("ERROR");
@@ -97,7 +97,7 @@ public class MypageController {
     public ResponseEntity<Object> addressList(@RequestBody Map<String, String> requestBody){
 
         try{
-            List<Address> resultList = mypageService.getAddressList(requestBody.get("memberEmail"));
+            List<Address> resultList = mypageService.getAddressList(requestBody.get("email"));
             return ResponseEntity.status(HttpStatus.OK).body(resultList);
         } catch (Exception e){
             log.error("ERROR");
@@ -106,10 +106,10 @@ public class MypageController {
     }
 
     @PostMapping("/myPage/cancelRefundList")
-    public ResponseEntity<Object> cancelRefundList(String memberEmail){
+    public ResponseEntity<Object> cancelRefundList(String email){
 
         try{
-        List<ClaimInfo> resultList = mypageService.getCancelRefundList(memberEmail);
+        List<ClaimInfo> resultList = mypageService.getCancelRefundList(email);
         return ResponseEntity.status(HttpStatus.OK).body(resultList);
         } catch (Exception e){
             log.error("ERROR");
