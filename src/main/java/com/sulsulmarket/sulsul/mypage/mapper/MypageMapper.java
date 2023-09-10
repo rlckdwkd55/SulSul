@@ -12,15 +12,15 @@ import java.util.List;
 
 @Mapper
 public interface MypageMapper {
-    List<Orders> getOrderList(String memberId);
+    List<Orders> getOrderList(String memberEmail);
 
     List<OrderDetail> getOrderDetailList(int orderNo);
 
-    List<Review> getReviewList(String memberId);
+    List<Review> getReviewList(String memberEmail);
 
-    List<Member> getUserInfo(String memberId);
+    List<Member> getUserInfo(String memberEmail);
 
-    List<Address> getAddressList(String memberId);
+    List<Address> getAddressList(String memberEmail);
 
-    List<ClaimInfo> getCancelRefundList(String memberId);
+    List<ClaimInfo> getCancelRefundList(String memberEmail);
 }

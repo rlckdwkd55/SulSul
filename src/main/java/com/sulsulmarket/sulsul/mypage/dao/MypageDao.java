@@ -19,8 +19,8 @@ public class MypageDao implements MypageMapper{
     private MypageMapper mypageMapper;
 
     @Override
-    public List<Orders> getOrderList(String memberId) {
-        return mypageMapper.getOrderList(memberId);
+    public List<Orders> getOrderList(String memberEmail) {
+        return mypageMapper.getOrderList(memberEmail);
     }
 
     @Override
@@ -29,24 +29,24 @@ public class MypageDao implements MypageMapper{
     }
 
     @Override
-    public List<Review> getReviewList(String memberId) {
+    public List<Review> getReviewList(String memberEmail) {
 
-        return mypageMapper.getReviewList(memberId);
+        return mypageMapper.getReviewList(memberEmail);
     }
 
     @Override
-    public List<Member> getUserInfo(String memberId) {
-        return mypageMapper.getUserInfo(memberId);
+    public List<Member> getUserInfo(String memberEmail) {
+        return mypageMapper.getUserInfo(memberEmail);
     }
 
     @Override
-    public List<Address> getAddressList(String memberId) {
-        return mypageMapper.getAddressList(memberId);
+    public List<Address> getAddressList(String memberEmail) {
+        return mypageMapper.getAddressList(memberEmail);
     }
 
     @Override
-    public List<ClaimInfo> getCancelRefundList(String memberId) {
-        return mypageMapper.getCancelRefundList(memberId);
+    public List<ClaimInfo> getCancelRefundList(String memberEmail) {
+        return mypageMapper.getCancelRefundList(memberEmail);
     }
 
 

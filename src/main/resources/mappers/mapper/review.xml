@@ -5,7 +5,7 @@
     <insert id="writeReview" parameterType="com.sulsulmarket.sulsul.dto.review.Review">
         INSERT INTO REVIEW(
              REVIEW_NO
-            ,MEMBER_ID
+            ,MEMBER_EMAIL
             ,DETAIL_NO
             ,REVIEW_CONTENT
             ,REVIEW_SCORE
@@ -14,7 +14,7 @@
             ,REVIEW_IMAGE
         ) VALUES(
              #{REVIEW_NO}
-            ,#{MEMBER_ID}
+            ,#{MEMBER_EMAIL}
             ,#{DETAIL_NO}
             ,#{REVIEW_CONTENT}
             ,#{REVIEW_SCORE}
@@ -34,9 +34,9 @@
     <select id="getReviewListAllByMemberId" resultType="com.sulsulmarket.sulsul.dto.review.ReviewOrderByMemberId">
         SELECT *
           FROM REVIEW A
-         JOIN MEMBER B ON A.MEMBER_ID = B.MEMBER_ID
+         JOIN MEMBER B ON A.MEMBER_EMAIL = B.MEMBER_EMAIL
           JOIN ORDER_DETAIL C ON A.DETAIL_NO = C.DETAIL_NO
-         WHERE B.MEMBER_ID = #{MEMBER_ID}
+         WHERE B.MEMBER_EMAIL = #{MEMBER_EMAIL}
     </select>
 
     <update id="updateReviewByMemberId" parameterType="com.sulsulmarket.sulsul.dto.review.Review">
@@ -53,13 +53,13 @@
             </if>
             UPDATE_TIME = NOW()
         </set>
-            WHERE MEMBER_ID = #{MEMBER_ID}
+            WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
             AND DETAIL_NO = #{DETAIL_NO}
     </update>
 
     <delete id="deleteReviewByMemberId">
         DELETE FROM REVIEW
-          WHERE MEMBER_ID = #{MEMBER_ID}
+          WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
         AND DETAIL_NO = #{DETAIL_NO}
     </delete>
     

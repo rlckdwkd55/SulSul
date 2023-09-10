@@ -10,7 +10,7 @@ import lombok.ToString;
 public class Orders {
 
     private int ORDER_NO; //주문번호
-    private String MEMBER_ID; //아이디
+    private String MEMBER_EMAIL; // 이메일
     private String TID; //결제승인번호
     private String AID; //결제코드
     private String ORDER_DATE; //주문날짜

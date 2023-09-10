@@ -6,7 +6,7 @@
     <insert id="qnaWrite" parameterType="com.sulsulmarket.sulsul.dto.qna.Qna">
         INSERT INTO QNA (
               QNA_NO
-            , MEMBER_ID
+            , MEMBER_EMAIL
             , PRODUCT_NO
             , QNA_TITLE
             , QNA_CONTENT
@@ -15,7 +15,7 @@
         )
         VALUES (
               #{QNA_NO}
-            , #{MEMBER_ID}
+            , #{MEMBER_EMAIL}
             , #{PRODUCT_NO}
             , #{QNA_TITLE}
             , #{QNA_CONTENT}
@@ -26,7 +26,7 @@
 
     <!-- QNA 테이블에서 특정 QNA_NO에 해당하는 데이터를 조회하는 SELECT 쿼리 -->
     <select id="getQnaByQnaNo" resultType="com.sulsulmarket.sulsul.dto.qna.Qna">
-        SELECT QNA_NO, MEMBER_ID, PRODUCT_NO, QNA_TITLE, QNA_CONTENT, CREATED_TIME, DEL_STATUS
+        SELECT QNA_NO, MEMBER_EMAIL, PRODUCT_NO, QNA_TITLE, QNA_CONTENT, CREATED_TIME, DEL_STATUS
         FROM QNA
         WHERE QNA_NO = #{qnaNo}
         AND DEL_STATUS = 'N'

@@ -30,7 +30,7 @@ public class QnaService {
             throw new NullPointerException("문의 데이터가 없습니다.");
         }
 
-        Member member = memberDao.getMemberById(qnaDTO.getMEMBER_ID());
+        Member member = memberDao.getMemberByEmail(qnaDTO.getMEMBER_EMAIL());
 
         if (member == null || Objects.isNull(member)) {
             log.error("Member Is Not Found");

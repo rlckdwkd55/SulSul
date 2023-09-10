@@ -14,13 +14,6 @@ import java.time.LocalDateTime;
  */
 public class Member {
 
-    @JsonProperty("memberId")
-    private String MEMBER_ID;
-
-    @JsonProperty("password")
-    @Setter
-    private String MEMBER_PW;
-
     @JsonProperty("name")
     private String MEMBER_NAME;
 

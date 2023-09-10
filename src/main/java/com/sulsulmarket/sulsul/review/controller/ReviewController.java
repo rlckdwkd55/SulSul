@@ -73,7 +73,7 @@ public class ReviewController {
     @PostMapping("/api/review/delete")
     public ResponseEntity<Object> reviewDelete(@RequestBody Review review) {
         try {
-            reviewService.deleteReviewByMemberId(review.getMEMBER_ID(), review.getDETAIL_NO());
+            reviewService.deleteReviewByMemberId(review.getMEMBER_EMAIL(), review.getDETAIL_NO());
             return ResponseEntity.status(HttpStatus.OK).body("삭제 성공");
         } catch (Exception e) {
             log.error("Delete Is Fail ! ! !");

@@ -10,17 +10,17 @@ import java.util.List;
 @Mapper
 public interface CartMapper {
 
-    int addCartByMemberIdAndProduct(String memberId, int productNo, int cartAmount);
+    int addCartByMemberIdAndProduct(String email, int productNo, int cartAmount);
 
-    Cart getCartByMemberIdAndProductNo(String memberId, int productNo);
+    Cart getCartByMemberIdAndProductNo(String email, int productNo);
 
-    int updateCartCount(String memberId, int productNo, int cartAmount);
+    int updateCartCount(String email, int productNo, int cartAmount);
 
-    int deleteCartByMemberId(String memberId, int productNo);
+    int deleteCartByMemberId(String email, int productNo);
 
     Product productListByProductNo(int productNo);
 
     ProductImage productImageByProductNo(int productNo);
 
-    List<Cart> getCartListByMemberId(String memberId);
+    List<Cart> getCartListByMemberEmail(String email);
 }

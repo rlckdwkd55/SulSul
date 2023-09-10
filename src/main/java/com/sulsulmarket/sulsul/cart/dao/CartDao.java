@@ -16,23 +16,23 @@ public class CartDao implements CartMapper {
     private CartMapper cartMapper;
 
     @Override
-    public int addCartByMemberIdAndProduct(String memberId, int productNo, int cartAmount) {
-        return cartMapper.addCartByMemberIdAndProduct(memberId, productNo, cartAmount);
+    public int addCartByMemberIdAndProduct(String email, int productNo, int cartAmount) {
+        return cartMapper.addCartByMemberIdAndProduct(email, productNo, cartAmount);
     }
 
     @Override
-    public Cart getCartByMemberIdAndProductNo(String memberId, int productNo) {
-        return cartMapper.getCartByMemberIdAndProductNo(memberId, productNo);
+    public Cart getCartByMemberIdAndProductNo(String email, int productNo) {
+        return cartMapper.getCartByMemberIdAndProductNo(email, productNo);
     }
 
     @Override
-    public int updateCartCount(String memberId, int productNo, int cartAmount) {
-        return cartMapper.updateCartCount(memberId, productNo, cartAmount);
+    public int updateCartCount(String email, int productNo, int cartAmount) {
+        return cartMapper.updateCartCount(email, productNo, cartAmount);
     }
 
     @Override
-    public int deleteCartByMemberId(String memberId, int productNo) {
-        return cartMapper.deleteCartByMemberId(memberId, productNo);
+    public int deleteCartByMemberId(String email, int productNo) {
+        return cartMapper.deleteCartByMemberId(email, productNo);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class CartDao implements CartMapper {
     }
 
     @Override
-    public List<Cart> getCartListByMemberId(String memberId) {
-        return cartMapper.getCartListByMemberId(memberId);
+    public List<Cart> getCartListByMemberEmail(String email) {
+        return cartMapper.getCartListByMemberEmail(email);
     }
 }

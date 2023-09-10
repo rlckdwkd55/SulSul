@@ -64,7 +64,7 @@ public class MypageController {
     public ResponseEntity<Object> reviewList(@RequestBody Map<String, String> requestBody){
 
         try{
-            List<Review> resultList = mypageService.getReviewList(requestBody.get("memberId"));
+            List<Review> resultList = mypageService.getReviewList(requestBody.get("memberEmail"));
             return ResponseEntity.status(HttpStatus.OK).body(resultList);
         } catch (Exception e){
             log.error("ERROR");
@@ -80,7 +80,7 @@ public class MypageController {
     public ResponseEntity<Object> userInfo(@RequestBody Map<String, String> requestBody){
 
         try{
-            List<Member> resultList = mypageService.getUserInfo(requestBody.get("memberId"));
+            List<Member> resultList = mypageService.getUserInfo(requestBody.get("memberEmail"));
             return ResponseEntity.status(HttpStatus.OK).body(resultList);
         } catch (Exception e){
             log.error("ERROR");
@@ -97,7 +97,7 @@ public class MypageController {
     public ResponseEntity<Object> addressList(@RequestBody Map<String, String> requestBody){
 
         try{
-            List<Address> resultList = mypageService.getAddressList(requestBody.get("memberId"));
+            List<Address> resultList = mypageService.getAddressList(requestBody.get("memberEmail"));
             return ResponseEntity.status(HttpStatus.OK).body(resultList);
         } catch (Exception e){
             log.error("ERROR");
@@ -106,10 +106,10 @@ public class MypageController {
     }
 
     @PostMapping("/myPage/cancelRefundList")
-    public ResponseEntity<Object> cancelRefundList(String memberId){
+    public ResponseEntity<Object> cancelRefundList(String memberEmail){
 
         try{
-        List<ClaimInfo> resultList = mypageService.getCancelRefundList(memberId);
+        List<ClaimInfo> resultList = mypageService.getCancelRefundList(memberEmail);
         return ResponseEntity.status(HttpStatus.OK).body(resultList);
         } catch (Exception e){
             log.error("ERROR");

@@ -25,7 +25,7 @@ public class OrdersService {
 
         int result = 0;
 
-        String memberId = (String)requestOrder.get("memberId");
+        String email = (String)requestOrder.get("email");
         Date orderDate = SulSulUtil.getCurrentTime();
         String orderAddress = (String)requestOrder.get("orderAddress");
         String orderReceiver =(String) requestOrder.get("orderReceiver");
@@ -45,7 +45,7 @@ public class OrdersService {
 
 
         orderParameter.put("ORDER_NO", orderNo);
-        orderParameter.put("MEMBER_ID", memberId);
+        orderParameter.put("MEMBER_ID", email);
         orderParameter.put("ORDER_DATE", String.valueOf(orderDate));
         orderParameter.put("ORDER_ADDRESS", orderAddress);
         orderParameter.put("ORDER_RECEIVER", orderReceiver);

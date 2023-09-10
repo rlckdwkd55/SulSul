@@ -37,7 +37,7 @@ public class ReviewReplyService {
             throw new NullPointerException("리뷰 답글에 대한 내용이 없습니다.");
         }
 
-        Member member = memberDao.getMemberById(reviewReply.getRESPONDER_ID());
+        Member member = memberDao.getMemberByEmail(reviewReply.getRESPONDER_ID());
 
         if (member == null || Objects.isNull(member)) {
             log.error("Not Found Member By Member Id");

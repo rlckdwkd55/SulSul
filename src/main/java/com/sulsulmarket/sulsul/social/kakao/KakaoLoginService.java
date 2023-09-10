@@ -7,7 +7,7 @@
 
 package com.sulsulmarket.sulsul.social.kakao;
 
-import com.sulsulmarket.sulsul.dto.social.kakao.KakaoAuth;
+import com.sulsulmarket.sulsul.dto.social.kakao.KakaoAuthDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -23,7 +23,8 @@ public class KakaoLoginService {
 
     private String url = "https://kauth.kakao.com/oauth/authorize";
     @Autowired
-    private KakaoAuth kakaoAuth;
+    private KakaoAuthDTO kakaoAuth;
+
     private RestTemplate restTemplate = new RestTemplate();
 
     public String getRedirectUrl() {

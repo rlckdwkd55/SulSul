@@ -13,8 +13,8 @@ public class Review {
 
     @JsonProperty("reviewNo")
     private int REVIEW_NO;
-    @JsonProperty("memberId")
-    private String MEMBER_ID;
+    @JsonProperty("email")
+    private String MEMBER_EMAIL;
     @JsonProperty("detailNo")
     private int DETAIL_NO;
     @JsonProperty("reviewContent")

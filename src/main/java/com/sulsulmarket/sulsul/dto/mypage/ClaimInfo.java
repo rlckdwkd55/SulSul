@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class ClaimInfo {
     private int CLAIM_NO; //클레임번호
     private int DETAIL_NO; //상세번호
-    private String MEMBER_ID; //아이디 -
+    private String MEMBER_EMAIL; // 이메일 -
     private int CLAIM_CODE; //클레임코드 -
     private String CLAIM_CONTENT; //클레임사유
     private LocalDateTime CLAIM_DATE; //클레임날짜

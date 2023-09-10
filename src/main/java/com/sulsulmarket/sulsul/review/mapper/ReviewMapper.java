@@ -14,13 +14,13 @@ public interface ReviewMapper {
 
     List<Review> getReviewListAllByOrderDetail();
 
-    List<ReviewOrderByMemberId> getReviewListAllByMemberId(String memberId);
+    List<ReviewOrderByMemberId> getReviewListAllByMemberId(String email);
 
     OrderDetail getOrderDetailList(int detailNo);
 
     int updateReviewByMemberId(Review review);
 
-    int deleteReviewByMemberId(String memberId, int detailNo);
+    int deleteReviewByMemberId(String email, int detailNo);
 
     Review getReviewByReviewNo(int reviewNo);
 }

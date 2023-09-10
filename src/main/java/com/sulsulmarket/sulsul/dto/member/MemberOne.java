@@ -6,7 +6,6 @@ import lombok.ToString;
 @Getter
 @ToString
 public class MemberOne {
-    private String memberId;
     private String name;
     private String email;
     private String gender;
@@ -14,7 +13,6 @@ public class MemberOne {
     private String phone;
 
     public MemberOne toDTO(Member member, Address address) {
-        this.memberId = member.getMEMBER_ID();
         this.name = member.getMEMBER_NAME();
         this.email = member.getMEMBER_EMAIL();
         this.gender = member.getMEMBER_GENDER();

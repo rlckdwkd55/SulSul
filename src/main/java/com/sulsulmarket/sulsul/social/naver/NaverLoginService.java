@@ -1,14 +1,11 @@
 package com.sulsulmarket.sulsul.social.naver;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.sulsulmarket.sulsul.Util.SulSulUtil;
 import com.sulsulmarket.sulsul.dto.social.naver.NaverTokenResponse;
 import com.sulsulmarket.sulsul.dto.social.naver.NaverUser;
 import com.sulsulmarket.sulsul.member.dao.MemberDao;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -19,7 +16,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Service
 @Slf4j
@@ -44,6 +40,7 @@ public class NaverLoginService {
 
     @Value("${spring.security.oauth2.client.provider.naver.user-info-uri}")
     private String userInfoUri;
+
     private MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
     private HttpHeaders headers = new HttpHeaders();
     private RestTemplate restTemplate = new RestTemplate();
@@ -88,6 +85,7 @@ public class NaverLoginService {
                 // 만약 에러 코드랑 에러 메시지가 있을 떄 네이버 토큰 요청 시에 에러가 날 경우에만 존재
                 if (!SulSulUtil.strNullCheck(tokenResponse.getError()) && !SulSulUtil.strNullCheck(tokenResponse.getError_description())) {
                     naverErrorHandler(tokenResponse.getError(), tokenResponse.getError_description());
+                    return null;
                 }
             }
 
@@ -116,6 +114,11 @@ public class NaverLoginService {
 
         // 토큰 반환 값.
         String accessToken = naverTokenRequest(code);
+
+        if (!SulSulUtil.strNullCheck(accessToken)) {
+            log.error("token is null error.");
+            throw new NullPointerException("토큰 값이 없습니다.");
+        }
         headers.setBearerAuth(accessToken);
         HttpEntity<String> userInfoEntity = new HttpEntity<>(headers);
 

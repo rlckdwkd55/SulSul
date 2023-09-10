@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+//@RequestMapping("/cart")
 @Slf4j
 public class CartController {
 
@@ -22,7 +23,7 @@ public class CartController {
     @PostMapping("/api/cart/select")
     public ResponseEntity<Object> getCartListByMemberId(@RequestBody Cart cart) {
 
-        List<Cart> cartList = cartService.getCartListByMemberId(cart.getMEMBER_ID());
+        List<Cart> cartList = cartService.getCartListByMemberId(cart.getMEMBER_EMAIL());
 
         return ResponseEntity.status(HttpStatus.OK).body(cartList);
     }
@@ -31,7 +32,7 @@ public class CartController {
     public ResponseEntity<Object> addCartByMemberIdAndProduct(@RequestBody Cart cart) {
 
         try {
-            cartService.addCartByMemberIdAndProduct(cart.getMEMBER_ID(), cart.getPRODUCT_NO(), cart.getCART_AMOUNT());
+            cartService.addCartByMemberIdAndProduct(cart.getMEMBER_EMAIL(), cart.getPRODUCT_NO(), cart.getCART_AMOUNT());
             return ResponseEntity.status(HttpStatus.OK).body("장바구니 추가 성공!");
         } catch (Exception e) {
             log.error("Cart Add Fail ! ! ! {}", e);
@@ -43,7 +44,7 @@ public class CartController {
     public ResponseEntity<Object> deleteCartByMemberIdAndProductNo(@RequestBody Cart cart) {
 
         try {
-            cartService.deleteCartByMemberId(cart.getMEMBER_ID(), cart.getPRODUCT_NO());
+            cartService.deleteCartByMemberId(cart.getMEMBER_EMAIL(), cart.getPRODUCT_NO());
             return ResponseEntity.status(HttpStatus.OK).body("장바구니 삭제 성공");
         } catch (Exception e) {
             log.error("Cart Delete Is Fail ! ! !");

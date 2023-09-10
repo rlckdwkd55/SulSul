@@ -26,9 +26,9 @@ public class MypageService {
         List<Orders> orderList;
         Map<String, Object> resultMap = new HashMap<>();
         List<OrderDetail> detailList;
-        String memberId = requestBody.get("memberId");
-        if(memberId != null){
-            orderList = mypageDao.getOrderList(memberId);
+        String memberEmail = requestBody.get("email");
+        if(memberEmail != null){
+            orderList = mypageDao.getOrderList(memberEmail);
             if(orderList != null){
                 resultMap.put("orderList", orderList);
                 for(Orders order : orderList) {
@@ -44,7 +44,7 @@ public class MypageService {
                 return null;
             }
         } else{
-            log.error("get Order List ,Member Id is Null : {}", memberId);
+            log.error("get Order List ,Member Id is Null : {}", memberEmail);
             return null;
         }
         return resultMap;
@@ -55,9 +55,9 @@ public class MypageService {
         return resultList;
     }
 
-    public List<Review> getReviewList(String memberId){
+    public List<Review> getReviewList(String memberEmail){
 
-        List<Review> reviewList =  mypageDao.getReviewList(memberId);
+        List<Review> reviewList =  mypageDao.getReviewList(memberEmail);
         log.info("ReviewListResult : {} ", reviewList.toString());
 
         if (reviewList == null || reviewList.isEmpty()){
@@ -67,9 +67,9 @@ public class MypageService {
         return reviewList;
     }
 
-    public List<Member> getUserInfo(String memberId){
+    public List<Member> getUserInfo(String memberEmail){
 
-        List<Member> resultList = mypageDao.getUserInfo(memberId);
+        List<Member> resultList = mypageDao.getUserInfo(memberEmail);
         log.info("UserInfoResult : {}", resultList);
 
         if (resultList == null || resultList.isEmpty()){
@@ -79,8 +79,8 @@ public class MypageService {
         return resultList;
     }
 
-    public List<Address> getAddressList(String memberId){
-        List<Address> resultList = mypageDao.getAddressList(memberId);
+    public List<Address> getAddressList(String memberEmail){
+        List<Address> resultList = mypageDao.getAddressList(memberEmail);
         log.info("AddressResult : {}", resultList);
 
         if (resultList == null || resultList.isEmpty()){
@@ -89,8 +89,8 @@ public class MypageService {
         return resultList;
     }
 
-    public List<ClaimInfo> getCancelRefundList(String memberId){
-        List<ClaimInfo> resultList = mypageDao.getCancelRefundList(memberId);
+    public List<ClaimInfo> getCancelRefundList(String memberEmail){
+        List<ClaimInfo> resultList = mypageDao.getCancelRefundList(memberEmail);
         log.info("ClaimResult : {}", resultList);
 
         if (resultList == null || resultList.isEmpty()){

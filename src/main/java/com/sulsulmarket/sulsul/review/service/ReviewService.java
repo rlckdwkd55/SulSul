@@ -3,15 +3,14 @@ package com.sulsulmarket.sulsul.review.service;
 import com.sulsulmarket.sulsul.dto.member.Member;
 import com.sulsulmarket.sulsul.dto.order.OrderDetail;
 import com.sulsulmarket.sulsul.dto.review.Review;
+import com.sulsulmarket.sulsul.dto.review.ReviewOrderByMemberId;
 import com.sulsulmarket.sulsul.member.dao.MemberDao;
 import com.sulsulmarket.sulsul.review.dao.ReviewDao;
-import com.sulsulmarket.sulsul.dto.review.ReviewOrderByMemberId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,7 +32,7 @@ public class ReviewService {
             throw new NullPointerException("데이터가 없습니다.");
         }
 
-        Member member = memberDao.getMemberById(review.getMEMBER_ID());
+        Member member = memberDao.getMemberByEmail(review.getMEMBER_EMAIL());
         if (member == null || Objects.isNull(member)) {
             log.error("Not Found Member Review Insert Fail ! ! !");
             throw new NullPointerException("회원 정보가 없습니다.");
@@ -103,7 +102,7 @@ public class ReviewService {
             log.error("Member Id Is Null");
             throw new NullPointerException("Member Id Is Null ! ! !");
         }
-        Member member = memberDao.getMemberById(memberId);
+        Member member = memberDao.getMemberByEmail(memberId);
         if (member == null || Objects.isNull(member)) {
             log.error("Not Found Member By Member Id ===>>> [{}]", memberId);
             throw new NullPointerException("Not Found Member By Member Id");

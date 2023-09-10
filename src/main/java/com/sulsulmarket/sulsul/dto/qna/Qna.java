@@ -14,8 +14,8 @@ public class Qna {
 
     @JsonProperty("qnaNo")
     private int QNA_NO;
-    @JsonProperty("memberId")
-    private String MEMBER_ID;
+    @JsonProperty("email")
+    private String MEMBER_EMAIL;
     @JsonProperty("productNo")
     private int PRODUCT_NO;
     @JsonProperty("qnaTitle")
