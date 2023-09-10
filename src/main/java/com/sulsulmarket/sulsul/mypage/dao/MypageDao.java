@@ -45,8 +45,8 @@ public class MypageDao implements MypageMapper{
     }
 
     @Override
-    public List<ClaimInfo> getCancelRefundList(String memberEmail) {
-        return mypageMapper.getCancelRefundList(memberEmail);
+    public List<ClaimInfo> getCancelRefundList(String email) {
+        return mypageMapper.getCancelRefundList(email);
     }
 
 

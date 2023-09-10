@@ -89,8 +89,8 @@ public class MypageService {
         return resultList;
     }
 
-    public List<ClaimInfo> getCancelRefundList(String memberEmail){
-        List<ClaimInfo> resultList = mypageDao.getCancelRefundList(memberEmail);
+    public List<ClaimInfo> getCancelRefundList(String email){
+        List<ClaimInfo> resultList = mypageDao.getCancelRefundList(email);
         log.info("ClaimResult : {}", resultList);
 
         if (resultList == null || resultList.isEmpty()){

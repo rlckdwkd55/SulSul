@@ -11,7 +11,7 @@
     </select>
 
     <select id="getReviewList" resultType="com.sulsulmarket.sulsul.dto.review.Review">
-        SELECT * FROM REVIEW WHERE MEMBER_ID = #{MEMBER_ID}
+        SELECT * FROM REVIEW WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
     </select>
 
     <select id="getUserInfo" resultType="com.sulsulmarket.sulsul.dto.member.Member">

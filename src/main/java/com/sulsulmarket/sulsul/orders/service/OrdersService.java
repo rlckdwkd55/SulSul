@@ -45,7 +45,7 @@ public class OrdersService {
 
 
         orderParameter.put("ORDER_NO", orderNo);
-        orderParameter.put("MEMBER_ID", email);
+        orderParameter.put("MEMBER_EMAIL", email);
         orderParameter.put("ORDER_DATE", String.valueOf(orderDate));
         orderParameter.put("ORDER_ADDRESS", orderAddress);
         orderParameter.put("ORDER_RECEIVER", orderReceiver);
