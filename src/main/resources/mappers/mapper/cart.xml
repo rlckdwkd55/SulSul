@@ -3,39 +3,39 @@
 <mapper namespace="com.sulsulmarket.sulsul.cart.mapper.CartMapper">
 
     <select id="getCartByMemberIdAndProductNo" resultType="com.sulsulmarket.sulsul.dto.cart.Cart">
-        SELECT FROM CART
-        WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
+        SELECT * FROM CART
+        WHERE MEMBER_EMAIL = #{email}
         AND PRODUCT_NO = #{productNo}
     </select>
 
     <update id="updateCartCount">
         UPDATE CART
-        SET CART_AMOUNT = #{cartAmount}
-        WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
+        SET QUANTITY = #{quantity}
+        WHERE MEMBER_EMAIL = #{email}
           AND PRODUCT_NO = #{productNo}
     </update>
 
-    <insert id="addCartByMemberIdAndProduct" parameterType="com.sulsulmarket.sulsul.dto.cart.Cart">
+    <insert id="addCartByMemberIdAndProduct">
         INSERT INTO CART(
                  MEMBER_EMAIL
                 ,PRODUCT_NO
-                ,CART_AMOUNT
+                ,QUANTITY
         ) VALUES(
-                 #{MEMBER_EMAIL}
+                 #{email}
                 ,#{productNo}
-                ,#{cartAmount}
+                ,#{quantity}
                 )
     </insert>
 
     <delete id="deleteCartByMemberId">
         DELETE FROM CART
-        WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
+        WHERE MEMBER_EMAIL = #{email}
           AND PRODUCT_NO = #{productNo}
     </delete>
 
     <select id="productListByProductNo" resultType="com.sulsulmarket.sulsul.dto.product.Product">
         SELECT *
-        FROM PRODUCT
+          FROM PRODUCT
         WHERE PRODUCT_NO = #{productNo}
     </select>
 
@@ -48,7 +48,7 @@
     <select id="getCartListByMemberEmail" resultType="com.sulsulmarket.sulsul.dto.cart.Cart">
         SELECT *
         FROM CART
-        WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
+        WHERE MEMBER_EMAIL = #{email}
     </select>
 
 </mapper>

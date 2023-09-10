@@ -2,6 +2,7 @@ package com.sulsulmarket.sulsul.member.dao;
 
 import com.sulsulmarket.sulsul.dto.member.Address;
 import com.sulsulmarket.sulsul.dto.member.Member;
+import com.sulsulmarket.sulsul.dto.member.SignRequestAddress;
 import com.sulsulmarket.sulsul.dto.member.SignRequestMember;
 import com.sulsulmarket.sulsul.member.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class MemberDao implements MemberMapper {
     @Override
     public Address getAddressByEmail(String email) {
         return memberMapper.getAddressByEmail(email);
+    }
+
+    @Override
+    public int addressSign(Address address) {
+        return memberMapper.addressSign(address);
     }
 }

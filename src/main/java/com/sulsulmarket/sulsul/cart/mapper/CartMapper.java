@@ -10,11 +10,11 @@ import java.util.List;
 @Mapper
 public interface CartMapper {
 
-    int addCartByMemberIdAndProduct(String email, int productNo, int cartAmount);
+    int addCartByMemberIdAndProduct(String email, int productNo, int quantity);
 
     Cart getCartByMemberIdAndProductNo(String email, int productNo);
 
-    int updateCartCount(String email, int productNo, int cartAmount);
+    int updateCartCount(String email, int productNo, int quantity);
 
     int deleteCartByMemberId(String email, int productNo);
 

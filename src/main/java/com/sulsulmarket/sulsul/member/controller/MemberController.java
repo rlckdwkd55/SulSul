@@ -27,7 +27,7 @@ public class MemberController {
      * 회원 정보 조회.
      */
     @PostMapping("/info")
-    public ResponseEntity<Object> getMemberById(@RequestBody Map<String, String> param) {
+    public ResponseEntity<Object> getMemberByEmail(@RequestBody Map<String, String> param) {
 
         try {
             MemberOne member = memberService.getMemberById(param.get("email"));

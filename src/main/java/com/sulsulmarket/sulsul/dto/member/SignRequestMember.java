@@ -11,5 +11,5 @@ public class SignRequestMember {
     private String email;
     private String mobile;
     private String gender;
-    private SignRequestAddress address;
+    private Address address;
 }

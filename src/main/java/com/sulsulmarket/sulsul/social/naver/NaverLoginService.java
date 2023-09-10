@@ -137,7 +137,7 @@ public class NaverLoginService {
                 }
 
                 // 미성년자인 경우
-                if (LocalDateTime.now().getYear() >= Integer.parseInt(userInfo.getResponse().getBirthyear()) + 19) {
+                if (LocalDateTime.now().getYear() <  Integer.parseInt(userInfo.getResponse().getBirthyear()) + 19) {
                     log.warn("is no adult member sign fail.");
                     userInfo.setResultcode("02");
                 }

@@ -16,8 +16,8 @@ public class CartDao implements CartMapper {
     private CartMapper cartMapper;
 
     @Override
-    public int addCartByMemberIdAndProduct(String email, int productNo, int cartAmount) {
-        return cartMapper.addCartByMemberIdAndProduct(email, productNo, cartAmount);
+    public int addCartByMemberIdAndProduct(String email, int productNo, int quantity) {
+        return cartMapper.addCartByMemberIdAndProduct(email, productNo, quantity);
     }
 
     @Override
@@ -26,8 +26,8 @@ public class CartDao implements CartMapper {
     }
 
     @Override
-    public int updateCartCount(String email, int productNo, int cartAmount) {
-        return cartMapper.updateCartCount(email, productNo, cartAmount);
+    public int updateCartCount(String email, int productNo, int quantity) {
+        return cartMapper.updateCartCount(email, productNo, quantity);
     }
 
     @Override

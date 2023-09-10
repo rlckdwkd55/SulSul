@@ -6,18 +6,18 @@
         INSERT INTO MEMBER(
              MEMBER_NAME
             ,MEMBER_BIRTHDATE
-            ,MEMBER_GENDER
-            ,MEMBER_PHONE
             ,MEMBER_EMAIL
-            ,MEMBER_ENROLLDATE
+            ,MEMBER_PHONE
+            ,MEMBER_GENDER
+            ,REG_TIME
             ,MEMBER_ROLE
         )
         VALUES(
-             #{MEMBER_NAME}
-            ,#{MEMBER_BIRTHDATE}
-            ,#{MEMBER_GENDER}
-            ,#{MEMBER_PHONE}
-            ,#{MEMBER_EMAIL}
+             #{name}
+            ,#{birthDay}
+            ,#{email}
+            ,#{mobile}
+            ,#{gender}
             ,now()
             ,'ACTIVE'
         )
@@ -37,4 +37,19 @@
           FROM ADDRESS
         WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
     </select>
+
+    <insert id="addressSign">
+        INSERT INTO ADDRESS(
+         MEMBER_EMAIL
+        ,ADDRESS
+        ,DETAIL_ADDRESS
+        ,POST_NO
+        )
+        VALUES(
+         #{MEMBER_EMAIL}
+        ,#{ADDRESS}
+        ,#{DETAIL_ADDRESS}
+        ,#{POST_NO}
+        )
+    </insert>
 </mapper>

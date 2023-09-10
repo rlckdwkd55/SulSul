@@ -8,39 +8,45 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-//@RequestMapping("/cart")
+@RequestMapping("/cart")
 @Slf4j
 public class CartController {
 
     @Autowired
     private CartService cartService;
 
-    @PostMapping("/api/cart/select")
-    public ResponseEntity<Object> getCartListByMemberId(@RequestBody Cart cart) {
-
-        List<Cart> cartList = cartService.getCartListByMemberId(cart.getMEMBER_EMAIL());
-
-        return ResponseEntity.status(HttpStatus.OK).body(cartList);
-    }
-
-    @PostMapping("/api/cart/add")
-    public ResponseEntity<Object> addCartByMemberIdAndProduct(@RequestBody Cart cart) {
+    @PostMapping("/info")
+    public ResponseEntity<Object> getCartListByMemberEmail(@RequestBody Map<String, String> param) {
 
         try {
-            cartService.addCartByMemberIdAndProduct(cart.getMEMBER_EMAIL(), cart.getPRODUCT_NO(), cart.getCART_AMOUNT());
-            return ResponseEntity.status(HttpStatus.OK).body("장바구니 추가 성공!");
+            List<Cart> cartList = cartService.getCartListByMemberId(param.get("email"));
+            return new ResponseEntity<>(cartList, HttpStatus.OK);
         } catch (Exception e) {
-            log.error("Cart Add Fail ! ! ! {}", e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            log.error("get cart List Exception.", e);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PostMapping("/api/cart/remove")
+    @PostMapping("/add")
+    public ResponseEntity<Object> addCartByMemberIdAndProduct(@RequestBody Cart cart) {
+
+        try {
+            cartService.addCartByMemberIdAndProduct(cart.getMEMBER_EMAIL(), cart.getPRODUCT_NO(), cart.getQUANTITY());
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("cart Add Exception..", e);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/remove")
     public ResponseEntity<Object> deleteCartByMemberIdAndProductNo(@RequestBody Cart cart) {
 
         try {

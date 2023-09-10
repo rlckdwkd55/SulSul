@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,27 +29,27 @@ public class CartService {
 
     public List<Cart> getCartListByMemberId(String email) {
 
-        if (SulSulUtil.strNullCheck(email)) {
+        // Parameter Null Check.
+        if (!SulSulUtil.strNullCheck(email)) {
             log.error("member email parameter is null.");
-            throw new NullPointerException("이메일 파라미터 값이 없습니다.");
+            throw new IllegalArgumentException("이메일 파라미터 값이 없습니다.");
         }
 
+        // Member Check
         if (memberDao.getMemberByEmail(email) == null) {
             log.error("member is not found member..");
-            throw new NullPointerException("이메일로 해당 회원을 찾을 수 없습니다.");
+            throw new IllegalArgumentException("이메일로 해당 회원을 찾을 수 없습니다.");
         }
 
+        // Cart List By Member Email.
         List<Cart> cartList = cartDao.getCartListByMemberEmail(email);
-        log.debug("cartList size : [{}]", cartList.size());
+        log.info("member email : [{}] cart List", email);
+        log.info("cartList size : [{}]", cartList.size());
 
-        if(cartList.size() < 0) {
-            log.error("get cart List By member email is fail..");
-            throw new IllegalArgumentException("회원 아이디로 장바구니 리스트를 가져오기 실패했습니다.");
-        }
+        List<Cart> updateCartList = new ArrayList<>();
 
         for (Cart cart : cartList) {
-            int productNo = cart.getPRODUCT_NO();
-            Product product = cartDao.productListByProductNo(productNo);
+            Product product = cartDao.productListByProductNo(cart.getPRODUCT_NO());
 
             if(product == null || Objects.isNull(product)) {
                 log.error("Product Is Null");
@@ -56,7 +57,7 @@ public class CartService {
             }
 
             cart.setPRODUCT(product);
-            ProductImage productImageDto = cartDao.productImageByProductNo(productNo);
+            ProductImage productImageDto = cartDao.productImageByProductNo(cart.getPRODUCT_NO());
 
             if (productImageDto == null || Objects.isNull(productImageDto)) {
                 log.error("ProductImage Is Null");
@@ -66,18 +67,18 @@ public class CartService {
             product.setPRODUCT_IMAGE(productImageDto);
             log.info("ProductImage ==>> [{}]", productImageDto);
             log.info("CART PRODUCT IMAGE CHECK ==>> [{}]", product.getPRODUCT_IMAGE());
-            cartList.add(cart);
-            log.info("cart Check ! ! !  ==>> [{}]", cart.toString());
+            updateCartList.add(cart);
+            log.info("cart Check ! ! ! ==>> [{}]", cart);
         }
-        log.info("CartList Check", cartList.toString());
-        return cartList;
+        log.info("CartList Check", updateCartList);
+        return updateCartList;
     }
 
     /**
      * 회원 기준 장바구니 추가하는 메서드
      */
     @Transactional
-    public void addCartByMemberIdAndProduct(String email, int productNo, int cartAmount) {
+    public void addCartByMemberIdAndProduct(String email, int productNo, int quantity) {
 
         checkMemberProductNo(email, productNo);
         /**
@@ -85,29 +86,30 @@ public class CartService {
          * 처음 추가하는 거라고 판단하여 INSERT 구문 실행
          * 해당 상품이 이미 존재할 경우 UPDATE 구문을 사용하여 카운트를 증가시킴.
          */
-        Cart Cart = cartDao.getCartByMemberIdAndProductNo(email, productNo);
-        if(Cart == null || Objects.isNull(Cart)) {
-            if(cartAmount <= 0) {
+        Cart cart = cartDao.getCartByMemberIdAndProductNo(email, productNo);
+        log.info("cart Chekc :: [{}]", cart);
+        if(cart == null || Objects.isNull(cart)) {
+            if(quantity <= 0) {
                 log.error("Insert Is Fail Amount > 0 ! ! !");
                 throw new IllegalArgumentException("수량이 0보다 작을 수 없습니다");
             }
             try {
                 // INSERT
-                cartDao.addCartByMemberIdAndProduct(email, productNo, cartAmount);
+                cartDao.addCartByMemberIdAndProduct(email, productNo, quantity);
                 log.info("CART INSERT IS SUCCESS ! ! !");
             } catch (Exception e) {
                 log.error("DB CART INSERT FAIL ! ! ! {}", e);
             }
             // Cart에 email, ProductNo 조회 시 있다는 거는 해당 PRODUCT_NO 상품이 존재
         } else {
-            if(cartAmount <= 0) {
+            if(quantity <= 0) {
                 log.error("Update Is Fail Amount > 0 ! ! !");
                 throw new IllegalArgumentException("수량이 0보다 작을 수 없습니다");
             }
             try {
                 // UPDATE
-                cartDao.updateCartCount(email, productNo, cartAmount);
-                log.info("Cart Product Amount Update Success => PRODUCT : [{}] AMOUNT : [{}]", productNo, cartAmount);
+                cartDao.updateCartCount(email, productNo, quantity);
+                log.info("Cart Product Amount Update Success => PRODUCT : [{}] AMOUNT : [{}]", productNo, quantity);
             } catch (Exception e) {
                 log.error("DB CART UPDATE FAIL ! ! ! {}", e);
             }

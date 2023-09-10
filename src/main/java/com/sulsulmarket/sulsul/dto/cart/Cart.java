@@ -15,8 +15,8 @@ public class Cart {
     private String MEMBER_EMAIL;
     @JsonProperty("productNo")
     private int PRODUCT_NO;
-    @JsonProperty("cartAmount")
-    private int CART_AMOUNT;
+    @JsonProperty("quantity")
+    private int QUANTITY;
     @JsonProperty("product")
     private Product PRODUCT;
 }

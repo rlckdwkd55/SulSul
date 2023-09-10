@@ -85,22 +85,21 @@ public class MemberService {
     /**
      * 회원가입 메서드
      */
-    /**
-     * 회원가입 메서드
-     */
     @Transactional
     public boolean memberSign(SignRequestMember member) {
 
-        // 위에서 암호화 한 Member 넘겨주면서 회원가입
+        //TODO Validation.
         try {
             Integer insertMember = memberDao.memberSign(member);
-
-            if (insertMember == null || insertMember <= 0) {
-                log.error("MEMBER SIGN FAIL ! ! !");
+            member.getAddress().setMEMBER_EMAIL(member.getEmail());
+            Integer insertAddress = memberDao.addressSign(member.getAddress());
+            if (insertMember == null || insertAddress == null) {
+                log.error("member sign is fail..");
                 throw new NullPointerException("회원 가입 실패");
             }
         } catch (Exception e) {
-            log.error("member Sign DB insert Fail.");
+            log.error("member Sign DB insert Fail.", e);
+            return false;
         }
         return true;
     }
