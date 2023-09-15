@@ -2,7 +2,7 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/layout/header";
-// import Footer from './components/layout/footer';
+import Footer from './components/layout/footer';
 import Login from "./components/pages/login";
 import Main from "./components/pages/main";
 import Join from "./components/pages/join";
@@ -14,15 +14,16 @@ import Cart from "./components/pages/cart";
 import Order from "./components/pages/Order";
 import GlobalStyle from "./Util/GlobalStyle";
 import SNSJoin from "./components/pages/SNSJoin";
+import Policy from './components/pages/Policy';
+import Privacy from './components/pages/Privacy';
 import styled from "styled-components";
 
 const AppWrapper = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 0 70px;
+  min-width: 1300px;
+  flex: 1;
 `;
 const PagesWrapper = styled.div`
   width: 100%;
@@ -48,10 +49,12 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/order" element={<Order />} />
               <Route path="/SNSJoin" element={<SNSJoin />} />
+              <Route path="/terms/policy" element={<Policy />} />
+              <Route path="/terms/privacy" element={<Privacy />} />
             </Routes>
           </PagesWrapper>
-          {/* <Footer/> */}
         </AppWrapper>
+        <Footer/>
       </BrowserRouter>
     </React.Fragment>
   );

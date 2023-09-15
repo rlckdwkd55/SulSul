@@ -31,6 +31,11 @@ body,
   height: 100%;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
 /* header */
 header {
   padding: 0 100px;
