@@ -52,7 +52,7 @@ const ProductList = (props) => {
     } else if (props.searchWord) {
       getProduct(props.searchWord, true);
     }
-  }, []);
+  }, [props.itemKey]);
 
   return(
     <ListWrap>
