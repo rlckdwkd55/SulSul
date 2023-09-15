@@ -2,6 +2,11 @@ import { Link } from "react-router-dom";
 import SearchBar from "./searchBar";
 import axios from "axios";
 import MenuList from "../template/menuList";
+import styled from 'styled-components';
+
+const Wrap =styled.div`
+  min-width: 1300px;
+`;
 
 function LoginOut() {
   // sessionStorage.setItem('isLogin', true);
@@ -48,7 +53,7 @@ function LoginOut() {
 
 function Header() {
   return (
-    <>
+    <Wrap>
       <header>
         <div className="header">
           <div className="header-left">
@@ -70,7 +75,7 @@ function Header() {
         </div>
       </header>
       <MenuList />
-    </>
+    </Wrap>
   );
 }
 

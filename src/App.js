@@ -27,6 +27,7 @@ const AppWrapper = styled.div`
 const PagesWrapper = styled.div`
   width: 100%;
   max-width: 1920px;
+  min-width: 1300px;
 `;
 function App() {
   return (
