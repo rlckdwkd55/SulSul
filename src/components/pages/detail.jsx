@@ -9,7 +9,13 @@ import ProductService from "../../service/ProductService";
 const Wrap = styled.div`
   margin: 50px 150px;
 `;
-const DetailInfo = styled.div``;
+const DetailInfo = styled.div`
+  margin-top: 50px;
+
+  > img {
+    width: 100%
+  }
+`;
 const DetailNav = styled.div`
   > a {
     margin-right: 10px;
@@ -55,7 +61,9 @@ const Detail = () => {
         <DetailNavBtn btnName={'후기'} url={''}/>
         <DetailNavBtn btnName={'상품문의'} url={''}/>
       </DetailNav>
-      <DetailInfo></DetailInfo>
+      <DetailInfo>
+        <img src=''></img>
+      </DetailInfo>
       <DetailReview></DetailReview>
       <DetailQnA></DetailQnA>
     </Wrap>    
