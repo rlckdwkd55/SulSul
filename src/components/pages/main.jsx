@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ProductList from '../template/productList';
 import BestItemSlider from '../template/BestItemSlider';
-import LoginService from '../../service/LoginService';
+import { rootColor } from '../../Util/GlobalStyle';
 
 const MainWrap = styled.div`
     max-width: 1144px;
@@ -15,18 +15,25 @@ const NewItemsWrap = styled.div`
     margin: auto;
     margin-top: 100px;
 `;
-
+const ContentHeadWrap = styled.div`
+    > span {
+        font-weight: bold;
+        color: ${rootColor.color};
+    }
+`;
 
 const ContentHead = (props) => {
     const navigate = useNavigate();
     return (
-        <div className="wrapper-header">
-            <span className="leftItem">{props.title}</span>
-            <span className="rightItem" onClick={()=>{
-                navigate('/list', {state: {cate: props.cate}});
-            }}>더보기</span>
-            <i className="fa-solid fa-chevron-right wrapper-header rightItem"></i>
-        </div>
+        <ContentHeadWrap>
+            <span>{props.title}</span>
+            <span style={{float: 'right', marginRight: '35px', cursor: 'pointer'}}>
+                <span onClick={()=>{
+                    navigate('/list', {state: {cate: props.cate}});
+                }}>더보기</span>
+                <i className="fa-solid fa-chevron-right wrapper-header rightItem"></i>
+            </span>
+        </ContentHeadWrap>
     )
 }
 

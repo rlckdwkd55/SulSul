@@ -49,4 +49,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const rootColor = {
+  color: 'rgb(233, 118, 118)'
+};
+
 export default GlobalStyle;
+export {rootColor};
