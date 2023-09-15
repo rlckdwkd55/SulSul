@@ -69,7 +69,7 @@ const Order = () => {
     <Wrap>
       <OrderItemList orderList={orderList}/>
       <OrderUserInfo userInfo={userInfo}/>
-      <OrderAddr userAddr={userAddr}/>
+      <OrderAddr userAddr={userAddr} setJsonData={setJsonData} userName={userInfo.userName}/>
       <OrderPayment price={total} total={total+3000} setPayment={setPayment}/>
       <OrderAgreement setIsAgree={setIsAgree} />
       <OrderButton payment={payment} isAgree={isAgree} total={total} jsonData={jsonData} />

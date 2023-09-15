@@ -40,22 +40,22 @@ const Detail = ({detail}) => {
 
 const Agreements = (props) => {
   const [ isDetailView, setIsDetailView ] = useState(false);
+  const [ contents, setContents ] = useState();
 
   const title = {
     'personal': '개인정보 수집 • 이용 및 처리 동의',
     'service': '전자지급 결제대행 서비스 이용약관 동의'
   }
   const details = {
-    'personal': '상세 약관1',
-    'service': '상세 약관2'
+    'personal': `상세 약관1`,
+    'service': `상세 약관2`
   }
-  let contents;
 
   function viewDetail() {
     if (!isDetailView) {
-      contents = (<Detail detail={details[props.type]}/>)
+      setContents(<Detail detail={details[props.type]}/>)
     } else {
-      contents = (<></>);
+      setContents(<></>);
     }
 
     setIsDetailView(!isDetailView);

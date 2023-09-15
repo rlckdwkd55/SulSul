@@ -61,7 +61,7 @@ const CountBtn = (props) => {
           setCount(count - 1);
           changeTotal(count -1);
         }}>-</CntBtn>
-      <input type="number" min="0" value={count} onChange={(e) => {
+      <input type="number" min="0" value={count} readOnly={true} onChange={(e) => {
                                                     e.preventDefault();
                                                     changeCnt(e);
                                                     changeTotal();
