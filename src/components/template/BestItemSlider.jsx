@@ -11,9 +11,9 @@ const StyledSlider = styled(Slider)`
 //   margin:0 -20px;
 // }
 
-// .slick-slide {
-//   margin:0 20px;
-// }
+.slick-track {
+  width: 100% !important;
+}
 `;
 
 const BestItemSlider = () => {

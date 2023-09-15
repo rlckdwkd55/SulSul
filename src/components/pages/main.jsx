@@ -5,14 +5,15 @@ import BestItemSlider from '../template/BestItemSlider';
 import LoginService from '../../service/LoginService';
 
 const MainWrap = styled.div`
-    // padding: 0 70px;
+    max-width: 1144px;
+    margin: auto;
 `;
 const BestItemsWrap = styled.div`
-    margin: 0 80px;
+    margin: auto;
 `;
 const NewItemsWrap = styled.div`
-    margin: 0 80px;
-    maxw-width: 1144px;
+    margin: auto;
+    margin-top: 100px;
 `;
 
 

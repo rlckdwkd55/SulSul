@@ -6,7 +6,7 @@ import ContentsHead from '../template/contentsHead';
 
 const ListWrap = styled.div`
   max-width: 1144px;
-  margin: 0 80px;
+  margin: auto;
 `;
 const FilterWrap = styled.div`
   display: flex;
@@ -15,6 +15,7 @@ const FilterWrap = styled.div`
 
 const List = () => {
   const [ contents, setContents] = useState({});
+  const [ prdCnt, setPrdCnt ] = useState(0);
   const { state } = useLocation();
   const cate = state.cate;
   const word = state.word;
@@ -67,7 +68,7 @@ const List = () => {
       <ContentsHead title={contents.title} content={contents.content}/>
       <div>
         <FilterWrap>
-          <div>15 건의 결과가 있어요</div>
+          <div>{prdCnt} 건의 결과가 있어요</div>
           <select>
             <option>추천순</option>
             <option>평점순</option>
@@ -77,7 +78,7 @@ const List = () => {
             <option>높은 가격순</option>
           </select>
         </FilterWrap>
-        <ProductList itemKey={cate} searchWord={word}/>
+        <ProductList itemKey={cate} searchWord={word} setPrdCnt={setPrdCnt}/>
       </div>
     </ListWrap>
   )

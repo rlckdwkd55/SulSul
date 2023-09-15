@@ -4,10 +4,7 @@ import Product from "../atoms/product";
 import styled from 'styled-components';
 
 const ListWrap = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: calc(100% + 20px);
-  justify-content: space-between;
+  
 `;
 
 const ProductList = (props) => {
@@ -21,6 +18,7 @@ const ProductList = (props) => {
     
           if (response.status === "success") {
             setProductList(response.data["newItems"]);
+            if (props.setPrdCnt) props.setPrdCnt(response.data["newItems"].length);
           }
         } else {
           const data = {
@@ -31,6 +29,7 @@ const ProductList = (props) => {
     
           if (response.status === "success") {
             setProductList(response.data);
+            if (props.setPrdCnt) props.setPrdCnt(response.data.length);
           }
         }
       } else {
@@ -43,6 +42,7 @@ const ProductList = (props) => {
   
         if (response.status === "success") {
           setProductList(response.data);
+          if (props.setPrdCnt) props.setPrdCnt(response.data.length);
         }
       }
     }

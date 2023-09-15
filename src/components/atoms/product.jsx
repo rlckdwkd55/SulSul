@@ -3,15 +3,12 @@ import styled from "styled-components";
 
 const ProductWrap = styled.div`
   padding: 10px 20px 0 0;
-  // max-width: 400px;
-  // max-height: 450px;
-  
+  width: calc(100%/4);
+  display: inline-block;
+
   // > div:nth-child(1) {
   //   > img {
-  //     max-width: 100%;
-  //     max-heixht: 100%;
-  //     min-width: 100%;
-  //     min-height: 100%;
+  //     margin: 0px;
   //   }
   // }
 `;
