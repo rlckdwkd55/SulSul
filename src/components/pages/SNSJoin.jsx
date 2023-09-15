@@ -93,15 +93,17 @@ const SNSJoin = () => {
             </div>
             <div style={{margin:'0 25%'}}>
                 <h3>선택입력</h3>
-                <span>성별</span>
-                <span>
-                    <label><input type='radio' name='gender' value='M' checked={input.gender === 'M'} />남성</label>
-                    <label><input type='radio' name='gender' value='F' checked={input.gender === 'F'} />여성</label>
-                </span>
+                <table>
+                    <tr>
+                        <td style={{width:'100px'}}>성별</td>
+                        <td><label><input type='radio' id='gender' name='gender' value='M' checked={input.gender === 'M'} onChange={(e) => changeInput(e)}/>남성</label></td>
+                        <td><label><input type='radio' id='gender' name='gender' value='F' checked={input.gender === 'F'} onChange={(e) => changeInput(e)}/>여성</label></td>
+                    </tr>
+                </table>
             </div>
 
             <div className="button-area">
-                <JoinBtn type="button" name="joinBtn" text="회원가입" onClickBtn={() => doJoin()}/>
+                <JoinBtn type="button" name="joinBtn" text="회원가입" clickEvent={() => doJoin()}/>
             </div>
         </Wrap>
     );
