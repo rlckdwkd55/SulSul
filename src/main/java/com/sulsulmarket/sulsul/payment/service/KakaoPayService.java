@@ -103,7 +103,7 @@ public class KakaoPayService {
             return null;
         }
 
-        log.info("MultiValueMap -> [{}]", parameters);
+        log.info("MultiValueMap -> [{}]", parameters); // 여기까진 됨
         // 파라미터, 헤더
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
 

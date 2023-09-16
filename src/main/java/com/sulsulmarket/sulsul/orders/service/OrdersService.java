@@ -46,7 +46,7 @@ public class OrdersService {
 
         orderParameter.put("ORDER_NO", orderNo);
         orderParameter.put("MEMBER_EMAIL", email);
-        orderParameter.put("ORDER_DATE", String.valueOf(orderDate));
+        orderParameter.put("ORDER_DATE", orderDate);
         orderParameter.put("ORDER_ADDRESS", orderAddress);
         orderParameter.put("ORDER_RECEIVER", orderReceiver);
         orderParameter.put("ORDER_REQUEST", orderRequest);
@@ -76,8 +76,6 @@ public class OrdersService {
                     detailParameter.put("DETAIL_NO", i);
                     detailParameter.put("ORDER_NO", orderNo);
                     detailParameter.put("PRODUCT_NO", productNo);
-//                    detailParameter.put("DELIVERY_NO", null);// 배송 하기 전
-//                    detailParameter.put("PROCESS_CODE",);
                     detailParameter.put("DETAIL_AMOUNT", detailAmount); // 수량(프론트에서 보내 준 데이터를
                     detailParameter.put("DETAIL_PRICE", detailPrice); // 가격(product의 가격을 가져와서 수량(detail_amount) 곱하기)
                     detailParameter.put("PAY_DATE", payDate); // 결제일

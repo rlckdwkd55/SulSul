@@ -33,4 +33,8 @@ public class Product {
     private Date UPLOAD_DATE; // 상품등록일
     @JsonProperty("productImage")
     private ProductImage PRODUCT_IMAGE; //상품이미지
+    @JsonProperty("productAlcohol")
+    private String PRODUCT_ALCOHOL;
+    @JsonProperty("productCapacity")
+    private String PRODUCT_CAPACITY;
 }

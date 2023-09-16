@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @ToString
@@ -13,7 +15,7 @@ public class Orders {
     private String MEMBER_EMAIL; // 이메일
     private String TID; //결제승인번호
     private String AID; //결제코드
-    private String ORDER_DATE; //주문날짜
+    private Date ORDER_DATE; //주문날짜
     private String ORDER_ADDRESS; //배송지주소
     private String ORDER_RECEIVER; //수령인
     private String REQUEST; //배송요청사항

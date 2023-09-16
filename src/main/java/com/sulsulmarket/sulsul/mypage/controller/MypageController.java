@@ -106,10 +106,10 @@ public class MypageController {
     }
 
     @PostMapping("/myPage/cancelRefundList")
-    public ResponseEntity<Object> cancelRefundList(String email){
+    public ResponseEntity<Object> cancelRefundList(@RequestBody Map<String, String> requestBody){
 
         try{
-        List<ClaimInfo> resultList = mypageService.getCancelRefundList(email);
+        List<ClaimInfo> resultList = mypageService.getCancelRefundList(requestBody.get("email"));
         return ResponseEntity.status(HttpStatus.OK).body(resultList);
         } catch (Exception e){
             log.error("ERROR");
