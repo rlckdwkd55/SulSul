@@ -13,7 +13,7 @@ const ProductList = (props) => {
   useEffect(()=>{
     async function getProduct(param, isSearch) {
       if (!isSearch) {
-        if (/^newItems$|^bestItems$/.test(param)) {
+        if (/^newItems$/.test(param)) {
           const response = await ProductService.getMainItemList();
     
           if (response.status === "success") {
@@ -56,9 +56,14 @@ const ProductList = (props) => {
 
   return(
     <ListWrap>
-      {productList.map((item) => {
-        return <Product key={item.PRODUCT_NO} prdNo={item.PRODUCT_NO} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/cate0" + item.CATEGORY_NO + "/0" + item.CATEGORY_NO + item.PRODUCT_NO + "_Image.jpg"}/>
-      })}
+      {productList && productList.length > 0 ? (
+        productList.map((item) => {
+          return <Product key={item.productNo} prdNo={item.productNo} prdName={item.productName} prdPrice={item.productPrice} imgPath={"/images/product/cate0" + item.categoryNo + "/0" + item.categoryNo + item.productNo + "_Image.jpg"}/>
+        }))
+        : (
+          <div style={{margin: '10px 0 0 20px'}}>등록 된 상품이 없습니다.</div>
+        )
+      }
     </ListWrap>
   )
 }

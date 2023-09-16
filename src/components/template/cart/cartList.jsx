@@ -120,9 +120,14 @@ const CartList = (props) => {
           <span onClick={()=> deleteCart}>선택삭제</span>
         </div>
       </BtnWrap>
-      {props.cartList.map((item) => {
-        return <PrdList key={item.prdNo} cartItem={item} checkItems={checkItems} setCheckItems={setCheckItems} setPrice={props.setPrice}/>
-      })}
+      {props.cartList && props.cartList > 0 ? (
+          props.cartList.map((item) => {
+            return <PrdList key={item.prdNo} cartItem={item} checkItems={checkItems} setCheckItems={setCheckItems} setPrice={props.setPrice}/>
+          })
+        ) : (
+          <div style={{margin: '10px 0 0 20px'}}>장바구니에 추가 한 상품이 없습니다.</div>
+        )
+      }
     </Wrap>
   )
 }

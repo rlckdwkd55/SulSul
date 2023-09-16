@@ -103,7 +103,8 @@ const DetailReview = (props) => {
       <h2>상품 후기</h2>
       {currentPosts && reviewList.length > 0 ? (
         currentPosts.map((data, idx) => (
-          <ReviewWrap>
+          <ReviewWrap key={idx}> 
+            {/* reivew 개발 되면 key 값 변경 필요 */}
             <div>
               <div>
                 <span>{data.userName}</span>
