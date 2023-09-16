@@ -9,7 +9,7 @@ const MenuWrap = styled.div`
   padding: 15px 70px 0 70px;
   border-top: 1px solid lightgrey;
   justify-content: center;
-
+  margin-bottom: 35px;
 `;
 
 const Ul = styled.ul`
@@ -33,6 +33,10 @@ const Li = styled.li`
 
 const MenuList = () => {
   const [menuList, setMenuList] = useState([
+    {
+      title: "전체 상품",
+      cate: 0
+    },    
     {
       title: "소주 · 증류주",
       cate: 1
@@ -60,7 +64,7 @@ const MenuList = () => {
     <MenuWrap>
       <Ul>
         { menuList.map(item => {
-          return <Li key={item.cate} cate={item.cate}><div onClick={() => navigatePage(item.cate)}>{item.title}</div></Li>
+          return <Li key={item.cate} cate={item.cate}><div style={ item.cate === 0 ? {fontWeight: 'bold'} : {} } onClick={() => navigatePage(item.cate)}>{item.title}</div></Li>
         }) }
       </Ul>
     </MenuWrap>
