@@ -27,7 +27,7 @@ const ContentHead = (props) => {
     return (
         <ContentHeadWrap>
             <span>{props.title}</span>
-            <span style={{float: 'right', marginRight: '35px', cursor: 'pointer'}}>
+            <span style={{float: 'right', cursor: 'pointer'}}>
                 <span onClick={()=>{
                     navigate('/list', {state: {cate: props.cate}});
                 }}>더보기</span>

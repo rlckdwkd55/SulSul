@@ -103,7 +103,7 @@ const DetailHead = (props) => {
   return (
     <Wrap>
       <div>
-        <img src={prdInfo.imgPath} alt={prdInfo.product_NAME} width='250' height='300'/>
+        <img src={"/images/product/cate0" + prdInfo.category_NO + "/0" + prdInfo.category_NO + prdInfo.product_NO + "_Image.jpg"} alt={prdInfo.product_NAME} width='250' height='300'/>
         <HeadInfo>
           <div>
             <h2>{prdInfo.product_NAME}</h2> 
@@ -125,16 +125,12 @@ const DetailHead = (props) => {
                   </td>
                 </tr>
                 <tr>
-                  <td>주종</td>
-                  <td>일반증류주(진)</td>
-                </tr>
-                <tr>
                   <td>도수</td>
-                  <td>44%</td>
+                  <td>{prdInfo.alcohol}</td>
                 </tr>
                 <tr>
                   <td>용량</td>
-                  <td>525ml</td>
+                  <td>{prdInfo.capacity}</td>
                 </tr>
                 <tr>
                   <td>상품 선택</td>
