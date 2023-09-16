@@ -22,7 +22,7 @@ const List = () => {
 
   useEffect(() => {
     switch(cate) {
-      case 0:
+      case '0':
         setContents({
           title: "전체 상품",
           content: "전체 상품"

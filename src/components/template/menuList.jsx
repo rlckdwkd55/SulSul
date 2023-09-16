@@ -35,7 +35,7 @@ const MenuList = () => {
   const [menuList, setMenuList] = useState([
     {
       title: "전체 상품",
-      cate: 0
+      cate: '0'
     },    
     {
       title: "소주 · 증류주",
@@ -64,7 +64,7 @@ const MenuList = () => {
     <MenuWrap>
       <Ul>
         { menuList.map(item => {
-          return <Li key={item.cate} cate={item.cate}><div style={ item.cate === 0 ? {fontWeight: 'bold'} : {} } onClick={() => navigatePage(item.cate)}>{item.title}</div></Li>
+          return <Li key={item.cate} cate={item.cate}><div style={ item.cate === '0' ? {fontWeight: 'bold'} : {} } onClick={() => navigatePage(item.cate)}>{item.title}</div></Li>
         }) }
       </Ul>
     </MenuWrap>

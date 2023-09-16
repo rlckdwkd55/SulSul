@@ -81,6 +81,21 @@ const ProductService = {
       };
     }
   },
+  getAllProductList: async () => {
+    try {
+      const response = await request.get('/product/allProductList');
+      if (request.isSuccess(response)) {
+        return {
+          ...response,
+          status: SUCCESS
+        }
+      }
+    } catch (error) {
+      return {
+        status: FAIL
+      }
+    }
+  },
 };
 
 export default ProductService;
