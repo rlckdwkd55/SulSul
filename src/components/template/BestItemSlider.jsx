@@ -12,7 +12,7 @@ const StyledSlider = styled(Slider)`
     margin-left: -20px;
   }
   .slick-prev:before, .slick-next:before {
-    color: ${rootColor.color},
+    color: ${rootColor.color};
     font-size: 30px;
   }
   .slick-prev {
@@ -41,17 +41,24 @@ const BestItemSlider = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 800,
     slidesToShow: 4,
-    slidesToScroll: 4
+    slidesToScroll: 4,
+    autoplay: true,
+    autoplaySpeed: 5000
   };
   
   return (
     <div>
       <StyledSlider {...settings}>
-        {productList.map((item, i) => {
-          return <Best_Product key={item.PRODUCT_NO} prdNo={item.PRODUCT_NO} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/cate0" + item.CATEGORY_NO + "/0" + item.CATEGORY_NO + item.PRODUCT_NO + "_Image.jpg"}/>
-        })}
+        { productList && productList.length > 0 ? (
+            productList.map((item, i) => {
+            return <Best_Product key={item.PRODUCT_NO} prdNo={item.PRODUCT_NO} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/cate0" + item.CATEGORY_NO + "/0" + item.CATEGORY_NO + item.PRODUCT_NO + "_Image.jpg"}/>
+            })
+          ) : (
+            <div style={{margin: '10px 0 0 20px'}}>등록 된 상품이 없습니다.</div>
+          )
+        }
       </StyledSlider>
     </div>
   )
