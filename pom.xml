@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sulsulmarket</groupId>
 	<artifactId>sulsul</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>sulsul</name>
 	<description>Spring Boot for SulSulMarket Project</description>
 	<properties>

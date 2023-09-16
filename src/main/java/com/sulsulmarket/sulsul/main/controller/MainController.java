@@ -33,8 +33,10 @@ public class MainController {
             List<Product> newProductList = mainService.getNewProduct();
             if(bestItemList.size()> 0){
                 resultMap.put("bestItems",bestItemList  );
+                log.info("bestItems -> {} ", bestItemList);
             }else if (newProductList.size()> 0){
                 resultMap.put("newItems", newProductList);
+                log.info("newItems -> {} ", bestItemList);
             }
 
             String json = gson.toJson(resultMap);
