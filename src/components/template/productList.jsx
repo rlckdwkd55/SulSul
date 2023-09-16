@@ -21,12 +21,17 @@ const ProductList = (props) => {
             if (props.setPrdCnt) props.setPrdCnt(response.data["newItems"].length);
           }
         } else {
-          const data = {
-            'categoryNo': param
-          }
-  
-          const response = await ProductService.postCategoryList(data);
+          let response;
+          if (param === '0') {
+            response = await ProductService.getAllProductList();
+          } else {
+            const data = {
+              'categoryNo': param
+            }
     
+            response = await ProductService.postCategoryList(data);
+          }
+          
           if (response.status === "success") {
             setProductList(response.data);
             if (props.setPrdCnt) props.setPrdCnt(response.data.length);
