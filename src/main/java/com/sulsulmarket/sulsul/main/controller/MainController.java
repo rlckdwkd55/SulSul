@@ -34,7 +34,8 @@ public class MainController {
             if(bestItemList.size()> 0){
                 resultMap.put("bestItems",bestItemList  );
                 log.info("bestItems -> {} ", bestItemList);
-            }else if (newProductList.size()> 0){
+            }
+            if (newProductList.size()> 0){
                 resultMap.put("newItems", newProductList);
                 log.info("newItems -> {} ", bestItemList);
             }
