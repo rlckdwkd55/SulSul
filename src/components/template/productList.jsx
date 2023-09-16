@@ -4,7 +4,7 @@ import Product from "../atoms/product";
 import styled from 'styled-components';
 
 const ListWrap = styled.div`
-  
+  margin-left: -20px;
 `;
 
 const ProductList = (props) => {
@@ -57,7 +57,7 @@ const ProductList = (props) => {
   return(
     <ListWrap>
       {productList.map((item) => {
-        return <Product key={item.PRODUCT_NO} prdNo={item.PRODUCT_NO} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/product01.jpg"}/>
+        return <Product key={item.PRODUCT_NO} prdNo={item.PRODUCT_NO} prdName={item.PRODUCT_NAME} prdPrice={item.PRODUCT_PRICE} imgPath={"/images/product/cate0" + item.CATEGORY_NO + "/0" + item.CATEGORY_NO + item.PRODUCT_NO + "_Image.jpg"}/>
       })}
     </ListWrap>
   )

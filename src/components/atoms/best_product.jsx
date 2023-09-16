@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const ProductWrap = styled.div`
-  padding: 10px  0 0 20px;
-  margin-bottom: 20px;
-  width: calc(100%/4);
-  display: inline-block;
+  margin: 10px  0 0 20px;
+  // margin-bottom: 20px;
+  // width: calc(100%/4);
+  // display: inline-block;
 
   > div:nth-child(1) {
     margin-bottom: 10px;
@@ -15,7 +15,7 @@ const ProductWrap = styled.div`
   }
 `;
 
-const Product = (props) => {
+const Best_Product = (props) => {
   const navigate = useNavigate();
 
   function navigateByPrdNo(prdNo) {
@@ -39,4 +39,4 @@ const Product = (props) => {
   )
 }
 
-export default Product;
+export default Best_Product;

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const ContentsHeadWrap = styled.div`
   background-color: rgb(255 240 240);
-  width: calc(100% - 10px);
   border-radius: 10px;
   display: flex;
   padding: 30px;
