@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -43,6 +42,18 @@ public class ProductService {
         }
 
         return productDao.getCategoryList(product);
+    }
+
+    public List<Product> getAllProductList() {
+
+        List<Product> productList = productDao.getAllProductList();
+
+        if(productList == null || productList.isEmpty()) {
+            throw new NullPointerException("가져올 상품 리스트가 없습니다.");
+        }
+        log.info("ProductList ===>>> [{}]", productList.toString());
+
+        return productList;
     }
 
 

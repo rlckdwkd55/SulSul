@@ -1,12 +1,12 @@
 package com.sulsulmarket.sulsul.product.dao;
 
 import com.sulsulmarket.sulsul.dto.product.Product;
+import com.sulsulmarket.sulsul.dto.review.Review;
 import com.sulsulmarket.sulsul.product.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class ProductDao implements ProductMapper {
@@ -30,4 +30,10 @@ public class ProductDao implements ProductMapper {
 
         return productMapper.getCategoryList(product);
     }
+
+    @Override
+    public List<Product> getAllProductList() {
+        return productMapper.getAllProductList();
+    }
+
 }

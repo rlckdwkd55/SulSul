@@ -17,4 +17,8 @@
         WHERE CATEGORY_NO = #{CATEGORY_NO}
     </select>
 
+    <select id="getAllProductList" parameterType="java.util.List" resultType="com.sulsulmarket.sulsul.dto.product.Product">
+        SELECT * FROM PRODUCT
+    </select>
+
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -51,6 +52,19 @@ public class ProductController {
         }
 
     }
+
+    @GetMapping("/product/allProductList")
+    public ResponseEntity<Object> getAllProductList() {
+        try {
+            List<Product> productList = productService.getAllProductList();
+            return ResponseEntity.status(HttpStatus.OK).body(productList);
+        } catch (Exception e) {
+            log.error("Product List Is Null ! ! !");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+
 
 }
 
