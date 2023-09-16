@@ -40,9 +40,9 @@ const ItemList = (props) => {
 
   return(
     <ItemWrap>
-      <div><img src={item.imgPath} alt='' width='100' height='150'/></div>
+      <div><img src={"/images/product/cate0" + item.categoryNo + "/0" + item.categoryNo + item.productNo + "_Image.jpg"} alt={item.productName} width='100' height='150'/></div>
       <div>
-        <div>{item.prdName}</div>
+        <div>{item.productName}</div>
         <div>{item.amount} 개</div>
         <div>{item.totalPrice} 원</div>
       </div>
