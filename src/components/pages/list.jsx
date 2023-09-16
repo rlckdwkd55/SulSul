@@ -22,18 +22,6 @@ const List = () => {
 
   useEffect(() => {
     switch(cate) {
-      case "best": 
-        setContents({
-          title: "BEST PICK!",
-          content: "술술의 인기 상품들을 만나보세요!"
-        });
-        break;
-      case "new":
-        setContents({
-          title: "NEW!",
-          content: "술술의 새로운 상품들을 만나보세요!"
-        });
-        break;
       case 1:
         setContents({
           title: "소주 · 증류주",

@@ -16,9 +16,10 @@ const NewItemsWrap = styled.div`
     margin-top: 100px;
 `;
 const ContentHeadWrap = styled.div`
-    > span {
-        font-weight: bold;
+    > div:nth-child(1) {
         color: ${rootColor.color};
+        font-weight: bold;
+        font-size: 15pt;
     }
 `;
 
@@ -26,13 +27,8 @@ const ContentHead = (props) => {
     const navigate = useNavigate();
     return (
         <ContentHeadWrap>
-            <span>{props.title}</span>
-            <span style={{float: 'right', cursor: 'pointer'}}>
-                <span onClick={()=>{
-                    navigate('/list', {state: {cate: props.cate}});
-                }}>더보기</span>
-                <i className="fa-solid fa-chevron-right wrapper-header rightItem"></i>
-            </span>
+            <div>{props.title}</div>
+            <div>{props.content}</div>
         </ContentHeadWrap>
     )
 }
@@ -45,11 +41,11 @@ const Main = () => {
 
             </div>
             <BestItemsWrap>
-                <ContentHead title={'BEST PICK!'} cate={'best'} />
+                <ContentHead title={'BEST PICK!'} cate={'best'} content={'술술의 인기 상품들을 만나보세요!'}/>
                 <BestItemSlider/>
             </BestItemsWrap>
             <NewItemsWrap>
-                <ContentHead title={'NEW!'} cate={'new'} />
+                <ContentHead title={'NEW!'} cate={'new'} content={'술술의 새로운 상품들을 만나보세요!'} />
                 <ProductList itemKey={'newItems'} />
             </NewItemsWrap>
         </MainWrap>
