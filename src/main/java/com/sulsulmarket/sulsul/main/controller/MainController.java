@@ -26,13 +26,13 @@ public class MainController {
 
     @GetMapping("/main")
     public ResponseEntity<Object> main() {
-        Gson gson = new GsonBuilder().create();
+        //Gson gson = new GsonBuilder().create();
         HashMap<String, List<Product>> resultMap = new HashMap<>();
         try {
             List<Product> bestItemList = mainService.getBestRankingProd();
             List<Product> newProductList = mainService.getNewProduct();
             if(bestItemList.size()> 0){
-                resultMap.put("bestItems",bestItemList  );
+                resultMap.put("bestItems",bestItemList);
                 log.info("bestItems -> {} ", bestItemList);
             }
             if (newProductList.size()> 0){
@@ -40,8 +40,9 @@ public class MainController {
                 log.info("newItems -> {} ", bestItemList);
             }
 
-            String json = gson.toJson(resultMap);
-            return new ResponseEntity<>(json, HttpStatus.OK);
+            //String json = gson.toJson(resultMap);
+            //return new ResponseEntity<>(json, HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body(resultMap);
 
         } catch (Exception e) {
             log.error("Main Service has been Exception : ", e);
