@@ -26,8 +26,8 @@ public class ReviewDao implements ReviewMapper {
     }
 
     @Override
-    public List<ReviewOrderByMemberId> getReviewListAllByMemberId(String email) {
-        return reviewMapper.getReviewListAllByMemberId(email);
+    public List<ReviewOrderByMemberId> getReviewListAllByEmail(String email) {
+        return reviewMapper.getReviewListAllByEmail(email);
     }
 
     @Override
@@ -41,8 +41,8 @@ public class ReviewDao implements ReviewMapper {
     }
 
     @Override
-    public int deleteReviewByMemberId(String email, int detailNo) {
-        return reviewMapper.deleteReviewByMemberId(email, detailNo);
+    public int deleteReviewByReviewNo(int reviewNo) {
+        return reviewMapper.deleteReviewByReviewNo(reviewNo);
     }
 
     @Override

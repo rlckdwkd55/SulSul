@@ -58,7 +58,7 @@ public class ReviewReplyService {
 
         try {
             reviewReply.setREPLY_ID(SulSulUtil.getNextSequence().intValue());
-            log.info("ReviewReplyDTO ===>>> [{}]", reviewReply.toString());
+            log.info("Review Reply :: [{}]", reviewReply);
             reviewReplyDao.reviewReplyAdd(reviewReply);
             log.info("Review Reply Insert Is Success ! ! !");
         } catch (Exception e) {

@@ -27,7 +27,6 @@ public class QnaController {
 
         try {
             qnaService.qnaWrite(qna);
-            log.info("Qna Write Is Success");
             return ResponseEntity.status(HttpStatus.OK).body("문의 등록에 성공하였습니다.");
         } catch (Exception e) {
             log.error("QnaController Is Write Exception ! ! ! : {}", e);
@@ -42,7 +41,7 @@ public class QnaController {
     // 제꺼 노션에서 해당 정리한 글이 있는데 GET / POST 한 번 읽어보시고 예시도 있어서 해보시면 뭐가 다른지 알 것 같아요
     // @01.09 Spring Boot Controller, GET API 정리
     //
-    //[Spring Boot Controller](https://www.notion.so/Spring-Boot-Controller-b5398272b89b45de83dfc5f3886e4172?pvs=21)
+//    [Spring Boot Controller](https://www.notion.so/Spring-Boot-Controller-b5398272b89b45de83dfc5f3886e4172?pvs=21)
     //
     //@01.18 Spring Boot Controller, POST API 정리
     //

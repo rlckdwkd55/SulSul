@@ -27,22 +27,10 @@ public class ReviewController {
 
         try {
             reviewService.writeReview(review);
-            return ResponseEntity.status(HttpStatus.OK).body("리뷰 작성 성공");
+            return ResponseEntity.status(HttpStatus.OK).body("등록이 완료 되었습니다.");
         } catch (Exception e) {
-            log.error("error");
+            log.error("Review Write Exception..", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/api/review/list/get")
-    public ResponseEntity<Object> getReviewListAll() {
-
-        try {
-            List<Review> reviewList = reviewService.getReviewListAll();
-            return ResponseEntity.status(HttpStatus.OK).body(reviewList);
-        } catch (Exception e) {
-            log.error("Review List Is Null ! ! !");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
@@ -50,10 +38,10 @@ public class ReviewController {
     public ResponseEntity<Object> getReviewListAllByMemberId(@RequestBody Map<String, String> body) {
 
         try {
-            List<ReviewOrderByMemberId> reviewList = reviewService.getReviewListAllByMemberId(body.get("memberId"));
+            List<ReviewOrderByMemberId> reviewList = reviewService.getReviewListAllByMemberId(body.get("email"));
             return ResponseEntity.status(HttpStatus.OK).body(reviewList);
         } catch (Exception e) {
-            log.error("ERROR ! ! !");
+            log.error("Review List Get Exception.", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
@@ -71,9 +59,9 @@ public class ReviewController {
     }
 
     @PostMapping("/api/review/delete")
-    public ResponseEntity<Object> reviewDelete(@RequestBody Review review) {
+    public ResponseEntity<Object> reviewDelete(@RequestBody Map<String, Integer> param) {
         try {
-            reviewService.deleteReviewByMemberId(review.getMEMBER_EMAIL(), review.getDETAIL_NO());
+            reviewService.deleteReviewByReviewNo(param.get("reviewNo"));
             return ResponseEntity.status(HttpStatus.OK).body("삭제 성공");
         } catch (Exception e) {
             log.error("Delete Is Fail ! ! !");

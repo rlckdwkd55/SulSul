@@ -44,7 +44,7 @@ public class QnaService {
         try {
             qnaDao.qnaWrite(qnaDTO);
         } catch (Exception e) {
-            log.error("Exception : {}", e);
+            log.error("Exception..", e);
         }
         log.info("Qna Write Is Success ! ! !");
     }
@@ -72,9 +72,8 @@ public class QnaService {
         }
 
         try {
-            log.info("Qna Data Check ==>> [{}]", qnaDTO.toString());
-            Qna qnaData = getQnaByQnaNo(qnaDTO.getQNA_NO());
-            log.info("Find Qna Data By QnaNo {}", qnaData.toString());
+            qnaDao.qnaUpdate(qnaDTO);
+            log.info("Qna Data Check ==>> [{}]", qnaDTO);
         } catch (Exception e) {
             log.error("Qna No Check Exception : {}", e);
         }
@@ -85,6 +84,11 @@ public class QnaService {
     @Transactional
     public void qnaStatusUpdate(int qnaNo) {
 
-        qnaDao.qnaUpdateStatus(qnaNo);
+        try {
+            qnaDao.qnaUpdateStatus(qnaNo);
+            log.info("Qna Delete is Success.");
+        } catch (Exception e) {
+            log.error("Qna Delete Exception..", e);
+        }
     }
 }

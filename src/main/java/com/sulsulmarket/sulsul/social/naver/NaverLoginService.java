@@ -23,21 +23,17 @@ public class NaverLoginService {
 
     @Autowired
     private MemberDao memberDao;
-
     @Value("${spring.security.oauth2.client.registration.naver.client-id}")
     private String clientId;
 
     @Value("${spring.security.oauth2.client.registration.naver.client-secret}")
     private String clientSecret;
-
     @Value("${spring.security.oauth2.client.registration.naver.redirect-uri}")
     private String redirectUri;
-
     @Value("${spring.security.oauth2.client.provider.naver.authorization-uri}")
     private String authorizationUri;
     @Value("${spring.security.oauth2.client.provider.naver.token-uri}")
     private String tokenUri;
-
     @Value("${spring.security.oauth2.client.provider.naver.user-info-uri}")
     private String userInfoUri;
 

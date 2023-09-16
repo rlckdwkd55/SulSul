@@ -20,7 +20,7 @@
             ,#{REVIEW_SCORE}
             ,NOW()
             ,#{REVIEW_STATUS}
-            ,#{REVIEW_OLDIMAGE}
+            ,#{REVIEW_IMAGE}
         )
     </insert>
     
@@ -31,7 +31,7 @@
           ORDER BY REVIEW_DATE DESC
     </select>
 
-    <select id="getReviewListAllByMemberId" resultType="com.sulsulmarket.sulsul.dto.review.ReviewOrderByMemberId">
+    <select id="getReviewListAllByEmail" resultType="com.sulsulmarket.sulsul.dto.review.ReviewOrderByMemberId">
         SELECT *
           FROM REVIEW A
          JOIN MEMBER B ON A.MEMBER_EMAIL = B.MEMBER_EMAIL
@@ -53,14 +53,12 @@
             </if>
             UPDATE_TIME = NOW()
         </set>
-            WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
-            AND DETAIL_NO = #{DETAIL_NO}
+            WHERE REVIEW_NO = #{REVIEW_NO}
     </update>
 
-    <delete id="deleteReviewByMemberId">
+    <delete id="deleteReviewByReviewNo">
         DELETE FROM REVIEW
-          WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
-        AND DETAIL_NO = #{DETAIL_NO}
+          WHERE REVIEW_NO = #{REVIEW_NO}
     </delete>
     
     <select id="getOrderDetailList" resultType="com.sulsulmarket.sulsul.dto.order.OrderDetail">

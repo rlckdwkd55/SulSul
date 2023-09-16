@@ -32,7 +32,7 @@ public class ReviewReply {
         return REVIEW_NO;
     }
 
-    public void setREVIEW_NO(int REVIEW_NO) {
+    public void deleteReviewByReviewNoIEW_NO(int REVIEW_NO) {
         this.REVIEW_NO = REVIEW_NO;
     }
 
