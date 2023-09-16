@@ -62,7 +62,7 @@ const Detail = () => {
         <DetailNavBtn btnName={'상품문의'} url={''}/>
       </DetailNav>
       <DetailInfo>
-        <img src={"/images/product/cate0" + prdInfo.category_NO + "/0" + prdInfo.category_NO + prdInfo.product_NO + "_DetailImage.png"} alt={prdInfo.product_NAME + "설명"}></img>
+        <img src={"/images/product/cate0" + prdInfo.categoryNo + "/0" + prdInfo.categoryNo + prdInfo.productNo + "_DetailImage.png"} alt={prdInfo.productName + "설명"}></img>
       </DetailInfo>
       <DetailReview></DetailReview>
       <DetailQnA></DetailQnA>

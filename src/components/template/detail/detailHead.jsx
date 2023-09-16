@@ -90,7 +90,7 @@ const DetailHead = (props) => {
 
     const jsonData = {
       "memberEmail": sessionStorage.getItem('userEmail'),
-      "productNo": prdInfo.product_NO,
+      "productNo": prdInfo.productNo,
       "cartAmount": props.amount
     }
 
@@ -103,15 +103,15 @@ const DetailHead = (props) => {
   return (
     <Wrap>
       <div>
-        <img src={"/images/product/cate0" + prdInfo.category_NO + "/0" + prdInfo.category_NO + prdInfo.product_NO + "_Image.jpg"} alt={prdInfo.product_NAME} width='250' height='300'/>
+        <img src={"/images/product/cate0" + prdInfo.categoryNo + "/0" + prdInfo.categoryNo + prdInfo.productNo + "_Image.jpg"} alt={prdInfo.productName} width='250' height='300'/>
         <HeadInfo>
           <div>
-            <h2>{prdInfo.product_NAME}</h2> 
-            <h3>{prdInfo.product_INFO}</h3>
+            <h2>{prdInfo.productName}</h2> 
+            <h3>{prdInfo.productInfo}</h3>
             <span>별 {prdInfo.rank}</span>
             <span>리뷰 {prdInfo.review}</span>
             <div>
-              <h2>{prdInfo.product_PRICE} 원</h2>
+              <h2>{prdInfo.productPrice} 원</h2>
             </div>
           </div>
           <div>
@@ -126,18 +126,18 @@ const DetailHead = (props) => {
                 </tr>
                 <tr>
                   <td>도수</td>
-                  <td>{prdInfo.alcohol}</td>
+                  <td>{prdInfo.productAlcohol}</td>
                 </tr>
                 <tr>
                   <td>용량</td>
-                  <td>{prdInfo.capacity}</td>
+                  <td>{prdInfo.productCapacity}</td>
                 </tr>
                 <tr>
                   <td>상품 선택</td>
                   <td>
                     <div>
-                      <span>{prdInfo.product_NAME}</span>
-                      <CountBtn className="cntBtn" cnt={0} setAmount={props.setAmount} setTotal={setTotal} price={prdInfo.product_PRICE}/>
+                      <span>{prdInfo.productName}</span>
+                      <CountBtn className="cntBtn" cnt={0} setAmount={props.setAmount} setTotal={setTotal} price={prdInfo.productPrice}/>
                     </div>
                   </td>
                 </tr>
