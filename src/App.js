@@ -17,6 +17,7 @@ import SNSJoin from "./components/pages/SNSJoin";
 import Policy from './components/pages/Policy';
 import Privacy from './components/pages/Privacy';
 import styled from "styled-components";
+import ScrollToTop from "./components/atoms/ScrollToTop";
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -36,6 +37,7 @@ function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Header />
+        <ScrollToTop />
         <AppWrapper>
           <PagesWrapper>
             <Routes>
