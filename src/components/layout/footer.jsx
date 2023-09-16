@@ -36,8 +36,8 @@ function Footer() {
                     <div>평일 10:00 - 18:00, 주말휴무</div>
                 </div>
                 <div>
-                    <span style={{fontWeight: 'bold', marginRight: '15px'}} onClick={() => navigatePage('policy')}>이용약관</span>
-                    <span style={{fontWeight: 'bold', marginRight: '15px'}} onClick={() => navigatePage('privacy')}>개인정보처리방침</span>
+                    <span style={{fontWeight: 'bold', marginRight: '15px', cursor: 'pointer'}} onClick={() => navigatePage('policy')}>이용약관</span>
+                    <span style={{fontWeight: 'bold', marginRight: '15px', cursor: 'pointer'}} onClick={() => navigatePage('privacy')}>개인정보처리방침</span>
                 </div>
                 <div>
                     <span style={{marginRight: '15px'}}>주소: 서울특별시 술술구 술술대로 100,10층</span>

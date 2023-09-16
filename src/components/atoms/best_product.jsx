@@ -3,9 +3,7 @@ import styled from "styled-components";
 
 const ProductWrap = styled.div`
   margin: 10px  0 0 20px;
-  // margin-bottom: 20px;
-  // width: calc(100%/4);
-  // display: inline-block;
+  cursor: pointer;
 
   > div:nth-child(1) {
     margin-bottom: 10px;
