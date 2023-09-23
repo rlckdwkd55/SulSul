@@ -48,7 +48,7 @@ public class NaverLoginService {
      */
     public String getAuthorizationUri() {
         log.debug("naver AuthorizationUrl : [{}]", authorizationUri + "?client_id=" + clientId + "&redirect_uri=" + redirectUri + "&response_type=code");
-        return authorizationUri + "?client_id=" + clientId + "&redirect_uri=" + redirectUri + "&response_type=code" + "&state=";
+        return authorizationUri + "?client_id=" + clientId + "&redirect_uri=" + redirectUri + "&response_type=code&state=";
     }
 
     /**
