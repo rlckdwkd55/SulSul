@@ -6,6 +6,8 @@ import LoginService from '../../service/LoginService';
 import * as common from '../../js/common';
 import '../../css/join.css';
 import styled from 'styled-components';
+import { rootColor } from '../../Util/GlobalStyle';
+import BtnRed from '../atoms/btnRed';
 
 const Wrap = styled.div`
     margin: 0 25%;
@@ -13,19 +15,29 @@ const Wrap = styled.div`
 const InputWrap = styled.div`
     margin: 0 25%;
 `;
+const Input = styled.input`
+    width: 300px;
+    height: 40px;
+    margin: 3px 15px 3px 0;
+    border: 1.5px solid lightgray;
+    border-radius: 5px;
 
-const JoinBtn = (props) => {
-    return (
-        <button type={props.type} className="btn-join" name={props.name} onClick={() => props.onClickBtn()}>{props.text}</button>
-    )
-}
+    &:focus {
+        outline: none;
+        border-color: ${rootColor.color}
+    }
+    &:hover {
+        border-color: ${rootColor.color}
+    }
+`;
+
 const InputArea = (props) => {
     return (
         <InputWrap>
             <table>
                 <tr>
                     <td style={{width:'100px'}}>{props.name}</td>    
-                    <td>{props.value}</td>
+                    <td><Input value={props.value} id={props.id} onChange={e=>{props.changeInput(e)}}/></td>
                 </tr>        
             </table>
         </InputWrap>
@@ -34,14 +46,16 @@ const InputArea = (props) => {
 
 const SNSJoin = () => {
     const [input, setInput] = useState({
-        userEmail: '',
-        userName: '',
-        postNo: '',
-        address: '',
-        detailAddress: '',
+        email: '',
+        name: '',
         gender: '',
-        birthDate: '',
-        phone: ''
+        address: {
+            address: '',
+            detailAddress: '',
+            postNo: '',
+        },
+        birthDay: '',
+        mobile: ''
     });
     const {state} = useLocation();
     const userInfo = state.userInfo
@@ -49,16 +63,16 @@ const SNSJoin = () => {
     useEffect(() => {
         setInput({
             ...input,
-            userEmail: userInfo.email,
+            email: userInfo.email,
             gender: userInfo.gender,
-            birthDate: userInfo.birthyear + '-' + userInfo.birthday,
-            userName: userInfo.name,
-            phone: userInfo.mobile
+            birthDay: userInfo.birthyear + '-' + userInfo.birthday,
+            name: userInfo.name,
+            mobile: userInfo.mobile
         })
     }, []);
 
     // event function
-    function changeInput(e) {
+    const changeInput = (e) => {
         const {id, value} = e.target;
         setInput({
             ...input,
@@ -66,10 +80,23 @@ const SNSJoin = () => {
         });
     }
 
+    const changeAddress= (e) => {
+        const {id, value} = e.target;
+        setInput({
+            ...input,
+            address: {
+                ...input.address,
+                [id]: value
+            }
+        });
+    }
+
     async function doJoin() {
+        console.log(JSON.stringify(input))
 
         const response = await LoginService.postJoin(input);
         if (response.status === 'success') {
+            alert('회원가입 완료! 로그인 하실 수 있습니다.');
             <Link to='/'/>
         } else {
             alert('회원가입에 실패했습니다.');
@@ -78,18 +105,18 @@ const SNSJoin = () => {
 
     return(
         <Wrap>
-            <InputArea name={'이름'} value={input.userName}/>
-            <InputArea name={'생년월일'} value={input.birthDate}/>
-            <InputArea name={'연락처'} value={input.phone}/>
-            <InputArea name={'이메일'} value={input.userEmail}/>
-            <div className="input-area">
+            <InputArea name={'이름'} value={input.name} id={'name'} onChange={changeInput}/>
+            <InputArea name={'생년월일'} value={input.birthDay} id={'birthDay'} onChange={changeInput}/>
+            <InputArea name={'연락처'} value={input.mobile} id={'mobil'} onChange={changeInput}/>
+            <InputArea name={'이메일'} value={input.email} id={'email'} onChange={changeInput}/>
+            <div className="input-area" style={{marginTop: '30px'}}>
                 <label for="postNo">주소</label>
                 <div className="input-field" id="inputPostNo">
-                    <input type="text" className="join-input" id="postNo" name="postNo" onChange={e=>{changeInput(e)}} value={input.postNo}/>
+                    <Input type="text" className="join-input" id="postNo" name="postNo" onChange={e=>{changeAddress(e)}} value={input.address.postNo}/>
                     <DaumPostPopup setInput={setInput}/>
                 </div>
-                <input type="text" className="join-input" id="address" name="address" onChange={e=>{changeInput(e)}} value={input.address}/>
-                <input type="text" className="join-input" id="detailAddress" name="detailAddress" placeholder="상세 주소를 입력해 주세요." onChange={e=>{changeInput(e)}} value={input.detailAddress}/>
+                <Input type="text" className="join-input" id="address" name="address" onChange={e=>{changeAddress(e)}} value={input.address.address}/>
+                <Input type="text" className="join-input" id="detailAddress" name="detailAddress" placeholder="상세 주소를 입력해 주세요." onChange={e=>{changeAddress(e)}} value={input.address.detailAddress}/>
             </div>
             <div style={{margin:'0 25%'}}>
                 <h3>선택입력</h3>
@@ -102,8 +129,8 @@ const SNSJoin = () => {
                 </table>
             </div>
 
-            <div className="button-area">
-                <JoinBtn type="button" name="joinBtn" text="회원가입" clickEvent={() => doJoin()}/>
+            <div className="button-area" style={{textAlign: 'center', marginTop: '30px'}}>
+                <BtnRed style={{width: '200px'}} type="button" name="회원가입" clickEvent={() => doJoin()}/>
             </div>
         </Wrap>
     );

@@ -18,7 +18,7 @@ const LoginService = {
   },
   postJoin: async (userInfo) => {
     try {
-      const response = await request.post('/join', userInfo);
+      const response = await request.post('/member/sign', userInfo);
       if (request.isSuccess(response)) {
         return {
           ...response,
@@ -67,8 +67,8 @@ const LoginService = {
   },
   getTokenRequest: async (type, code) => {
     const url = {
-      'naver': '/naver/login/toekn/request',
-      'kakao': '/kakao/login/url'
+      'naver': '/naver/login/user/info',
+      'kakao': '/kakao/login/user/info'
     }
     try{
       const response = await request.get(url[type]+'?code='+code);

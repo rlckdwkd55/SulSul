@@ -9,11 +9,8 @@ const Wrap =styled.div`
 `;
 
 function LoginOut() {
-  // sessionStorage.setItem('isLogin', true);
-  // sessionStorage.setItem('userId', 'user01');
   const isLogin = sessionStorage.getItem("isLogin");
   let contents;
-
   if (isLogin !== "true") {
     contents = (
       <Link to="/login">
