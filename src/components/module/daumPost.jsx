@@ -1,4 +1,5 @@
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import BtnRed from '../atoms/btnRed';
 
 const DaumPostPopup = (props) => {
     const open = useDaumPostcodePopup();
@@ -21,18 +22,20 @@ const DaumPostPopup = (props) => {
         //주소값을 상태값으로..
         props.setInput((prev) => ({
             ...prev,
-            postNo: postNo,
-            addr: fullAddress
+            address: {
+              ...prev.address,
+              postNo: postNo,
+              address: fullAddress
+            }
         }));
       };
     
-      const handleClick = (e) => {
+      const handleClick = () => {
         open({ onComplete: handleComplete });
-        e.preventDefault();
       };
 
     return (
-        <button type='button' className="btn-join" name='searchAddr' onClick={handleClick}>우편번호</button>
+        <BtnRed type='button' className="btn-join" name='우편번호' clickEvent={handleClick}></BtnRed>
     )
 }
 

@@ -21,12 +21,12 @@ const UserService = {
       };
     }
   },
-  postUserInfo: async () => {
-    const userId = {
-      userId: sessionStorage.getItem('userId')
+  postUserInfo: async (userEmail) => {
+    const data = {
+      email: userEmail
     };
     try {
-      const response = await request.post(`/myPage/orderList`, userId);
+      const response = await request.post(`/member/info`, data);
       if (request.isSuccess(response)) {
         return {
           ...response,

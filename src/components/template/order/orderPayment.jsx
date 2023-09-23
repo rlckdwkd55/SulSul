@@ -49,13 +49,13 @@ const PaymentWrap = styled.div`
 const PaymentMethodBtn = styled.button`
   padding: 3px 15px;
   margin-right: 20px;
-    border: 1.5px solid lightgray;
-    border-radius: 5px;
-    background-color: white;
+  border: 1.5px solid lightgray;
+  border-radius: 5px;
+  background-color: white;
     
-    &:hover {
-      border-color: rgb(233, 118, 118);
-    }
+  &:hover{
+    border-color: rgb(233, 118, 118);
+  }
 `;
 const PayInfoWrap = styled.div`
   width: 30%;
@@ -99,35 +99,29 @@ const PriceAreaWrap = styled.div`
 `;
 
 const PaymentMethod = (props) => {
-  const [ isPaymentChecked, setPaymentCheck ] = useState(false);
 
-  function handleBtnClick(setPayment, methodName) {
-    if (isPaymentChecked) {
-      setPayment('');
-      setPaymentCheck(false);
-    } else {
-      if (methodName === '카카오페이') {
-        setPayment('KKO');
-      }
-      setPaymentCheck(true);
-    }
+  function handleBtnClick(e) {
+    props.setPayment(e.target.name);
+    props.setPaymentChecked(e.target.name);
   }
 
   return(
-    <PaymentMethodBtn onClick={() => handleBtnClick(props.setPayment, props.methodName)}>
+    <PaymentMethodBtn name={props.method} onClick={(e) => handleBtnClick(e)}>
       {props.methodName}
     </PaymentMethodBtn>
   )
 }
 
 const PaymentMethodArea = ({setPayment}) => {
+  const [ paymentChecked, setPaymentChecked ] = useState('');
+
   return (
     <PaymentWrap>
       <div>
         <div>결제수단 선택</div>
         <div>
-          <PaymentMethod methodName={'카카오페이'} setPayment={setPayment}/>
-          <PaymentMethod methodName={'무통장입금'} setPayment={setPayment}/>
+          <PaymentMethod method={'KKO'} methodName={'카카오페이'} setPayment={setPayment} setPaymentChecked={setPaymentChecked}/>
+          <PaymentMethod method={'MU'} methodName={'무통장입금'} setPayment={setPayment} setPaymentChecked={setPaymentChecked}/>
         </div>
       </div>
       <div>

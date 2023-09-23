@@ -11,6 +11,7 @@ import OrderAgreement from "../template/order/orderAgreement";
 import OrderButton from "../template/order/orderButton";
 import styled from "styled-components";
 import { dateFormat } from "../../js/common";
+import { useSelector } from 'react-redux';
 
 const Wrap = styled.div`
   margin: 50px 150px;
@@ -24,7 +25,7 @@ const Order = () => {
   const [ payment, setPayment ] = useState('');
   const [ orderDetailList, setOrderDetailList ] = useState([])
   const [ jsonData, setJsonData ] = useState({
-    "memberEmail": sessionStorage.getItem('userEmail'), // email로 변경되어야 할 듯?
+    "memberEmail": useSelector((state) => state.user.value.userEmail), // email로 변경되어야 할 듯?
     "orderAddress": '',
     "orderReceiver": '',
     "orderRequest": '',
@@ -49,19 +50,23 @@ const Order = () => {
   })
 
   useEffect(()=>{
+    const getUserInfo = async (email) => {
+      const response = await UserService.postUserInfo(email);
+
+      if (response.status === 'success') {
+        setUserInfo({
+          "userName": response.data.name,
+          "userPhone": response.data.phone,
+          "userEmail": response.data.email
+        });
+
+        setUserAddr({
+
+        })
+      }
+    }
     setOrderList(prdList);
-
-    setUserInfo({
-      "userName": '김용주',
-      "userPhone": '010-1111-1111',
-      "userEmail": 'test@test.com'
-    });
-
-    setUserAddr({
-
-    })
-
-    
+    getUserInfo(jsonData.memberEmail);
     setOrderDetailList(list);
   },[])
 

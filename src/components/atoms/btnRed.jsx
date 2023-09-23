@@ -13,7 +13,9 @@ const BtnRed = (props) => {
   return (
     <BtnWrap onClick={() => {
       props.clickEvent();
-    }}>{props.name}</BtnWrap>
+    }}
+    style={props.style ? props.style : {}}
+    >{props.name}</BtnWrap>
   )
 }
 

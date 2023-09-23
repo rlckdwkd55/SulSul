@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import DaumPostPopup from "../../module/daumPost";
 import styled from "styled-components";
+import { rootColor } from '../../../Util/GlobalStyle';
 
 const Wrap = styled.div`
   margin: 60px 0;
@@ -24,7 +25,21 @@ const Table = styled.table`
 const AddrWrap = styled.div`
   display: flex;
   flex-direction: column;
+`;
+const Input = styled.input`
+  width: 300px;
+  height: 40px;
+  margin: 3px 15px 3px 0;
+  border: 1.5px solid lightgray;
+  border-radius: 5px;
 
+  &:focus {
+    outline: none;
+    border-color: ${rootColor.color}
+  }
+  &:hover {
+    border-color: ${rootColor.color}
+  }
 `;
 const ReqSelect = styled.select``;
 
@@ -47,7 +62,7 @@ const OrderAddr = (props) => {
       addr: userAddr.addr,
       addrDetail: userAddr.addrDetail
     });
-  },[]);
+  },[userName]);
 
   const handleRadioCheck = (e) => {
     const value = e.target.value;
@@ -58,14 +73,23 @@ const OrderAddr = (props) => {
         addr: userAddr.addr,
         addrDetail: userAddr.addrDetail
       })
+      props.setJsonData((prev) => ({
+        ...prev,
+        orderReceiver: userName,
+        orderAddress: addrInfo.postNo + addrInfo.addr + addrInfo.addrDetail
+      }));
     } else {
       setOrderReceiver('');
       setAddrInfo({
         postNo: '',
         addr: '',
         addrDetail: ''
-      })
-      console.log(userName)
+      });
+      props.setJsonData((prev) => ({
+        ...prev,
+        orderReceiver: '',
+        orderAddress: ''
+      }));
     }
     setCheckVal(value);
   }
@@ -75,7 +99,12 @@ const OrderAddr = (props) => {
       props.setJsonData((prev) => ({
         ...prev,
         [e.target.name]: e.target.value
-      }))
+      }));
+    } else if (e.target.name === 'orderRequest') {
+      props.setJsonData((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value
+      }));
     } else {
       const address = addrInfo.postNo + addrInfo.addr + addrInfo.addrDetail;
       props.setJsonData((prev) => ({
@@ -93,26 +122,26 @@ const OrderAddr = (props) => {
           <td>배송지</td>
           <td>
             <div>
-              <label><input type='radio' name='address' defaultValue='A' checked={checkVal === 'A'} onChange={(e) => handleRadioCheck(e)}/>기본 배송지</label>
-              <label><input type='radio' name='address' defaultValue='B' checked={checkVal === 'B'} onChange={(e) => handleRadioCheck(e)}/>새 배송지</label>
+              <label style={{marginRight: '30px'}}><input type='radio' name='address' value='A' checked={checkVal === 'A'} onChange={(e) => handleRadioCheck(e)}/>기본 배송지</label>
+              <label><input type='radio' name='address' value='B' checked={checkVal === 'B'} onChange={(e) => handleRadioCheck(e)}/>새 배송지</label>
             </div>
             <div>
-              <input type="text" name="orderReceiver" onChange={(e) => onChangeInfo(e)} defaultValue={orderReceiver}/>
+              <Input type="text" name="orderReceiver" onChange={(e) => onChangeInfo(e)} value={orderReceiver} placeholder="배송받으시는 분 성함"/>
             </div>
             <AddrWrap>
               <div>
-                <input type="text" name="postNo" check-result="false" onChange={(e) => onChangeInfo(e)} defaultValue={addrInfo.postNo}/>
+                <Input type="text" name="postNo" check-result="false" onChange={(e) => onChangeInfo(e)} value={addrInfo.postNo}/>
                 <DaumPostPopup setInput={setAddrInfo}/>
               </div>
-              <input type="text" name="address" check-result="false" onChange={(e) => onChangeInfo(e)} defaultValue={addrInfo.addr}/>
-              <input type="text" name="detailAddress" placeholder="상세 주소를 입력해 주세요." check-result="false" onChange={(e) => onChangeInfo(e)} defaultValue={addrInfo.addrDetail}/>
+              <Input type="text" name="address" check-result="false" onChange={(e) => onChangeInfo(e)} value={addrInfo.addr}/>
+              <Input type="text" name="detailAddress" placeholder="상세 주소를 입력해 주세요." check-result="false" onChange={(e) => onChangeInfo(e)} value={addrInfo.addrDetail}/>
             </AddrWrap>
           </td>
         </tr>
         <tr>
           <td>상세정보</td>
           <td>
-            <ReqSelect>
+            <ReqSelect name="orderRequest" onChange={(e) => onChangeInfo(e)}>
               <option>선택안함</option>
               <option>부재 시 문 앞에 놓아주세요.</option>
               <option>부재 시 경비실에 맡겨주세요.</option>
