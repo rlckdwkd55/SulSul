@@ -15,6 +15,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 
 @Service
@@ -37,10 +38,18 @@ public class NaverLoginService {
     @Value("${spring.security.oauth2.client.provider.naver.user-info-uri}")
     private String userInfoUri;
 
-    private MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-    private HttpHeaders headers = new HttpHeaders();
-    private RestTemplate restTemplate = new RestTemplate();
-    private Gson gson = new Gson();
+    private MultiValueMap<String, String> params;
+    private HttpHeaders headers;
+    private RestTemplate restTemplate;
+    private Gson gson;
+
+    @PostConstruct
+    public void init() {
+        params = new LinkedMultiValueMap<>();
+        headers = new HttpHeaders();
+        restTemplate = new RestTemplate();
+        gson = new Gson();
+    }
 
     /**
      * naver login URL 인증 요청하는 메서드 return by client_id, redirect-url

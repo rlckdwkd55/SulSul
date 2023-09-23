@@ -9,8 +9,10 @@ package com.sulsulmarket.sulsul.social.kakao;
 
 import com.google.gson.Gson;
 import com.sulsulmarket.sulsul.dto.social.kakao.KakaoAuthDTO;
+import com.sulsulmarket.sulsul.dto.social.kakao.KakaoCustomResponse;
 import com.sulsulmarket.sulsul.dto.social.kakao.KakaoTokenResponse;
 import com.sulsulmarket.sulsul.dto.social.kakao.KakaoUserInfoResponse;
+import com.sulsulmarket.sulsul.member.dao.MemberDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -20,6 +22,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
+
 @Service
 @Slf4j
 public class KakaoLoginService {
@@ -27,6 +31,8 @@ public class KakaoLoginService {
     private String url = "https://kauth.kakao.com/oauth/authorize";
     @Autowired
     private KakaoAuthDTO kakaoAuth;
+    @Autowired
+    private MemberDao memberDao;
 
     private RestTemplate restTemplate = new RestTemplate();
     private Gson gson = new Gson();
@@ -58,16 +64,44 @@ public class KakaoLoginService {
         }
     }
 
-    public KakaoUserInfoResponse getUserInfo(String code) {
+    public KakaoCustomResponse getUserInfo(String code) {
 
         String token = tokenRequest(code);
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
         HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<String> response = restTemplate.exchange(kakaoAuth.getUserInfoUri(), HttpMethod.GET, entity, String.class);
-        log.info("Response Check : {}", response.getBody());
-        KakaoUserInfoResponse userInfoResponse = gson.fromJson(response.getBody(), KakaoUserInfoResponse.class);
-        log.info("Check man,.. :: [{}]", userInfoResponse);
-        return userInfoResponse;
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(kakaoAuth.getUserInfoUri(), HttpMethod.GET, entity, String.class);
+            log.info("Response Check : {}", response.getBody());
+            KakaoUserInfoResponse userInfo = gson.fromJson(response.getBody(), KakaoUserInfoResponse.class);
+
+            if (userInfo == null) {
+                throw new NullPointerException("카카오 유저 정보가 없습니다.");
+            }
+
+            KakaoCustomResponse customResponse = KakaoCustomResponse
+                    .builder()
+                    .kakaoUserInfoResponse(userInfo)
+                    .resultcode("00").build();
+
+            // 이미 가입된 회원인 경우에
+            if (memberDao.getMemberByEmail(userInfo.getKakao_account().getEmail()) != null) {
+                log.warn("Is Exist Naver Member.");
+                customResponse.setResultcode("01");
+            }
+
+            // 미성년자인 경우 체크할 수가 없음 생년월일 제공을 안해줌
+//            if (LocalDateTime.now().getYear() <  Integer.parseInt(userInfo.get().getBirthyear()) + 19) {
+//                log.warn("is no adult member sign fail.");
+//                customResponse.setResultcode("02");
+//            }
+
+            log.info("kakao get userInfo Success : [{}]", userInfo);
+
+            return customResponse;
+        } catch (Exception e) {
+            log.error("Kakao User Info Response Exception.", e);
+            return null;
+        }
     }
 }

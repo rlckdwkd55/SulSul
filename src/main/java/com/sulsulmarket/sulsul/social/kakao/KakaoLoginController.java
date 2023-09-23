@@ -1,5 +1,6 @@
 package com.sulsulmarket.sulsul.social.kakao;
 
+import com.sulsulmarket.sulsul.dto.social.kakao.KakaoCustomResponse;
 import com.sulsulmarket.sulsul.dto.social.kakao.KakaoUserInfoResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class KakaoLoginController {
     @GetMapping("/user/info")
     public ResponseEntity<Object> getUserInfo(@RequestParam String code) {
         try {
-            KakaoUserInfoResponse response = kakaoLoginService.getUserInfo(code);
+            KakaoCustomResponse response = kakaoLoginService.getUserInfo(code);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

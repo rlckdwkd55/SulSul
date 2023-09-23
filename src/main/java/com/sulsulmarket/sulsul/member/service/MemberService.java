@@ -7,6 +7,7 @@ import com.sulsulmarket.sulsul.dto.member.MemberOne;
 import com.sulsulmarket.sulsul.dto.member.SignRequestMember;
 import com.sulsulmarket.sulsul.member.dao.MemberDao;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -88,8 +89,16 @@ public class MemberService {
     @Transactional
     public boolean memberSign(SignRequestMember member) {
 
-        //TODO Validation.
+        if (member == null) {
+            log.error("member sign parameter is null..");
+            throw new NullPointerException("회원 가입 정보가 없습니다.");
+        }
+
         try {
+            if (memberDao.getMemberByEmail(member.getEmail()) != null) {
+                log.warn("duplicate member :: [{}]", member.getEmail());
+                throw new DuplicateMemberException("이미 존재하는 회원입니다");
+            }
             Integer insertMember = memberDao.memberSign(member);
             member.getAddress().setMEMBER_EMAIL(member.getEmail());
             Integer insertAddress = memberDao.addressSign(member.getAddress());

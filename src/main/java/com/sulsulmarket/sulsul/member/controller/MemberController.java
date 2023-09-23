@@ -4,6 +4,7 @@ import com.sulsulmarket.sulsul.dto.member.MemberOne;
 import com.sulsulmarket.sulsul.dto.member.SignRequestMember;
 import com.sulsulmarket.sulsul.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -69,6 +70,10 @@ public class MemberController {
                 return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
+            if (e instanceof DuplicateMemberException) {
+                log.warn("duplicate member is false.. member sign fail.. [{}]", e.getMessage());
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            }
             log.error("member sign is exception", e.getMessage());
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
