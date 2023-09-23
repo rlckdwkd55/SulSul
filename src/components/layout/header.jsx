@@ -1,17 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "./searchBar";
 import axios from "axios";
 import MenuList from "../template/menuList";
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { logout } from '../../store/reducers/userSlice';
+import { useDispatch } from 'react-redux';
 
 const Wrap =styled.div`
   min-width: 1300px;
 `;
 
 function LoginOut() {
-  const isLogin = sessionStorage.getItem("isLogin");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLogin = useSelector((state) => state.user.value.isLogin);
   let contents;
-  if (isLogin !== "true") {
+  if (!isLogin) {
     contents = (
       <Link to="/login">
           {/* <img src='/images/login_btnG.png' alt='네이버로그인'/> */}
@@ -25,9 +30,8 @@ function LoginOut() {
           className="btn"
           id="logout-btn"
           onClick={() => {
-            sessionStorage.setItem('isLogin', false);
-            sessionStorage.setItem('userEmail', '');
-            axios.post("/logout");
+            dispatch(logout());
+            navigate('/');
           }}
         >
           로그아웃

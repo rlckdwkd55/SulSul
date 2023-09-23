@@ -18,6 +18,8 @@ import Policy from './components/pages/Policy';
 import Privacy from './components/pages/Privacy';
 import styled from "styled-components";
 import ScrollToTop from "./components/atoms/ScrollToTop";
+import NaverLogin from './components/atoms/NaverLogin';
+import KakaoLogin from './components/atoms/KakaoLogin';
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -53,6 +55,8 @@ function App() {
               <Route path="/SNSJoin" element={<SNSJoin />} />
               <Route path="/terms/policy" element={<Policy />} />
               <Route path="/terms/privacy" element={<Privacy />} />
+              <Route path="/naverLogin" element={<NaverLogin />} />
+              <Route path="/kakaoLogin" element={<KakaoLogin />} />
             </Routes>
           </PagesWrapper>
         </AppWrapper>
